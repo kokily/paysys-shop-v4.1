@@ -205,3 +205,20 @@ interface ExpenseType {
 interface UpdateType extends ExpenseType {
   wedding_at: Date;
 }
+
+interface ClosedUserType {
+  id: string;
+  username: string;
+  closed_date: string[] | null;
+  closedId: string;
+  closed: ClosedType;
+  created_at: string;
+}
+
+interface ClosedType {
+  id: string;
+  year: string;
+  month: string;
+  closed_users: ClosedUserType[] | null;
+  created_at: string;
+}
