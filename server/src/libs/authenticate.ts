@@ -28,7 +28,7 @@ export const adminResovler =
 
       if (user && user.admin) {
         ctx.state.user = {
-          user_id: user.id,
+          id: user.id,
           username: user.username,
           admin: user.admin,
         };
@@ -58,7 +58,7 @@ export const authResolver =
 
       if (user) {
         ctx.state.user = {
-          user_id: user.id,
+          id: user.id,
           username: user.username,
           admin: user.admin,
         };

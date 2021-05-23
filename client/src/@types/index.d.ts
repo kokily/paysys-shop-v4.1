@@ -1,5 +1,5 @@
 interface MeType {
-  user_id: string;
+  id: string;
   username: string;
   admin: boolean;
 }

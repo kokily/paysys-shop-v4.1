@@ -1,4 +1,4 @@
-const prev = [
+export const menu = [
   {
     id: 0,
     divide: '식사(뷔페)',
@@ -64,5 +64,3 @@ const prev = [
     divide: '부대비용',
   },
 ];
-
-export const menu = JSON.stringify(prev);

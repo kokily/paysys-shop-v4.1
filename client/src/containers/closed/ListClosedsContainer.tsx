@@ -1,6 +1,5 @@
 import { useHistory } from 'react-router-dom';
 import useListCloseds from './hooks/useListCloseds';
-import Layout from '../../components/closed/common/Layout';
 import ListCloseds from '../../components/closed/ListCloseds';
 import Loading from '../../components/common/Loading';
 

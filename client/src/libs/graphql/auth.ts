@@ -25,7 +25,7 @@ export const ME = gql`
       ok
       error
       me {
-        user_id
+        id
         username
         admin
       }

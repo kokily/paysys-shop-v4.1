@@ -50,7 +50,7 @@ class User extends BaseEntity {
 
   generateToken(): string {
     const token = {
-      user_id: this.id,
+      id: this.id,
       username: this.username,
       admin: this.admin,
     };

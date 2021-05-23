@@ -5,7 +5,7 @@ import oc from 'open-color';
 import { shadow, media } from '../../../libs/styles';
 import MenuButton from './MenuButton';
 import MenuList from './MenuList';
-import useToggle from './hooks/useToggle';
+import useToggle from '../../../libs/hooks/useToggle';
 
 // Styles
 const Container = styled.div`

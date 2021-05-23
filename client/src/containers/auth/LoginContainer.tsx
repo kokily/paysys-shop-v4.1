@@ -1,5 +1,4 @@
 import React, { useReducer } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
 import { LOGIN } from '../../libs/graphql/auth';
@@ -23,7 +22,6 @@ const reducer = (state: StateProps, action: ActionProps) => {
 };
 
 function LoginContainer() {
-  const history = useHistory();
   const [state, dispatch] = useReducer(reducer, {
     username: '',
     password: '',
@@ -55,11 +53,11 @@ function LoginContainer() {
 
         const token = response.data.Login.token;
 
-        localStorage.setItem('paysys_token', JSON.stringify(token));
+        localStorage.setItem('paysys_token', token);
 
         await client.clearStore();
 
-        history.push('/soldier');
+        document.location.href = '/';
       }
     } catch (err) {
       toast.error(err);

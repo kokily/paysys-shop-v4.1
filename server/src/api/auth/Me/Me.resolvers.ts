@@ -7,13 +7,9 @@ const resolvers: Resolvers = {
   Query: {
     Me: authResolver(
       async (_, __, { ctx }: { ctx: Context }): Promise<MeResponse> => {
-        const { user_id, username, admin } = ctx.state.user;
+        const { id, username, admin } = ctx.state.user;
 
-        if (
-          user_id === undefined ||
-          username === undefined ||
-          admin === undefined
-        ) {
+        if (id === undefined || username === undefined || admin === undefined) {
           return {
             ok: false,
             error: 'unhandled User',
@@ -24,7 +20,7 @@ const resolvers: Resolvers = {
             ok: true,
             error: null,
             me: {
-              user_id,
+              id,
               username,
               admin,
             },

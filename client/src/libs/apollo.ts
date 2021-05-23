@@ -40,7 +40,7 @@ const httpLink = new HttpLink({
 });
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
-  console.table([graphQLErrors, networkError]);
+  // console.table([graphQLErrors, networkError]);
 });
 
 const client = new ApolloClient({

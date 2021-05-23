@@ -10,7 +10,7 @@ type User {
 }
 
 type MeType {
-  user_id: ID!
+  id: ID!
   username: String!
   admin: Boolean!
 }
