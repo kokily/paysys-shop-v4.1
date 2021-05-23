@@ -20,6 +20,7 @@ const LoginPage = loadable(() => import('./pages/auth/LoginPage'));
 const SoldierPage = loadable(() => import('./pages/home/SoldierPage'));
 const ReservePage = loadable(() => import('./pages/home/ReservePage'));
 const GeneralPage = loadable(() => import('./pages/home/GeneralPage'));
+const ListMenuPage = loadable(() => import('./pages/home/ListMenuPage'));
 
 // Separation according to account authentication
 const LoginRoutes = ({ user }: { user: MeType | null }) => (
@@ -28,6 +29,7 @@ const LoginRoutes = ({ user }: { user: MeType | null }) => (
     <Route exact path="/soldier" component={SoldierPage} />
     <Route exact path="/reserve" component={ReservePage} />
     <Route exact path="/general" component={GeneralPage} />
+    <Route exact path="/menu" component={ListMenuPage} />
 
     <Redirect from={'*'} to={'/soldier'} />
   </Switch>

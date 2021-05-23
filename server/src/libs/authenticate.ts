@@ -14,7 +14,7 @@ async function decodeToken(token: string): Promise<User | undefined> {
   }
 }
 
-export const adminResovler =
+export const adminResolver =
   (resolverFunction) => async (parent, args, context, info) => {
     const { ctx }: { ctx: Context } = context;
     const token = ctx.req.headers['authorization'];

@@ -27,6 +27,7 @@ type Query {
   Me: MeResponse!
   ListCloseds(cursor: ID): ListClosedsResponse!
   ReadClosed(id: ID!): ReadClosedResponse!
+  ListItems(cursor: ID, name: String, divide: String, native: String): ListItemsResponse!
 }
 
 type RegisterResponse {
@@ -59,6 +60,12 @@ type ReadClosedResponse {
 type RemoveClosedResponse {
   ok: Boolean!
   error: String
+}
+
+type ListItemsResponse {
+  ok: Boolean!
+  error: String
+  items: [Item]
 }
 
 scalar Date
