@@ -9,6 +9,7 @@ import ReadClosedsPage from './pages/closed/ReadClosedPage';
 import AddClosedsPage from './pages/closed/AddClosedPage';
 import Loading from './components/common/Loading';
 import GlobalStyle from './libs/styles';
+import { ToastContainer } from 'react-toastify';
 
 const WelcomePage = loadable(() => import('./pages/WelcomePage'), {
   fallback: <div>로딩 중</div>,
@@ -36,6 +37,7 @@ function App() {
     <>
       <GlobalStyle />
       {isLoggedIn ? <LoginRoutes /> : <LogoutRoutes />}
+      <ToastContainer position="top-center" draggable={false} />
     </>
   );
 }

@@ -4,8 +4,11 @@ import { LIST_CLOSEDS } from '../../../libs/graphql/closeds';
 import useScroll from '../../../libs/hooks/useScroll';
 
 function useListCloseds() {
-  const { data, loading, error, fetchMore, refetch } =
-    useQuery<{ ListCloseds: { closeds: ClosedType[] } }>(LIST_CLOSEDS);
+  const { data, loading, error, fetchMore, refetch } = useQuery<{
+    ListCloseds: { closeds: ClosedType[] };
+  }>(LIST_CLOSEDS, {
+    fetchPolicy: 'network-only',
+  });
   const [isFinished, setIsFinished] = useState(false);
 
   const onLoadMore = useCallback(

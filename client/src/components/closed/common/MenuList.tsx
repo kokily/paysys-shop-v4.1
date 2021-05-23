@@ -41,8 +41,8 @@ const MenuList: React.FC<Props> = ({ visible, onClose }) => {
           <OutsideClickHandler key={key} onOutsideClick={onClose}>
             <ListBox onClick={onClose} style={props}>
               <div className="menu-wrapper">
-                <MenuItem to={'/'}>리스트</MenuItem>
-                <MenuItem to={'/write'}>작 성</MenuItem>
+                <MenuItem to={'/closed'}>리스트</MenuItem>
+                <MenuItem to={'/closed/add'}>작 성</MenuItem>
               </div>
             </ListBox>
           </OutsideClickHandler>

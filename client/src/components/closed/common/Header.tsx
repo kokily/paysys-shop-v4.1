@@ -82,7 +82,7 @@ const Header: React.FC<Props> = () => {
     <Container>
       <AlignPane>
         <Content>
-          <Logo to="/">휴업현황</Logo>
+          <Logo to="/closed">휴업현황</Logo>
 
           <Spacer />
 
