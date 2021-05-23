@@ -34,7 +34,7 @@ function ReadClosedContainer() {
       await client.clearStore();
 
       toast.success('삭제 완료');
-      history.push('/');
+      history.push('/closed');
     } catch (err) {
       toast.error(err);
     }

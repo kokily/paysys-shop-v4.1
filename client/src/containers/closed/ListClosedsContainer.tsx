@@ -6,10 +6,10 @@ import Loading from '../../components/common/Loading';
 
 function ListClosedsContainer() {
   const history = useHistory();
-  const { data, loading, error, refetch } = useListCloseds();
+  const { data, loading, error } = useListCloseds();
 
   const onRead = (id: string) => {
-    history.push(`/closed/${id}`);
+    history.push(`/closed/read/${id}`);
   };
 
   if (error) return null;

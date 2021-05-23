@@ -222,3 +222,8 @@ interface ClosedType {
   closed_users: ClosedUserType[] | null;
   created_at: string;
 }
+
+interface ClosedUserState {
+  username: string;
+  closed_date: string[];
+}

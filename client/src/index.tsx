@@ -1,16 +1,19 @@
 import { ApolloProvider } from '@apollo/client';
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import client from './libs/apollo';
+import Loading from './components/common/Loading';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
       <BrowserRouter>
-        <App />
+        <Suspense fallback={<Loading />}>
+          <App />
+        </Suspense>
       </BrowserRouter>
     </ApolloProvider>
   </React.StrictMode>,

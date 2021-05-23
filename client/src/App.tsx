@@ -4,16 +4,17 @@ import { useReactiveVar } from '@apollo/client';
 import { useQuery } from '@apollo/react-hooks';
 import isLogged from './libs/store/isLogged';
 import { ME } from './libs/graphql/auth';
-import ListClosedsPage from './pages/closed/ListClosedsPage';
-import ReadClosedsPage from './pages/closed/ReadClosedPage';
-import AddClosedsPage from './pages/closed/AddClosedPage';
 import Loading from './components/common/Loading';
 import GlobalStyle from './libs/styles';
 import { ToastContainer } from 'react-toastify';
 
-const WelcomePage = loadable(() => import('./pages/WelcomePage'), {
-  fallback: <div>로딩 중</div>,
-});
+const WelcomePage = loadable(() => import('./pages/WelcomePage'));
+
+const ListClosedsPage = loadable(
+  () => import('./pages/closed/ListClosedsPage')
+);
+const ReadClosedsPage = loadable(() => import('./pages/closed/ReadClosedPage'));
+const AddClosedsPage = loadable(() => import('./pages/closed/AddClosedPage'));
 
 // Separation according to account authentication
 const LoginRoutes = () => <Switch></Switch>;
@@ -21,7 +22,7 @@ const LogoutRoutes = () => (
   <Switch>
     <Route exact path="/" component={WelcomePage} />
     <Route exact path="/closed" component={ListClosedsPage} />
-    <Route path="/closed/:id" component={ReadClosedsPage} />
+    <Route path="/closed/read/:id" component={ReadClosedsPage} />
     <Route exact path="/closed/add" component={AddClosedsPage} />
     <Redirect from={'*'} to={'/'} />
   </Switch>

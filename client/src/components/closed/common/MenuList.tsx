@@ -43,6 +43,7 @@ const MenuList: React.FC<Props> = ({ visible, onClose }) => {
               <div className="menu-wrapper">
                 <MenuItem to={'/closed'}>리스트</MenuItem>
                 <MenuItem to={'/closed/add'}>작 성</MenuItem>
+                <MenuItem to={'/'}>초기메뉴로</MenuItem>
               </div>
             </ListBox>
           </OutsideClickHandler>
