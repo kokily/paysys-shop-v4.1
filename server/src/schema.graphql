@@ -1,13 +1,20 @@
+type ChangePasswordResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  ChangePassword(password: String!): ChangePasswordResponse!
+  Login(username: String!, password: String!): LoginResponse!
+  Register(username: String!, password: String!): RegisterResponse!
+  AddClosed(year: String!, month: String!, users: [InputUser]!): AddClosedResponse!
+  RemoveClosed(id: ID!): RemoveClosedResponse!
+}
+
 type LoginResponse {
   ok: Boolean!
   error: String
   token: String
-}
-
-type Mutation {
-  Login(username: String!, password: String!): LoginResponse!
-  AddClosed(year: String!, month: String!, users: [InputUser]!): AddClosedResponse!
-  RemoveClosed(id: ID!): RemoveClosedResponse!
 }
 
 type MeResponse {
@@ -20,6 +27,11 @@ type Query {
   Me: MeResponse!
   ListCloseds(cursor: ID): ListClosedsResponse!
   ReadClosed(id: ID!): ReadClosedResponse!
+}
+
+type RegisterResponse {
+  ok: Boolean!
+  error: String
 }
 
 type AddClosedResponse {
