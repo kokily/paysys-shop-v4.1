@@ -16,6 +16,8 @@ const ListClosedsPage = loadable(
 const ReadClosedsPage = loadable(() => import('./pages/closed/ReadClosedPage'));
 const AddClosedsPage = loadable(() => import('./pages/closed/AddClosedPage'));
 
+const LoginPage = loadable(() => import('./pages/auth/LoginPage'));
+
 // Separation according to account authentication
 const LoginRoutes = () => <Switch></Switch>;
 const LogoutRoutes = () => (
@@ -24,6 +26,7 @@ const LogoutRoutes = () => (
     <Route exact path="/closed" component={ListClosedsPage} />
     <Route path="/closed/read/:id" component={ReadClosedsPage} />
     <Route exact path="/closed/add" component={AddClosedsPage} />
+    <Route exact path="/login" component={LoginPage} />
     <Redirect from={'*'} to={'/'} />
   </Switch>
 );
