@@ -1,0 +1,55 @@
+type AddClosedResponse {
+  ok: Boolean!
+  error: String
+}
+
+input InputUser {
+  username: String!
+  closed_date: [String]
+}
+
+type Mutation {
+  AddClosed(year: String!, month: String!, users: [InputUser]!): AddClosedResponse!
+  RemoveClosed(id: ID!): RemoveClosedResponse!
+}
+
+type ListClosedsResponse {
+  ok: Boolean!
+  error: String
+  closeds: [Closed]
+}
+
+type Query {
+  ListCloseds(cursor: ID): ListClosedsResponse!
+  ReadClosed(id: ID!): ReadClosedResponse!
+}
+
+type ReadClosedResponse {
+  ok: Boolean!
+  error: String
+  closed: Closed
+}
+
+type RemoveClosedResponse {
+  ok: Boolean!
+  error: String
+}
+
+scalar Date
+
+type Closed {
+  id: ID!
+  year: String!
+  month: String!
+  closed_users: [ClosedUser]
+  created_at: Date!
+}
+
+type ClosedUser {
+  id: ID!
+  username: String!
+  closed_date: [String]
+  closedId: String!
+  closed: Closed
+  created_at: Date!
+}
