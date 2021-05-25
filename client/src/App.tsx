@@ -27,6 +27,10 @@ const DetailMenuPage = loadable(() => import('./pages/home/DetailMenuPage'));
 const CartPage = loadable(() => import('./pages/cart/CartPage'));
 const ListFrontsPage = loadable(() => import('./pages/front/ListFrontsPage'));
 const ReadFrontPage = loadable(() => import('./pages/front/ReadFrontPage'));
+const ListItemsPage = loadable(() => import('./pages/items/ListItemsPage'));
+const ReadItemPage = loadable(() => import('./pages/items/ReadItemPage'));
+const AddItemPage = loadable(() => import('./pages/items/AddItemPage'));
+const UpdateItemPage = loadable(() => import('./pages/items/UpdateItemPage'));
 
 // Separation according to account authentication
 const LoginRoutes = ({ user }: { user: MeType | null }) => (
@@ -40,6 +44,15 @@ const LoginRoutes = ({ user }: { user: MeType | null }) => (
     <Route exact path="/cart" component={CartPage} />
     <Route exact path="/fronts" component={ListFrontsPage} />
     <Route path="/front/:frontId" component={ReadFrontPage} />
+
+    {user && user.admin && (
+      <>
+        <Route exact path="/items" component={ListItemsPage} />
+        <Route exact path="/item/:itemId" component={ReadItemPage} />
+        <Route exact path="/add" component={AddItemPage} />
+        <Route exact path="/item/update/:itemId" component={UpdateItemPage} />
+      </>
+    )}
 
     <Redirect from={'*'} to={'/soldier'} />
   </Switch>
