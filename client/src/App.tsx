@@ -25,6 +25,7 @@ const GeneralPage = loadable(() => import('./pages/home/GeneralPage'));
 const ListMenuPage = loadable(() => import('./pages/home/ListMenuPage'));
 const DetailMenuPage = loadable(() => import('./pages/home/DetailMenuPage'));
 const CartPage = loadable(() => import('./pages/cart/CartPage'));
+const ListFrontsPage = loadable(() => import('./pages/front/ListFrontsPage'));
 
 // Separation according to account authentication
 const LoginRoutes = ({ user }: { user: MeType | null }) => (
@@ -36,6 +37,7 @@ const LoginRoutes = ({ user }: { user: MeType | null }) => (
     <Route exact path="/menu" component={ListMenuPage} />
     <Route path="/menu/:menuId" component={DetailMenuPage} />
     <Route exact path="/cart" component={CartPage} />
+    <Route exact path="/fronts" component={ListFrontsPage} />
 
     <Redirect from={'*'} to={'/soldier'} />
   </Switch>
