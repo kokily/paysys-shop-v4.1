@@ -7,6 +7,9 @@ type Mutation {
   ChangePassword(password: String!): ChangePasswordResponse!
   Login(username: String!, password: String!): LoginResponse!
   Register(username: String!, password: String!): RegisterResponse!
+  AddCart(item_id: ID!, count: Int!, price: Int!): AddCartResponse!
+  RemoveCart: RemoveCartResponse!
+  RemoveOne(item_id: ID!): RemoveOneResponse!
   AddClosed(year: String!, month: String!, users: [InputUser]!): AddClosedResponse!
   RemoveClosed(id: ID!): RemoveClosedResponse!
   AddItem(name: String!, divide: String!, native: String!, unit: String!, price: Int!): AddItemResponse!
@@ -28,6 +31,7 @@ type MeResponse {
 
 type Query {
   Me: MeResponse!
+  ViewCart: ViewCartResponse!
   ListCloseds(cursor: ID): ListClosedsResponse!
   ReadClosed(id: ID!): ReadClosedResponse!
   ListItems(cursor: ID, name: String, divide: String, native: String): ListItemsResponse!
@@ -37,6 +41,28 @@ type Query {
 type RegisterResponse {
   ok: Boolean!
   error: String
+}
+
+type AddCartResponse {
+  ok: Boolean!
+  error: String
+  cart: Cart
+}
+
+type RemoveCartResponse {
+  ok: Boolean!
+  error: String
+}
+
+type RemoveOneResponse {
+  ok: Boolean!
+  error: String
+}
+
+type ViewCartResponse {
+  ok: Boolean!
+  error: String
+  cart: Cart
 }
 
 type AddClosedResponse {
