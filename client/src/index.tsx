@@ -1,6 +1,7 @@
 import { ApolloProvider } from '@apollo/client';
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import client from './libs/apollo';
@@ -10,11 +11,13 @@ import reportWebVitals from './reportWebVitals';
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <BrowserRouter>
-        <Suspense fallback={<Loading />}>
-          <App />
-        </Suspense>
-      </BrowserRouter>
+      <HelmetProvider>
+        <BrowserRouter>
+          <Suspense fallback={<Loading />}>
+            <App />
+          </Suspense>
+        </BrowserRouter>
+      </HelmetProvider>
     </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')
