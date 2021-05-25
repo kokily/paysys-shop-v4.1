@@ -6,6 +6,7 @@ import { ME } from './libs/graphql/auth';
 import Loading from './components/common/Loading';
 import GlobalStyle from './libs/styles';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // Logout Routes Loadable
 const WelcomePage = loadable(() => import('./pages/WelcomePage'));
@@ -23,6 +24,7 @@ const ReservePage = loadable(() => import('./pages/home/ReservePage'));
 const GeneralPage = loadable(() => import('./pages/home/GeneralPage'));
 const ListMenuPage = loadable(() => import('./pages/home/ListMenuPage'));
 const DetailMenuPage = loadable(() => import('./pages/home/DetailMenuPage'));
+const CartPage = loadable(() => import('./pages/cart/CartPage'));
 
 // Separation according to account authentication
 const LoginRoutes = ({ user }: { user: MeType | null }) => (
@@ -33,6 +35,7 @@ const LoginRoutes = ({ user }: { user: MeType | null }) => (
     <Route exact path="/general" component={GeneralPage} />
     <Route exact path="/menu" component={ListMenuPage} />
     <Route path="/menu/:menuId" component={DetailMenuPage} />
+    <Route exact path="/cart" component={CartPage} />
 
     <Redirect from={'*'} to={'/soldier'} />
   </Switch>

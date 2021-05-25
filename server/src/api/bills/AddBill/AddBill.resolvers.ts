@@ -15,12 +15,12 @@ const resolvers: Resolvers = {
         args: AddBillMutationArgs,
         { ctx }: { ctx: Context }
       ): Promise<AddBillResponse> => {
-        const { user_id, username } = ctx.state.user;
+        const { id, username } = ctx.state.user;
 
         try {
           const query = await getManager()
             .createQueryBuilder(Cart, 'cart')
-            .where('cart.user_id = :user_id', { user_id })
+            .where('cart.user_id = :id', { id })
             .andWhere('cart.completed = false')
             .andWhere('cart.deleted = false');
           const cart = await query.getOne();
@@ -42,7 +42,7 @@ const resolvers: Resolvers = {
           const bill = await getRepository(Bill).create({
             ...args,
             username,
-            user_id,
+            user_id: id,
             cart_id: input_cart.id,
             total_amount: total,
             items: input_cart.items,

@@ -14,13 +14,13 @@ const resolvers: Resolvers = {
         args: AddCartMutationArgs,
         { ctx }: { ctx: Context }
       ): Promise<AddCartResponse> => {
-        const { user_id } = ctx.state.user;
+        const { id } = ctx.state.user;
         const { item_id, count, price } = args;
 
         try {
           const query = await getManager()
             .createQueryBuilder(Cart, 'cart')
-            .where('cart.user_id = :user_id', { user_id })
+            .where('cart.user_id = :id', { id })
             .andWhere('cart.completed = false')
             .andWhere('cart.deleted = false');
           const prev_cart = await query.getOne();
@@ -45,7 +45,7 @@ const resolvers: Resolvers = {
             // Not Cart
             const cart = await getRepository(Cart).create({
               items: [add_item],
-              user_id,
+              user_id: id,
               completed: false,
               deleted: false,
             });

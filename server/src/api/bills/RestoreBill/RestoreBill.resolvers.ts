@@ -14,7 +14,7 @@ const resolvers: Resolvers = {
         args: RestoreBillMutationArgs,
         { ctx }: { ctx: Context }
       ): Promise<RestoreBillResponse> => {
-        const { user_id } = ctx.state.user;
+        const { id: user_id } = ctx.state.user;
         const { id } = args;
 
         try {

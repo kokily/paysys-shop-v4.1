@@ -9,12 +9,12 @@ const resolvers: Resolvers = {
   Query: {
     ViewCart: authResolver(
       async (_, __, { ctx }: { ctx: Context }): Promise<ViewCartResponse> => {
-        const { user_id } = ctx.state.user;
+        const { id } = ctx.state.user;
 
         try {
           const query = await getManager()
             .createQueryBuilder(Cart, 'cart')
-            .where('cart.user_id = :user_id', { user_id })
+            .where('cart.user_id = :id', { id })
             .andWhere('cart.completed = false')
             .andWhere('cart.deleted = false');
           const cart = await query.getOne();

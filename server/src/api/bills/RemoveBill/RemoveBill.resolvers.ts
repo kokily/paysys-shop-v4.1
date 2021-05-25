@@ -13,7 +13,7 @@ const resolvers: Resolvers = {
         args: RemoveBillMutationArgs,
         { ctx }: { ctx: Context }
       ): Promise<RemoveBillResponse> => {
-        const { user_id, admin } = ctx.state.user;
+        const { id: user_id, admin } = ctx.state.user;
         const { id } = args;
 
         try {

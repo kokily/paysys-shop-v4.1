@@ -13,13 +13,13 @@ const resolvers: Resolvers = {
         args: RemoveOneMutationArgs,
         { ctx }: { ctx: Context }
       ): Promise<RemoveOneResponse> => {
-        const { user_id } = ctx.state.user;
+        const { id } = ctx.state.user;
         const { item_id } = args;
 
         try {
           const query = await getManager()
             .createQueryBuilder(Cart, 'cart')
-            .where('cart.user_id = :user_id', { user_id })
+            .where('cart.user_id = :id', { id })
             .andWhere('cart.completed = false')
             .andWhere('cart.deleted = false');
           const cart = await query.getOne();
@@ -36,7 +36,7 @@ const resolvers: Resolvers = {
             let remove_cart = { ...cart };
             let update_cart = {
               id: remove_cart.id,
-              user_id,
+              user_id: id,
               deleted: true,
             };
 
