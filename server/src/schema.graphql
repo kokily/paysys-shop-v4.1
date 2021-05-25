@@ -7,6 +7,9 @@ type Mutation {
   ChangePassword(password: String!): ChangePasswordResponse!
   Login(username: String!, password: String!): LoginResponse!
   Register(username: String!, password: String!): RegisterResponse!
+  AddBill(title: String!, hall: String!, etc: String!): AddBillResponse!
+  RemoveBill(id: ID!): RemoveBillResponse!
+  RestoreBill(id: ID!): RestoreBillResponse!
   AddCart(item_id: ID!, count: Int!, price: Int!): AddCartResponse!
   RemoveCart: RemoveCartResponse!
   RemoveOne(item_id: ID!): RemoveOneResponse!
@@ -15,6 +18,8 @@ type Mutation {
   AddItem(name: String!, divide: String!, native: String!, unit: String!, price: Int!): AddItemResponse!
   RemoveItem(id: ID!): RemoveItemResponse!
   UpdateItem(id: ID!, name: String, divide: String, native: String, unit: String, price: Int): UpdateItemResponse!
+  AddReserve(bill_id: ID!, reserve: Int!): AddReserveResponse!
+  RemoveReserve(id: ID!): RemoveReserveResponse!
 }
 
 type LoginResponse {
@@ -31,6 +36,8 @@ type MeResponse {
 
 type Query {
   Me: MeResponse!
+  ListBills(cursor: ID, user_id: ID, title: String, hall: String): ListBillsResponse!
+  ReadBill(id: ID!): ReadBillResponse!
   ViewCart: ViewCartResponse!
   ListCloseds(cursor: ID): ListClosedsResponse!
   ReadClosed(id: ID!): ReadClosedResponse!
@@ -39,6 +46,33 @@ type Query {
 }
 
 type RegisterResponse {
+  ok: Boolean!
+  error: String
+}
+
+type AddBillResponse {
+  ok: Boolean!
+  error: String
+}
+
+type ListBillsResponse {
+  ok: Boolean!
+  error: String
+  bills: [Bill]
+}
+
+type ReadBillResponse {
+  ok: Boolean!
+  error: String
+  bill: Bill
+}
+
+type RemoveBillResponse {
+  ok: Boolean!
+  error: String
+}
+
+type RestoreBillResponse {
   ok: Boolean!
   error: String
 }
@@ -115,6 +149,16 @@ type RemoveItemResponse {
 }
 
 type UpdateItemResponse {
+  ok: Boolean!
+  error: String
+}
+
+type AddReserveResponse {
+  ok: Boolean!
+  error: String
+}
+
+type RemoveReserveResponse {
   ok: Boolean!
   error: String
 }
