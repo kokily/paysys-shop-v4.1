@@ -26,12 +26,12 @@ export const READ_CLOSED = gql`
         id
         year
         month
-        users {
-          id
-          username
-          closed_date
-          created_at
-        }
+      }
+      closed_users {
+        id
+        username
+        closed_date
+        created_at
       }
     }
   }

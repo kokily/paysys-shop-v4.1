@@ -1,9 +1,0 @@
-scalar Date
-
-type Closed {
-  id: ID!
-  year: String!
-  month: String!
-  closed_users: [ClosedUser]
-  created_at: Date!
-}

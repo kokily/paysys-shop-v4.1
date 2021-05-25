@@ -2,6 +2,7 @@ type ReadClosedResponse {
   ok: Boolean!
   error: String
   closed: Closed
+  closed_users: [ClosedUser]
 }
 
 type Query {

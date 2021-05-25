@@ -19,12 +19,12 @@ class ClosedUser extends BaseEntity {
   @Column({ type: 'jsonb', nullable: true })
   closed_date!: string[] | null;
 
-  @Column({ nullable: true })
-  closedId!: string;
-
   @Column({ type: 'timestamptz' })
   @CreateDateColumn()
   created_at!: Date;
+
+  @Column({ nullable: true })
+  closedId!: string;
 
   @ManyToOne((type) => Closed, (closed) => closed.closed_users, {
     onDelete: 'CASCADE',

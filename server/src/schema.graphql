@@ -130,6 +130,7 @@ type ReadClosedResponse {
   ok: Boolean!
   error: String
   closed: Closed
+  closed_users: [ClosedUser]
 }
 
 type RemoveClosedResponse {
@@ -188,7 +189,7 @@ type ClosedUser {
   id: ID!
   username: String!
   closed_date: [String]
-  closedId: String!
+  closedId: ID!
   closed: Closed
   created_at: Date!
 }

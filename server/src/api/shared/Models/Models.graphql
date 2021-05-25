@@ -1,5 +1,22 @@
 scalar Date
 
+type Closed {
+  id: ID!
+  year: String!
+  month: String!
+  closed_users: [ClosedUser]
+  created_at: Date!
+}
+
+type ClosedUser {
+  id: ID!
+  username: String!
+  closed_date: [String]
+  closedId: ID!
+  closed: Closed
+  created_at: Date!
+}
+
 type User {
   id: ID!
   username: String!

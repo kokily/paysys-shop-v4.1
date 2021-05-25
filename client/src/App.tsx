@@ -36,6 +36,9 @@ const ReadUserPage = loadable(() => import('./pages/users/ReadUserPage'));
 const ListWeddingsPage = loadable(
   () => import('./pages/weddings/ListWeddingsPage')
 );
+const ReadWeddingPage = loadable(
+  () => import('./pages/weddings/ReadWeddingPage')
+);
 
 // Separation according to account authentication
 const LoginRoutes = ({ user }: { user: MeType | null }) => (
@@ -59,6 +62,7 @@ const LoginRoutes = ({ user }: { user: MeType | null }) => (
         <Route exact path="/users" component={ListUsersPage} />
         <Route path="/user/:userId" component={ReadUserPage} />
         <Route exact path="/weddings" component={ListWeddingsPage} />
+        <Route path="/wedding/:weddingId" component={ReadWeddingPage} />
       </>
     )}
 

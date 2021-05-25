@@ -90,15 +90,20 @@ const Button = styled.button`
 
 interface Props {
   closed: ClosedType | null;
+  closed_users: ClosedUserType[] | [];
   onRemoveClosed: (e: React.MouseEvent) => void;
 }
 
-const ReadClosed: React.FC<Props> = ({ closed, onRemoveClosed }) => {
+const ReadClosed: React.FC<Props> = ({
+  closed,
+  closed_users,
+  onRemoveClosed,
+}) => {
   return (
     <>
       {closed && (
         <ClosedBox>
-          {closed.closed_users && (
+          {closed_users && (
             <WhiteBoard>
               <InfoHeader>
                 <h2>
@@ -118,8 +123,8 @@ const ReadClosed: React.FC<Props> = ({ closed, onRemoveClosed }) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {closed.closed_users.length !== 0 &&
-                      closed.closed_users.map((user) => (
+                    {closed_users.length !== 0 &&
+                      closed_users.map((user) => (
                         <tr key={user.id}>
                           <td>{user.username} 님</td>
                           <td>

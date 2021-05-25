@@ -10,7 +10,7 @@ function ReadClosedContainer() {
   const history = useHistory();
   const { id }: { id: string } = useParams();
   const { data, loading, error } = useQuery<{
-    ReadClosed: { closed: ClosedType };
+    ReadClosed: { closed: ClosedType; closed_users: ClosedUserType[] };
   }>(READ_CLOSED, {
     variables: { id },
   });
@@ -46,6 +46,7 @@ function ReadClosedContainer() {
   return (
     <ReadClosed
       closed={data?.ReadClosed.closed || null}
+      closed_users={data?.ReadClosed.closed_users || []}
       onRemoveClosed={onRemoveClosed}
     />
   );
