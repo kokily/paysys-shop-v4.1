@@ -149,7 +149,7 @@ interface Props {
   onRemoveReserve: () => void;
 }
 
-const ReadFront: React.FC<Props> = ({
+const ReadFrontMobile: React.FC<Props> = ({
   front,
   user,
   onList,
@@ -220,8 +220,11 @@ const ReadFront: React.FC<Props> = ({
                 <thead>
                   <tr>
                     <th>구분</th>
-                    <th>상품명</th>
-                    <th>단가</th>
+                    <th>
+                      상품명
+                      <br />
+                      (단가)
+                    </th>
                     <th>수량</th>
                     <th>소계</th>
                   </tr>
@@ -236,13 +239,15 @@ const ReadFront: React.FC<Props> = ({
                       {front.items?.map((item, i) => (
                         <tr key={i}>
                           <td>{item.native}</td>
-                          <td>{item.name}</td>
                           <td>
+                            {item.name}
+                            <br />
                             <span style={{ color: oc.gray[6] }}>
+                              (
                               {item.price
                                 .toString()
                                 .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                              원
+                              원)
                             </span>
                           </td>
                           <td>{item.count}</td>
@@ -339,4 +344,4 @@ const ReadFront: React.FC<Props> = ({
   );
 };
 
-export default ReadFront;
+export default ReadFrontMobile;

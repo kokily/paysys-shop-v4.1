@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import oc from 'open-color';
 import { media, shadow } from '../../libs/styles';
+import { BrowserView, MobileView } from 'react-device-detect';
 
 interface ButtonProps {
   remove?: boolean;
@@ -13,11 +14,14 @@ interface ButtonProps {
 // Styles
 const Container = styled.div`
   margin-top: 1rem;
-  display: inline-flex;
-  ${media.xsmall} {
-    display: flex;
-    justify-content: center;
-  }
+  display: flex;
+  width: 100%;
+  justify-content: center;
+`;
+
+const ButtonBox = styled.div`
+  display: flex;
+  justify-content: center;
 `;
 
 const Button = styled.button<ButtonProps>`
@@ -109,32 +113,37 @@ const ReadButton: React.FC<Props> = ({
 }) => {
   return (
     <Container>
-      {user && front && (user.admin || front.user_id === user.id) && (
-        <>
-          <Button remove onClick={onRemoveClick}>
-            삭제하기
-          </Button>
-          <Button restore onClick={onRestore}>
-            수정하기
-          </Button>
-        </>
-      )}
-      <Button menu onClick={onList}>
-        목록으로
-      </Button>
-      {user && front && user.admin && (
-        <>
-          {!front.reserve || front.reserve === 0 ? (
-            <Button reserve onClick={onReserve}>
-              + 예약금
+      <ButtonBox>
+        {user && front && (user.admin || front.user_id === user.id) && (
+          <>
+            <Button remove onClick={onRemoveClick}>
+              <BrowserView>삭제하기</BrowserView>
+              <MobileView>삭제</MobileView>
             </Button>
-          ) : (
-            <Button reserve onClick={onRemoveReserve}>
-              예약금 삭제
+            <Button restore onClick={onRestore}>
+              <BrowserView>수정하기</BrowserView>
+              <MobileView>수정</MobileView>
             </Button>
-          )}
-        </>
-      )}
+          </>
+        )}
+        <Button menu onClick={onList}>
+          <BrowserView>목록으로</BrowserView>
+          <MobileView>목록</MobileView>
+        </Button>
+        {user && front && user.admin && (
+          <>
+            {!front.reserve || front.reserve === 0 ? (
+              <Button reserve onClick={onReserve}>
+                + 예약금
+              </Button>
+            ) : (
+              <Button reserve onClick={onRemoveReserve}>
+                예약금 삭제
+              </Button>
+            )}
+          </>
+        )}
+      </ButtonBox>
     </Container>
   );
 };

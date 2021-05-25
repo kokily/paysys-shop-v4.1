@@ -1,10 +1,11 @@
-import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useApolloClient, useMutation, useQuery } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
+import { BrowserView, MobileView } from 'react-device-detect';
 import { READ_BILL, REMOVE_BILL, RESTORE_BILL } from '../../libs/graphql/bills';
 import { ME } from '../../libs/graphql/auth';
 import { REMOVE_RESERVE } from '../../libs/graphql/reserve';
+import ReadFrontMobile from '../../components/fronts/ReadFrontMobile';
 import ReadFront from '../../components/fronts/ReadFront';
 
 function ReadFrontContainer() {
@@ -90,15 +91,30 @@ function ReadFrontContainer() {
   if (error) return null;
 
   return (
-    <ReadFront
-      front={data?.ReadBill.bill || null}
-      user={me?.Me.me || null}
-      onList={onList}
-      onRemove={onRemove}
-      onRestore={onRestore}
-      onReserve={onReserve}
-      onRemoveReserve={onRemoveReserve}
-    />
+    <>
+      <BrowserView>
+        <ReadFront
+          front={data?.ReadBill.bill || null}
+          user={me?.Me.me || null}
+          onList={onList}
+          onRemove={onRemove}
+          onRestore={onRestore}
+          onReserve={onReserve}
+          onRemoveReserve={onRemoveReserve}
+        />
+      </BrowserView>
+      <MobileView>
+        <ReadFrontMobile
+          front={data?.ReadBill.bill || null}
+          user={me?.Me.me || null}
+          onList={onList}
+          onRemove={onRemove}
+          onRestore={onRestore}
+          onReserve={onReserve}
+          onRemoveReserve={onRemoveReserve}
+        />
+      </MobileView>
+    </>
   );
 }
 
