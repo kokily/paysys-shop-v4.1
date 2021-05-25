@@ -39,6 +39,7 @@ const ListWeddingsPage = loadable(
 const ReadWeddingPage = loadable(
   () => import('./pages/weddings/ReadWeddingPage')
 );
+const PasswordPage = loadable(() => import('./pages/auth/PasswordPage'));
 
 // Separation according to account authentication
 const LoginRoutes = ({ user }: { user: MeType | null }) => (
@@ -63,6 +64,7 @@ const LoginRoutes = ({ user }: { user: MeType | null }) => (
         <Route path="/user/:userId" component={ReadUserPage} />
         <Route exact path="/weddings" component={ListWeddingsPage} />
         <Route path="/wedding/:weddingId" component={ReadWeddingPage} />
+        <Route exact path="/password" component={PasswordPage} />
       </>
     )}
 
