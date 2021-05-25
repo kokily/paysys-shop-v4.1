@@ -1,13 +1,13 @@
 import { useQuery } from '@apollo/react-hooks';
 import { useCallback, useState } from 'react';
-import { LIST_ITEMS } from '../../../libs/graphql/items';
+import { LIST_USERS } from '../../../libs/graphql/users';
 import useScroll from '../../../libs/hooks/useScroll';
 
-function useListItems(name?: string) {
+function useListUsers(username?: string) {
   const { data, loading, error, fetchMore } = useQuery<{
-    ListItems: { items: ItemType[] };
-  }>(LIST_ITEMS, {
-    variables: { name },
+    ListUsers: { users: UserType[] };
+  }>(LIST_USERS, {
+    variables: { username },
   });
   const [isFinished, setIsFinished] = useState(false);
 
@@ -15,31 +15,31 @@ function useListItems(name?: string) {
     (cursor: string) => {
       fetchMore({
         variables: {
-          name,
+          username,
           cursor,
         },
         updateQuery: (prev, { fetchMoreResult }) => {
           if (!fetchMoreResult) return prev;
-          if (fetchMoreResult.ListItems.items.length) {
+          if (fetchMoreResult.ListUsers.users.length === 0) {
             setIsFinished(true);
           }
 
           return {
-            ListItems: {
-              ...prev.ListItems,
-              items: [
-                ...prev.ListItems.items,
-                ...fetchMoreResult.ListItems.items,
+            ListUsers: {
+              ...prev.ListUsers,
+              users: [
+                ...prev.ListUsers.users,
+                ...fetchMoreResult.ListUsers.users,
               ],
             },
           };
         },
       });
     },
-    [fetchMore, name]
+    [fetchMore, username]
   );
 
-  const cursor = data?.ListItems.items[data.ListItems.items.length - 1]?.id;
+  const cursor = data?.ListUsers.users[data.ListUsers.users.length - 1]?.id;
 
   useScroll({
     cursor,
@@ -54,4 +54,4 @@ function useListItems(name?: string) {
   };
 }
 
-export default useListItems;
+export default useListUsers;

@@ -31,6 +31,8 @@ const ListItemsPage = loadable(() => import('./pages/items/ListItemsPage'));
 const ReadItemPage = loadable(() => import('./pages/items/ReadItemPage'));
 const AddItemPage = loadable(() => import('./pages/items/AddItemPage'));
 const UpdateItemPage = loadable(() => import('./pages/items/UpdateItemPage'));
+const ListUsersPage = loadable(() => import('./pages/users/ListUsersPage'));
+const ReadUserPage = loadable(() => import('./pages/users/ReadUserPage'));
 
 // Separation according to account authentication
 const LoginRoutes = ({ user }: { user: MeType | null }) => (
@@ -51,6 +53,8 @@ const LoginRoutes = ({ user }: { user: MeType | null }) => (
         <Route exact path="/item/:itemId" component={ReadItemPage} />
         <Route exact path="/add" component={AddItemPage} />
         <Route exact path="/item/update/:itemId" component={UpdateItemPage} />
+        <Route exact path="/users" component={ListUsersPage} />
+        <Route path="/user/:userId" component={ReadUserPage} />
       </>
     )}
 
