@@ -9,6 +9,9 @@ type Mutation {
   Register(username: String!, password: String!): RegisterResponse!
   AddClosed(year: String!, month: String!, users: [InputUser]!): AddClosedResponse!
   RemoveClosed(id: ID!): RemoveClosedResponse!
+  AddItem(name: String!, divide: String!, native: String!, unit: String!, price: Int!): AddItemResponse!
+  RemoveItem(id: ID!): RemoveItemResponse!
+  UpdateItem(id: ID!, name: String, divide: String, native: String, unit: String, price: Int): UpdateItemResponse!
 }
 
 type LoginResponse {
@@ -28,6 +31,7 @@ type Query {
   ListCloseds(cursor: ID): ListClosedsResponse!
   ReadClosed(id: ID!): ReadClosedResponse!
   ListItems(cursor: ID, name: String, divide: String, native: String): ListItemsResponse!
+  ReadItem(id: ID!): ReadItemResponse!
 }
 
 type RegisterResponse {
@@ -62,10 +66,31 @@ type RemoveClosedResponse {
   error: String
 }
 
+type AddItemResponse {
+  ok: Boolean!
+  error: String
+}
+
 type ListItemsResponse {
   ok: Boolean!
   error: String
   items: [Item]
+}
+
+type ReadItemResponse {
+  ok: Boolean!
+  error: String
+  item: Item
+}
+
+type RemoveItemResponse {
+  ok: Boolean!
+  error: String
+}
+
+type UpdateItemResponse {
+  ok: Boolean!
+  error: String
 }
 
 scalar Date
