@@ -97,6 +97,7 @@ const resolvers: Resolvers = {
             hanbok_pre_bride: args.hanbok_pre_bride,
             hanbok_post_husband: args.hanbok_post_husband,
             hanbok_post_bride: args.hanbok_post_bride,
+            weddingId: wedding.id,
           });
           await hanbok.save();
 
