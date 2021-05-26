@@ -11,7 +11,6 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import Cart from './Cart';
 import Bill from './Bill';
-import Wedding from './Wedding';
 
 @Entity()
 class User extends BaseEntity {
@@ -66,9 +65,6 @@ class User extends BaseEntity {
 
   @OneToMany((type) => Bill, (bill) => bill.user_id)
   bills!: [Bill];
-
-  @OneToMany((type) => Wedding, (wedding) => wedding.user_id)
-  weddings!: [Wedding];
 }
 
 export default User;

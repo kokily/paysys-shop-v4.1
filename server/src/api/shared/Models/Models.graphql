@@ -82,73 +82,122 @@ type Bill {
 
 type Wedding {
   id: ID!
-  husband: String!
-  husband_rental: Int!
-  husband_company: Int!
-  husband_add: Int!
-  husband_today: Int!
-  husband_bouquet: Int!
-  husband_ceremony: Int!
-  husband_hanbok: Int!
-  husband_play: Int!
-  husband_anthem: Int!
-  husband_moderator: Int!
-  husband_officiate: Int!
-  husband_etc: Int!
-  husband_conv: Int!
-  husband_wedding: Int!
-  husband_num: Int!
-  husband_meal: Int!
-  husband_present_num: Int!
-  husband_present: Int!
-  husband_reserve: Int!
-  bride: String!
-  bride_rental: Int!
-  bride_company: Int!
-  bride_add: Int!
-  bride_today: Int!
-  bride_bouquet: Int!
-  bride_ceremony: Int!
-  bride_hanbok: Int!
-  bride_play: Int!
-  bride_anthem: Int!
-  bride_moderator: Int!
-  bride_officiate: Int!
-  bride_etc: Int!
-  bride_conv: Int!
-  bride_wedding: Int!
-  bride_num: Int!
-  bride_meal: Int!
-  bride_present_num: Int!
-  bride_present: Int!
-  bride_reserve: Int!
-  sum_rental: Int!
-  sum_company: Int!
-  sum_add: Int!
-  sum_today: Int!
-  sum_bouquet: Int!
-  sum_ceremony: Int!
-  sum_hanbok: Int!
-  sum_play: Int!
-  sum_anthem: Int!
-  sum_moderator: Int!
-  sum_officiate: Int!
-  sum_etc: Int!
-  sum_conv: Int!
-  sum_wedding: Int!
-  sum_num: Int!
-  sum_meal: Int!
-  sum_present_num: Int!
-  sum_present: Int!
-  reserve_pay: Int!
-  meals_price: Int!
-  present_price: Int!
-  meal: String!
-  reserve: String!
-  present: String!
+  husband_name: String!
+  bride_name: String!
   wedding_at: String!
   event_at: String!
   created_at: Date!
   updated_at: Date
-  user_id: String!
+  conventionId: String
+  convention: Convention
+  companyId: String
+  company: Company
+  hanbokId: String
+  hanbok: Hanbok
+  eventId: String
+  event: Event
+  mealId: String
+  meal: Meal
+  presentId: String
+  present: Present
+  reserveId: String
+  reserve: Reserve
+}
+
+type Company {
+  id: ID!
+  company_husband: Int!
+  company_bride: Int!
+  rooftop_husband: Int!
+  rooftop_bride: Int!
+  owner_woman_husband: Int!
+  owner_woman_bride: Int!
+  owner_man_husband: Int!
+  owner_man_bride: Int!
+  select_husband: Int!
+  select_bride: Int!
+  frame_husband: Int!
+  frame_bride: Int!
+  dress_husband: Int!
+  dress_bride: Int!
+  hairpin_husband: Int!
+  hairpin_bride: Int!
+  wig_husband: Int!
+  wig_bride: Int!
+  video_husband: Int!
+  video_bride: Int!
+  etc_husband: Int!
+  etc_bride: Int!
+  weddingId: String!
+  wedding: Wedding!
+}
+
+type Convention {
+  id: ID!
+  rental_husband: Int!
+  rental_bride: Int!
+  sword_husband: Int!
+  sword_bride: Int!
+  glove_husband: Int!
+  glove_bride: Int!
+  bouquet_husband: Int!
+  bouquet_bride: Int!
+  ceremony_husband: Int!
+  ceremony_bride: Int!
+  weddingId: String
+  wedding: Wedding
+}
+
+type Event {
+  id: ID!
+  play_husband: Int!
+  play_bride: Int!
+  anthem_husband: Int!
+  anthem_bride: Int!
+  moderator_husband: Int!
+  moderator_bride: Int!
+  officiate_husband: Int!
+  officiate_bride: Int!
+  weddingId: String
+  wedding: Wedding
+}
+
+type Hanbok {
+  id: ID!
+  hanbok_pre_husband: Int!
+  hanbok_pre_bride: Int!
+  hanbok_post_husband: Int!
+  hanbok_post_bride: Int!
+  weddingId: String
+  wedding: Wedding
+}
+
+type Meal {
+  id: ID!
+  meals: String!
+  meals_price: Int!
+  meals_num_husband: Int!
+  meals_num_bride: Int!
+  weddingId: String
+  wedding: Wedding
+}
+
+type Present {
+  id: ID!
+  present: String!
+  present_price: Int!
+  present_num_husband: Int!
+  present_num_bride: Int!
+  weddingId: String
+  wedding: Wedding
+}
+
+type Reserve {
+  id: ID!
+  reserve: String!
+  reserve_pay: Int!
+  reserve_husband: Int!
+  reserve_bride: Int!
+  weddingId: String
+  wedding: Wedding
 }
