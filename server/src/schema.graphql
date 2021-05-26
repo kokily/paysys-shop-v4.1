@@ -50,6 +50,8 @@ type Query {
   ReadItem(id: ID!): ReadItemResponse!
   ListUsers(username: String, cursor: ID): ListUsersResponse!
   ReadUser(id: ID!): ReadUserResponse!
+  ListWeddings(date: String, cursor: ID): ListWeddingsResponse!
+  ReadWedding(id: ID!): ReadWeddingResponse!
 }
 
 type RegisterResponse {
@@ -410,4 +412,23 @@ type SetEmployeeResponse {
 type AddWeddingResponse {
   ok: Boolean!
   error: String
+}
+
+type ListWeddingsResponse {
+  ok: Boolean!
+  error: String
+  weddings: [Wedding]
+}
+
+type ReadWeddingResponse {
+  ok: Boolean!
+  error: String
+  wedding: Wedding
+  company: Company
+  convention: Convention
+  event: Event
+  hanbok: Hanbok
+  meal: Meal
+  present: Present
+  reserve: Reserve
 }
