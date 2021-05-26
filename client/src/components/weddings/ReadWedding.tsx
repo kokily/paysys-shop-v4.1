@@ -5,6 +5,7 @@ import { shadow } from '../../libs/styles';
 import TopRead from './browser/TopRead';
 import BottomRead from './browser/BottomRead';
 import RemoveModal from '../common/RemoveModal';
+import Receipt from './Receipt';
 
 // Styles
 const Container = styled.div`
@@ -216,92 +217,7 @@ const ReadWedding: React.FC<Props> = ({
 
           <hr style={{ width: '90%' }} />
 
-          <h3 style={{ color: 'silver ' }}>
-            웨딩 총 비용:{' '}
-            {(wedding.sum_wedding + wedding.sum_meal + wedding.sum_present)
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-            원
-          </h3>
-
-          <h3 style={{ color: 'blue' }}>
-            결제비용 총액:{' '}
-            {(
-              wedding.sum_wedding +
-              wedding.sum_meal +
-              wedding.sum_present -
-              wedding.reserve_pay
-            )
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-            원
-          </h3>
-
-          <h3>
-            신랑 총 결제비용:{' '}
-            {(
-              wedding.husband_wedding +
-              (function () {
-                if (wedding.meal === 'privacy') {
-                  return wedding.husband_meal;
-                } else if (wedding.meal === 'husband') {
-                  return wedding.sum_meal;
-                } else if (wedding.meal === 'bride') {
-                  return 0;
-                } else {
-                  return wedding.sum_meal / 2;
-                }
-              })() +
-              (function () {
-                if (wedding.present === 'privacy') {
-                  return wedding.husband_present;
-                } else if (wedding.present === 'husband') {
-                  return wedding.sum_present;
-                } else if (wedding.present === 'bride') {
-                  return 0;
-                } else {
-                  return wedding.sum_present / 2;
-                }
-              })() -
-              wedding.husband_reserve
-            )
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-            원
-          </h3>
-
-          <h3>
-            신부 총 결제비용:{' '}
-            {(
-              wedding.bride_wedding +
-              (function () {
-                if (wedding.meal === 'privacy') {
-                  return wedding.bride_meal;
-                } else if (wedding.meal === 'husband') {
-                  return 0;
-                } else if (wedding.meal === 'bride') {
-                  return wedding.sum_meal;
-                } else {
-                  return wedding.sum_meal / 2;
-                }
-              })() +
-              (function () {
-                if (wedding.present === 'privacy') {
-                  return wedding.bride_present;
-                } else if (wedding.present === 'husband') {
-                  return 0;
-                } else if (wedding.present === 'bride') {
-                  return wedding.sum_present;
-                } else {
-                  return wedding.sum_present / 2;
-                }
-              })() -
-              wedding.bride_reserve
-            )
-              .toString()
-              .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-            원
-          </h3>
+          <Receipt wedding={wedding} />
 
           <ButtonBox>
             <Button menu onClick={onList}>
