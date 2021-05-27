@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import oc from 'open-color';
 import { media } from '../../libs/styles';
 import ReadButton from './ReadButton';
 import RemoveModal from '../common/RemoveModal';
+
+interface TdProps {
+  soldier?: boolean;
+  reserve?: boolean;
+  general?: boolean;
+}
 
 // Styles
 const Container = styled.div`
@@ -103,6 +109,29 @@ const Content = styled.div`
     background: ${oc.indigo[9]};
     color: white;
   }
+`;
+
+const Td = styled.td<TdProps>`
+  ${(props) =>
+    props.soldier &&
+    css`
+      background: ${oc.cyan[7]};
+      color: white;
+    `}
+
+  ${(props) =>
+    props.reserve &&
+    css`
+      background: ${oc.lime[7]};
+      color: white;
+    `}
+
+  ${(props) =>
+    props.general &&
+    css`
+      background: ${oc.orange[6]};
+      color: white;
+    `}
 `;
 
 const EtcPane = styled.div`
@@ -238,25 +267,47 @@ const ReadFrontMobile: React.FC<Props> = ({
                     <>
                       {front.items?.map((item, i) => (
                         <tr key={i}>
-                          <td>{item.native}</td>
-                          <td>
+                          <Td
+                            soldier={item.native === '현역'}
+                            reserve={item.native === '예비역'}
+                            general={item.native === '일반'}
+                          >
+                            {item.native}
+                          </Td>
+                          <Td
+                            soldier={item.native === '현역'}
+                            reserve={item.native === '예비역'}
+                            general={item.native === '일반'}
+                          >
                             {item.name}
                             <br />
-                            <span style={{ color: oc.gray[6] }}>
+                            <span
+                              style={{ color: oc.gray[4], fontSize: '0.8rem' }}
+                            >
                               (
                               {item.price
                                 .toString()
                                 .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                               원)
                             </span>
-                          </td>
-                          <td>{item.count}</td>
-                          <td>
+                          </Td>
+                          <Td
+                            soldier={item.native === '현역'}
+                            reserve={item.native === '예비역'}
+                            general={item.native === '일반'}
+                          >
+                            {item.count}
+                          </Td>
+                          <Td
+                            soldier={item.native === '현역'}
+                            reserve={item.native === '예비역'}
+                            general={item.native === '일반'}
+                          >
                             {(item.price * item.count)
                               .toString()
                               .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
                             원
-                          </td>
+                          </Td>
                         </tr>
                       ))}
                     </>

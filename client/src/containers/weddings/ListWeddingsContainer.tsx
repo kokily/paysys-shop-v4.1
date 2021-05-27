@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import ListWeddings from '../../components/weddings/ListWeddings';
 import useListWeddings from './hooks/useListWeddings';

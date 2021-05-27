@@ -33,13 +33,10 @@ const AddItemPage = loadable(() => import('./pages/items/AddItemPage'));
 const UpdateItemPage = loadable(() => import('./pages/items/UpdateItemPage'));
 const ListUsersPage = loadable(() => import('./pages/users/ListUsersPage'));
 const ReadUserPage = loadable(() => import('./pages/users/ReadUserPage'));
+const PasswordPage = loadable(() => import('./pages/auth/PasswordPage'));
 const ListWeddingsPage = loadable(
   () => import('./pages/weddings/ListWeddingsPage')
 );
-const ReadWeddingPage = loadable(
-  () => import('./pages/weddings/ReadWeddingPage')
-);
-const PasswordPage = loadable(() => import('./pages/auth/PasswordPage'));
 
 // Separation according to account authentication
 const LoginRoutes = ({ user }: { user: MeType | null }) => (
@@ -62,9 +59,8 @@ const LoginRoutes = ({ user }: { user: MeType | null }) => (
         <Route exact path="/item/update/:itemId" component={UpdateItemPage} />
         <Route exact path="/users" component={ListUsersPage} />
         <Route path="/user/:userId" component={ReadUserPage} />
-        <Route exact path="/weddings" component={ListWeddingsPage} />
-        <Route path="/wedding/:weddingId" component={ReadWeddingPage} />
         <Route exact path="/password" component={PasswordPage} />
+        <Route exact path="/weddings" component={ListWeddingsPage} />
       </>
     )}
 
