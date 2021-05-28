@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { ADD_WEDDING } from '../../libs/graphql/weddings';
 import { toast } from 'react-toastify';
 import ExpensiveWedding from '../../components/weddings/expensive';
-import ExpenseButton from '../../components/weddings/expensive/ButtonBox';
+import ExpenseButton from '../../components/weddings/expensive/ExpenseButton';
 import ExpensiveTemplate from '../../components/weddings/expensive/ExpensiveTemplate';
 import Convention from '../../components/weddings/expensive/Convention';
 import Company from '../../components/weddings/expensive/Company';

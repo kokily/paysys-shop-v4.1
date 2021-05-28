@@ -53,7 +53,7 @@ const resolvers: Resolvers = {
           ) {
             return {
               ok: false,
-              error: '',
+              error: '데이터가 없음',
               wedding: null,
               company: null,
               convention: null,
