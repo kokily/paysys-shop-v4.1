@@ -1,10 +1,11 @@
 import React from 'react';
+import { stringAccounting } from '../../../../libs/utils';
 
 interface Props {
-  wedding: WeddingType;
+  convention: ConventionType;
 }
 
-const ReadConvention: React.FC<Props> = ({ wedding }) => {
+const ReadConvention: React.FC<Props> = ({ convention }) => {
   return (
     <>
       <tr>
@@ -14,14 +15,61 @@ const ReadConvention: React.FC<Props> = ({ wedding }) => {
         <th className="basic red">계</th>
       </tr>
 
-      {wedding.convention && (
-        <>
-          <tr>
-            <th>웨딩홀 사용료</th>
-            <td>{wedding.convention.husband_rental}</td>
-          </tr>
-        </>
-      )}
+      <tr>
+        <th>웨딩홀 사용료</th>
+        <td>{stringAccounting(convention.rental_husband)}원</td>
+        <td>{stringAccounting(convention.rental_bride)}원</td>
+        <td className="sub">
+          {stringAccounting(
+            convention.rental_husband + convention.rental_bride
+          )}
+          원
+        </td>
+      </tr>
+
+      <tr>
+        <th>예도칼</th>
+        <td>{stringAccounting(convention.sword_husband)}원</td>
+        <td>{stringAccounting(convention.sword_bride)}원</td>
+        <td className="sub">
+          {stringAccounting(convention.sword_husband + convention.sword_bride)}
+          원
+        </td>
+      </tr>
+
+      <tr>
+        <th>장 갑</th>
+        <td>{stringAccounting(convention.glove_husband)}원</td>
+        <td>{stringAccounting(convention.glove_bride)}원</td>
+        <td className="sub">
+          {stringAccounting(convention.glove_husband + convention.glove_bride)}
+          원
+        </td>
+      </tr>
+
+      <tr>
+        <th>부 케</th>
+        <td>{stringAccounting(convention.bouquet_husband)}원</td>
+        <td>{stringAccounting(convention.bouquet_bride)}원</td>
+        <td className="sub">
+          {stringAccounting(
+            convention.bouquet_husband + convention.bouquet_bride
+          )}
+          원
+        </td>
+      </tr>
+
+      <tr>
+        <th>폐 백</th>
+        <td>{stringAccounting(convention.ceremony_husband)}원</td>
+        <td>{stringAccounting(convention.ceremony_bride)}원</td>
+        <td className="sub">
+          {stringAccounting(
+            convention.ceremony_husband + convention.ceremony_bride
+          )}
+          원
+        </td>
+      </tr>
     </>
   );
 };

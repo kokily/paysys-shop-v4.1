@@ -12,7 +12,16 @@ function ReadWeddingContainer() {
   const history = useHistory();
   const { weddingId }: { weddingId: string } = useParams();
   const { data, loading, error } = useQuery<{
-    ReadWedding: { wedding: WeddingType };
+    ReadWedding: {
+      wedding: WeddingType;
+      convention: ConventionType;
+      company: CompanyType;
+      event: EventType;
+      hanbok: HanbokType;
+      meal: MealType;
+      present: PresentType;
+      reserve: ReserveType;
+    };
   }>(READ_WEDDING, {
     variables: { id: weddingId },
   });
@@ -58,7 +67,13 @@ function ReadWeddingContainer() {
             wedding={data?.ReadWedding.wedding || null}
             onRemove={onRemoveWedding}
           />
-          <LeftSide wedding={data?.ReadWedding.wedding || null} />
+          <LeftSide
+            wedding={data?.ReadWedding.wedding || null}
+            convention={data?.ReadWedding.convention || null}
+            company={data?.ReadWedding.company || null}
+            event={data?.ReadWedding.event || null}
+            hanbok={data?.ReadWedding.hanbok || null}
+          />
           <RightSide wedding={data?.ReadWedding.wedding || null} />
         </ReadWeddingTemplate>
       </BrowserView>
