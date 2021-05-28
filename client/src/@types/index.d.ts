@@ -86,7 +86,7 @@ interface WeddingType {
   id: string;
   husband_name: string;
   bride_name: string;
-  wedding_at: string;
+  wedding_at: Date;
   event_at: string;
   created_at: string;
   updated_at?: string;
@@ -192,7 +192,87 @@ interface ReserveType {
   id: string;
   reserve: string;
   reserve_pay: number;
-  reserve_husband: number;
-  reserve_bride: number;
   weddingId: string;
+}
+
+interface ExpensiveWeddingType {
+  husband_name: string;
+  bride_name: string;
+  wedding_at: Date;
+  event_at: string;
+}
+
+interface ExpensiveConventionType {
+  rental_husband: string;
+  rental_bride: string;
+  sword_husband: string;
+  sword_bride: string;
+  glove_husband: string;
+  glove_bride: string;
+  bouquet_husband: string;
+  bouquet_bride: string;
+  ceremony_husband: string;
+  ceremony_bride: string;
+}
+
+interface ExpensiveCompanyType {
+  company_husband: string;
+  company_bride: string;
+  rooftop_husband: string;
+  rooftop_bride: string;
+  owner_woman_husband: string;
+  owner_woman_bride: string;
+  owner_man_husband: string;
+  owner_man_bride: string;
+  select_husband: string;
+  select_bride: string;
+  frame_husband: string;
+  frame_bride: string;
+  dress_husband: string;
+  dress_bride: string;
+  hairpin_husband: string;
+  hairpin_bride: string;
+  wig_husband: string;
+  wig_bride: string;
+  video_husband: string;
+  video_bride: string;
+  etc_husband: string;
+  etc_bride: string;
+}
+
+interface ExpensiveHanbokType {
+  hanbok_pre_husband: string;
+  hanbok_pre_bride: string;
+  hanbok_post_husband: string;
+  hanbok_post_bride: string;
+}
+
+interface ExpensiveEventType {
+  play_husband: string;
+  play_bride: string;
+  anthem_husband: string;
+  anthem_bride: string;
+  moderator_husband: string;
+  moderator_bride: string;
+  officiate_husband: string;
+  officiate_bride: string;
+}
+
+interface ExpensiveMealType {
+  meals: string;
+  meals_price: string;
+  meals_num_husband: string;
+  meals_num_bride: string;
+}
+
+interface ExpensivePresentType {
+  present: string;
+  present_price: string;
+  present_num_husband: string;
+  present_num_bride: string;
+}
+
+interface ExpensiveReserveType {
+  reserve: string;
+  reserve_pay: string;
 }

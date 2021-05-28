@@ -1,7 +1,12 @@
-import PageTemplate from "../../components/common/PageTemplate";
+import PageTemplate from '../../components/common/PageTemplate';
+import ExpensiveWeddingContainer from '../../containers/weddings/ExpensiveWeddingContainer';
 
 function ExpensiveWeddingPage() {
-  return <PageTemplate>ExpensiveWeddingPage</PageTemplate>;
+  return (
+    <PageTemplate>
+      <ExpensiveWeddingContainer />
+    </PageTemplate>
+  );
 }
 
 export default ExpensiveWeddingPage;

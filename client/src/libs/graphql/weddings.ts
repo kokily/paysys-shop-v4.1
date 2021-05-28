@@ -79,8 +79,6 @@ export const ADD_WEDDING = gql`
     $present_num_bride: Int!
     $reserve: String!
     $reserve_pay: Int!
-    $reserve_husband: Int!
-    $reserve_bride: Int!
   ) {
     AddWedding(
       husband_name: $husband_name
@@ -141,8 +139,6 @@ export const ADD_WEDDING = gql`
       present_num_bride: $present_num_bride
       reserve: $reserve
       reserve_pay: $reserve_pay
-      reserve_husband: $reserve_husband
-      reserve_bride: $reserve_bride
     ) {
       ok
       error

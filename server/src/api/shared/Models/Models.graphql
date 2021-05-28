@@ -196,8 +196,6 @@ type Reserve {
   id: ID!
   reserve: String!
   reserve_pay: Int!
-  reserve_husband: Int!
-  reserve_bride: Int!
   weddingId: String
   wedding: Wedding
 }

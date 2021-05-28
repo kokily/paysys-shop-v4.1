@@ -20,13 +20,6 @@ class Reserve extends BaseEntity {
   @Column()
   reserve_pay!: number;
 
-  // 예약금
-  @Column()
-  reserve_husband!: number;
-
-  @Column()
-  reserve_bride!: number;
-
   // Relations
   @Column({ nullable: true })
   weddingId!: string;

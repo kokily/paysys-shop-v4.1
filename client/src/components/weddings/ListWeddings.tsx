@@ -191,8 +191,8 @@ const ListWeddings: React.FC<Props> = ({
                         </strong>
                       </td>
                       <td>{wedding.event_at}</td>
-                      <td>{wedding.husband}</td>
-                      <td>{wedding.bride}</td>
+                      <td>{wedding.husband_name}</td>
+                      <td>{wedding.bride_name}</td>
                     </tr>
                   ))}
                 </>

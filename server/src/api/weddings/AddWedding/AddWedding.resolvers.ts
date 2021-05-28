@@ -122,8 +122,6 @@ const resolvers: Resolvers = {
           const reserve = await getRepository(Reserve).create({
             reserve: args.reserve,
             reserve_pay: args.reserve_pay,
-            reserve_husband: args.reserve_husband,
-            reserve_bride: args.reserve_bride,
             weddingId: wedding.id,
           });
           await reserve.save();

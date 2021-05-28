@@ -138,8 +138,6 @@ const resolvers: Resolvers = {
             {
               reserve: args.reserve,
               reserve_pay: args.reserve_pay,
-              reserve_husband: args.reserve_husband,
-              reserve_bride: args.reserve_bride,
               weddingId: id,
             }
           );
