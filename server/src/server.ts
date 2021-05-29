@@ -2,12 +2,11 @@ import 'dotenv/config';
 import https from 'https';
 import http from 'http';
 import fs from 'fs';
-import { getConnectionOptions, createConnection } from 'typeorm';
+import { createConnection } from 'typeorm';
+import ConnectionOptions from './libs/ormConfig';
 import app from './app';
 
 const _bootstrap = async () => {
-  const ConnectionOptions = await getConnectionOptions();
-
   const configurations = {
     production: { ssl: true, port: 443, hostname: 'paysys.shop' },
     development: { ssl: false, port: 4000, hostname: 'localhost' },
