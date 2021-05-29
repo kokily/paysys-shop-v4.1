@@ -64,5 +64,13 @@ type Mutation {
     present_num_bride: Int!
     reserve: String!
     reserve_pay: Int!
+    cost_husband: Int!
+    cost_bride: Int!
+    meal_husband: Int!
+    meal_bride: Int!
+    present_husband: Int!
+    present_bride: Int!
+    reserve_husband: Int!
+    reserve_bride: Int!
   ): UpdateWeddingResponse!
 }

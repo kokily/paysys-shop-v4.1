@@ -88,6 +88,14 @@ interface WeddingType {
   bride_name: string;
   wedding_at: Date;
   event_at: string;
+  cost_husband: number;
+  cost_bride: number;
+  meal_husband: number;
+  meal_bride: number;
+  present_husband: number;
+  present_bride: number;
+  reserve_husband: number;
+  reserve_bride: number;
   created_at: string;
   updated_at?: string;
   conventionId: string;
@@ -200,6 +208,14 @@ interface ExpensiveWeddingType {
   bride_name: string;
   wedding_at: Date;
   event_at: string;
+  cost_husband?: string;
+  cost_bride?: string;
+  meal_husband?: string;
+  meal_bride?: string;
+  present_husband?: string;
+  present_bride?: string;
+  reserve_husband?: string;
+  reserve_bride?: string;
 }
 
 interface ExpensiveConventionType {

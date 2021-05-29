@@ -32,6 +32,14 @@ const resolvers: Resolvers = {
               bride_name: masking(args.bride_name),
               wedding_at: args.wedding_at,
               event_at: args.event_at,
+              cost_husband: args.cost_husband,
+              cost_bride: args.cost_bride,
+              meal_husband: args.cost_husband,
+              meal_bride: args.cost_bride,
+              present_husband: args.present_husband,
+              present_bride: args.present_bride,
+              reserve_husband: args.reserve_husband,
+              reserve_bride: args.reserve_bride,
             }
           );
           await getRepository(Company).update(

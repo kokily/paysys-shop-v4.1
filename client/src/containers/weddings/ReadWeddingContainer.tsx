@@ -62,11 +62,13 @@ function ReadWeddingContainer() {
   return (
     <>
       <BrowserView>
-        <ReadWeddingTemplate>
-          <ReadWedding
-            wedding={data?.ReadWedding.wedding || null}
-            onRemove={onRemoveWedding}
-          />
+        <ReadWeddingTemplate
+          onList={onList}
+          onBack={onBack}
+          onRemove={onRemoveWedding}
+          onUpdate={onUpdate}
+        >
+          <ReadWedding wedding={data?.ReadWedding.wedding || null} />
           <LeftSide
             wedding={data?.ReadWedding.wedding || null}
             convention={data?.ReadWedding.convention || null}
@@ -74,7 +76,12 @@ function ReadWeddingContainer() {
             event={data?.ReadWedding.event || null}
             hanbok={data?.ReadWedding.hanbok || null}
           />
-          <RightSide wedding={data?.ReadWedding.wedding || null} />
+          <RightSide
+            wedding={data?.ReadWedding.wedding || null}
+            meal={data?.ReadWedding.meal || null}
+            present={data?.ReadWedding.present || null}
+            reserve={data?.ReadWedding.reserve || null}
+          />
         </ReadWeddingTemplate>
       </BrowserView>
       <MobileView>Mobile</MobileView>

@@ -86,6 +86,14 @@ type Wedding {
   bride_name: String!
   wedding_at: String!
   event_at: String!
+  cost_husband: Int!
+  cost_bride: Int!
+  meal_husband: Int!
+  meal_bride: Int!
+  present_husband: Int!
+  present_bride: Int!
+  reserve_husband: Int!
+  reserve_bride: Int!
   created_at: Date!
   updated_at: Date
   conventionId: String

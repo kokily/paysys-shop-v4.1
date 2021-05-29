@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import oc from 'open-color';
 import { shadow } from '../../../libs/styles';
+import ReadButton from './ReadButton';
+import RemoveModal from '../../common/RemoveModal';
 
 // Styles
 const Container = styled.div`
@@ -23,7 +25,7 @@ const Container = styled.div`
   }
   .title {
     font-size: 1.512rem;
-    color: ${oc.violet[7]};
+    color: ${oc.violet[6]};
   }
   .name {
     text-align: center;
@@ -40,7 +42,7 @@ const Content = styled.div`
   }
   tr {
     &:hover {
-      background: rgba(165, 102, 255, 0.2);
+      background: rgba(167, 122, 230, 0.2);
     }
   }
   th,
@@ -51,7 +53,7 @@ const Content = styled.div`
     padding-bottom: 0.15rem;
   }
   th {
-    background: ${oc.violet[4]};
+    background: #a6a6a6;
     color: white;
     width: 130px;
     &.basic {
@@ -64,7 +66,8 @@ const Content = styled.div`
       background: ${oc.cyan[4]};
     }
     &.red {
-      background: ${oc.red[4]};
+      background: white;
+      color: ${oc.blue[9]};
     }
   }
   td {
@@ -79,14 +82,50 @@ const Content = styled.div`
   }
 `;
 
-interface Props {}
+interface Props {
+  onList: () => void;
+  onBack: () => void;
+  onRemove: () => void;
+  onUpdate: () => void;
+}
 
-const ReadWeddingTemplate: React.FC<Props> = ({ children }) => {
+const ReadWeddingTemplate: React.FC<Props> = ({
+  children,
+  onList,
+  onBack,
+  onRemove,
+  onUpdate,
+}) => {
+  const [modal, setModal] = useState(false);
+
+  const onRemoveClick = () => {
+    setModal(true);
+  };
+
+  const onCancel = () => {
+    setModal(false);
+  };
+
+  const onConfirm = () => {
+    setModal(false);
+    onRemove();
+  };
+
   return (
     <Container>
       <h2 className="title">웨딩 정산 내역</h2>
 
-      <Content>{children}</Content>
+      <Content>
+        {children}
+        <ReadButton
+          onList={onList}
+          onBack={onBack}
+          onRemoveClick={onRemoveClick}
+          onUpdate={onUpdate}
+        />
+      </Content>
+
+      <RemoveModal visible={modal} onConfirm={onConfirm} onCancel={onCancel} />
     </Container>
   );
 };

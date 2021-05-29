@@ -79,6 +79,14 @@ export const ADD_WEDDING = gql`
     $present_num_bride: Int!
     $reserve: String!
     $reserve_pay: Int!
+    $cost_husband: Int!
+    $cost_bride: Int!
+    $meal_husband: Int!
+    $meal_bride: Int!
+    $present_husband: Int!
+    $present_bride: Int!
+    $reserve_husband: Int!
+    $reserve_bride: Int!
   ) {
     AddWedding(
       husband_name: $husband_name
@@ -139,6 +147,14 @@ export const ADD_WEDDING = gql`
       present_num_bride: $present_num_bride
       reserve: $reserve
       reserve_pay: $reserve_pay
+      cost_husband: $cost_husband
+      cost_bride: $cost_bride
+      meal_husband: $meal_husband
+      meal_bride: $meal_bride
+      present_husband: $present_husband
+      present_bride: $present_bride
+      reserve_husband: $reserve_husband
+      reserve_bride: $reserve_bride
     ) {
       ok
       error
@@ -157,6 +173,14 @@ export const READ_WEDDING = gql`
         husband_name
         bride_name
         wedding_at
+        cost_husband
+        cost_bride
+        meal_husband
+        meal_bride
+        present_husband
+        present_bride
+        reserve_husband
+        reserve_bride
         event_at
         created_at
       }

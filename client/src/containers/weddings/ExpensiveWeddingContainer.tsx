@@ -282,6 +282,75 @@ function ExpensiveWeddingContainer() {
     }
 
     try {
+      let reserve_husband = 0;
+      let reserve_bride = 0;
+
+      if (reserve === 'half') {
+        reserve_husband = parseInt(reserve_pay) / 2;
+        reserve_bride = parseInt(reserve_pay) / 2;
+      } else if (reserve === 'husband') {
+        reserve_husband = parseInt(reserve_pay);
+        reserve_bride = 0;
+      } else {
+        reserve_husband = 0;
+        reserve_bride = parseInt(reserve_pay) / 2;
+      }
+
+      let meal_husband = 0;
+      let meal_bride = 0;
+
+      if (meals === 'privacy') {
+        meal_husband = parseInt(meals_price) * parseInt(meals_num_husband);
+        meal_bride = parseInt(meals_price) * parseInt(meals_num_bride);
+      } else if (meals === 'husband') {
+        meal_husband =
+          parseInt(meals_price) *
+          (parseInt(meals_num_husband) + parseInt(meals_num_bride));
+        meal_bride = 0;
+      } else if (meals === 'bride') {
+        meal_husband = 0;
+        meal_bride =
+          parseInt(meals_price) *
+          (parseInt(meals_num_husband) + parseInt(meals_num_bride));
+      } else {
+        meal_husband =
+          (parseInt(meals_price) *
+            (parseInt(meals_num_husband) + parseInt(meals_num_bride))) /
+          2;
+        meal_bride =
+          (parseInt(meals_price) *
+            (parseInt(meals_num_husband) + parseInt(meals_num_bride))) /
+          2;
+      }
+
+      let present_husband = 0;
+      let present_bride = 0;
+
+      if (present === 'privacy') {
+        present_husband =
+          parseInt(present_price) * parseInt(present_num_husband);
+        present_bride = parseInt(present_price) * parseInt(present_num_bride);
+      } else if (present === 'husband') {
+        present_husband =
+          parseInt(present_price) *
+          (parseInt(present_num_husband) + parseInt(present_num_bride));
+        present_bride = 0;
+      } else if (present === 'bride') {
+        present_husband = 0;
+        present_bride =
+          parseInt(present_price) *
+          (parseInt(present_num_husband) + parseInt(present_num_bride));
+      } else {
+        present_husband =
+          (parseInt(present_price) *
+            (parseInt(present_num_husband) + parseInt(present_num_bride))) /
+          2;
+        present_bride =
+          (parseInt(present_price) *
+            (parseInt(present_num_husband) + parseInt(present_num_bride))) /
+          2;
+      }
+
       const response = await AddWedding({
         variables: {
           husband_name,
@@ -342,6 +411,58 @@ function ExpensiveWeddingContainer() {
           present_num_bride: parseInt(present_num_bride),
           reserve,
           reserve_pay: parseInt(reserve_pay),
+          cost_husband:
+            parseInt(rental_husband) +
+            parseInt(sword_husband) +
+            parseInt(glove_husband) +
+            parseInt(bouquet_husband) +
+            parseInt(ceremony_husband) +
+            parseInt(company_husband) +
+            parseInt(rooftop_husband) +
+            parseInt(owner_woman_husband) +
+            parseInt(owner_man_husband) +
+            parseInt(select_husband) +
+            parseInt(frame_husband) +
+            parseInt(dress_husband) +
+            parseInt(hairpin_husband) +
+            parseInt(wig_husband) +
+            parseInt(video_husband) +
+            parseInt(etc_husband) +
+            parseInt(play_husband) +
+            parseInt(anthem_husband) +
+            parseInt(moderator_husband) +
+            parseInt(officiate_husband) +
+            parseInt(hanbok_pre_husband) +
+            parseInt(hanbok_post_husband),
+          cost_bride:
+            parseInt(rental_bride) +
+            parseInt(sword_bride) +
+            parseInt(glove_bride) +
+            parseInt(bouquet_bride) +
+            parseInt(ceremony_bride) +
+            parseInt(company_bride) +
+            parseInt(rooftop_bride) +
+            parseInt(owner_woman_bride) +
+            parseInt(owner_man_bride) +
+            parseInt(select_bride) +
+            parseInt(frame_bride) +
+            parseInt(dress_bride) +
+            parseInt(hairpin_bride) +
+            parseInt(wig_bride) +
+            parseInt(video_bride) +
+            parseInt(etc_bride) +
+            parseInt(play_bride) +
+            parseInt(anthem_bride) +
+            parseInt(moderator_bride) +
+            parseInt(officiate_bride) +
+            parseInt(hanbok_pre_bride) +
+            parseInt(hanbok_post_bride),
+          meal_husband,
+          meal_bride,
+          present_husband,
+          present_bride,
+          reserve_husband,
+          reserve_bride,
         },
       });
 

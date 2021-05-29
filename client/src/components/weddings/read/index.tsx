@@ -1,26 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 interface Props {
   wedding: WeddingType | null;
-  onRemove: () => void;
 }
 
-const ReadWedding: React.FC<Props> = ({ wedding, onRemove }) => {
-  const [modal, setModal] = useState(false);
-
-  const onRemoveClick = () => {
-    setModal(true);
-  };
-
-  const onCancel = () => {
-    setModal(false);
-  };
-
-  const onConfirm = () => {
-    setModal(false);
-    onRemove();
-  };
-
+const ReadWedding: React.FC<Props> = ({ wedding }) => {
   return (
     <>
       {wedding && (

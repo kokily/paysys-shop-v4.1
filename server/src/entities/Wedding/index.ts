@@ -32,6 +32,30 @@ class Wedding extends BaseEntity {
   @Column({ type: 'text' })
   event_at!: string;
 
+  @Column()
+  cost_husband!: number;
+
+  @Column()
+  cost_bride!: number;
+
+  @Column()
+  meal_husband!: number;
+
+  @Column()
+  meal_bride!: number;
+
+  @Column()
+  present_husband!: number;
+
+  @Column()
+  present_bride!: number;
+
+  @Column()
+  reserve_husband!: number;
+
+  @Column()
+  reserve_bride!: number;
+
   @Column({ type: 'timestamptz' })
   @CreateDateColumn()
   created_at!: Date;

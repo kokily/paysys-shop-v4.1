@@ -14,7 +14,7 @@ const Button = styled.button<{
   remove?: boolean;
   back?: boolean;
 }>`
-  margin-top: 1rem;
+  margin-top: 2rem;
   font-size: 1rem;
   font-weight: bold;
   border-radius: 6px;
