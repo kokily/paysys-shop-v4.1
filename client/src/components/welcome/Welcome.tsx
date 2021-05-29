@@ -1,19 +1,21 @@
 import styled from 'styled-components';
 import oc from 'open-color';
+import { shadow } from '../../libs/styles';
 
 // Styles
 const Container = styled.div`
-  display: flex;
-  height: 100vh;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  position: absolute;
+  width: 320px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: 0.5s ease-out 0s 1 fadeIn;
+  ${shadow(1)};
 `;
 
 const Button = styled.button`
   background: white;
-  width: 90%;
-  max-width: 300px;
+  width: 100%;
   padding: 0.4rem 0.25rem;
   margin-bottom: 1.2rem;
   color: ${oc.indigo[8]};
