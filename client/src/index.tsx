@@ -8,12 +8,6 @@ import client from './libs/apollo';
 import Loading from './components/common/Loading';
 import reportWebVitals from './reportWebVitals';
 
-function resetToken() {
-  localStorage.removeItem('paysys_token');
-}
-
-resetToken();
-
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>

@@ -49,43 +49,62 @@ const UpdateWeddingPage = loadable(
 const CanvasPage = loadable(() => import('./pages/Canvas'));
 
 // Separation according to account authentication
-const LoginRoutes = ({ user }: { user: MeType | null }) => (
-  <Switch>
-    <Route exact path="/" component={WelcomePage} />
-    <Route exact path="/closed" component={ListClosedsPage} />
-    <Route path="/closed/read/:id" component={ReadClosedsPage} />
-    <Route exact path="/closed/add" component={AddClosedsPage} />
-    <Route exact path="/soldier" component={SoldierPage} />
-    <Route exact path="/reserve" component={ReservePage} />
-    <Route exact path="/general" component={GeneralPage} />
-    <Route exact path="/menu" component={ListMenuPage} />
-    <Route path="/menu/:menuId" component={DetailMenuPage} />
-    <Route exact path="/cart" component={CartPage} />
-    <Route exact path="/fronts" component={ListFrontsPage} />
-    <Route path="/front/:frontId" component={ReadFrontPage} />
+const LoginRoutes = ({ user }: { user: MeType | null }) => {
+  if (!user) {
+    localStorage.removeItem('paysys_token');
+    document.location.href = '/';
+  }
 
-    {user && user.admin && (
-      <>
-        <Route exact path="/items" component={ListItemsPage} />
-        <Route exact path="/item/:itemId" component={ReadItemPage} />
-        <Route exact path="/add" component={AddItemPage} />
-        <Route exact path="/item/update/:itemId" component={UpdateItemPage} />
-        <Route exact path="/users" component={ListUsersPage} />
-        <Route path="/user/:userId" component={ReadUserPage} />
-        <Route exact path="/password" component={PasswordPage} />
-        <Route exact path="/weddings" component={ListWeddingsPage} />
-        <Route exact path="/expense" component={ExpensiveWeddingPage} />
-        <Route exact path="/wedding/:weddingId" component={ReadWeddingPage} />
-        <Route
-          path="/wedding/update/:weddingId"
-          component={UpdateWeddingPage}
-        />
-      </>
-    )}
+  return (
+    <>
+      {user && (
+        <Switch>
+          <Route exact path="/" render={() => <Redirect to="/soldier" />} />
+          <Route exact path="/closed" component={ListClosedsPage} />
+          <Route path="/closed/read/:id" component={ReadClosedsPage} />
+          <Route exact path="/closed/add" component={AddClosedsPage} />
+          <Route exact path="/soldier" component={SoldierPage} />
+          <Route exact path="/reserve" component={ReservePage} />
+          <Route exact path="/general" component={GeneralPage} />
+          <Route exact path="/menu" component={ListMenuPage} />
+          <Route path="/menu/:menuId" component={DetailMenuPage} />
+          <Route exact path="/cart" component={CartPage} />
+          <Route exact path="/fronts" component={ListFrontsPage} />
+          <Route path="/front/:frontId" component={ReadFrontPage} />
 
-    <Redirect from={'*'} to={'/soldier'} />
-  </Switch>
-);
+          {user && user.admin && (
+            <>
+              <Route exact path="/items" component={ListItemsPage} />
+              <Route exact path="/item/:itemId" component={ReadItemPage} />
+              <Route exact path="/add" component={AddItemPage} />
+              <Route
+                exact
+                path="/item/update/:itemId"
+                component={UpdateItemPage}
+              />
+              <Route exact path="/users" component={ListUsersPage} />
+              <Route path="/user/:userId" component={ReadUserPage} />
+              <Route exact path="/password" component={PasswordPage} />
+              <Route exact path="/weddings" component={ListWeddingsPage} />
+              <Route exact path="/expense" component={ExpensiveWeddingPage} />
+              <Route
+                exact
+                path="/wedding/:weddingId"
+                component={ReadWeddingPage}
+              />
+              <Route
+                path="/wedding/update/:weddingId"
+                component={UpdateWeddingPage}
+              />
+            </>
+          )}
+          <Redirect from={'*'} to={'/soldier'} />
+        </Switch>
+      )}
+    </>
+  );
+};
+
 const LogoutRoutes = () => (
   <Switch>
     <Route exact path="/" component={WelcomePage} />
