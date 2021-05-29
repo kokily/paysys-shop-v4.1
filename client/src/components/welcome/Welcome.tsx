@@ -12,12 +12,15 @@ const Container = styled.div`
 
 const Button = styled.button`
   background: white;
-  width: 120px;
+  width: 90%;
+  max-width: 300px;
   padding: 0.4rem 0.25rem;
+  margin-bottom: 1.2rem;
   color: ${oc.indigo[8]};
   border: 2px solid ${oc.indigo[8]};
   border-radius: 8px;
   cursor: pointer;
+  font-size: 1.215rem;
   font-weight: 700;
   transition: 0.3s;
   &:hover {
