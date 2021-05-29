@@ -46,6 +46,7 @@ const ReadWeddingPage = loadable(
 const UpdateWeddingPage = loadable(
   () => import('./pages/weddings/UpdateWeddingPage')
 );
+const CanvasPage = loadable(() => import('./pages/Canvas'));
 
 // Separation according to account authentication
 const LoginRoutes = ({ user }: { user: MeType | null }) => (
@@ -90,6 +91,7 @@ const LogoutRoutes = () => (
     <Route exact path="/closed/add" component={AddClosedsPage} />
     <Route exact path="/login" component={LoginPage} />
     <Route exact path="/register" component={RegisterPage} />
+    <Route exact path="/canvas" component={CanvasPage} />
     <Redirect from={'*'} to={'/'} />
   </Switch>
 );
