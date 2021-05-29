@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Card from './Card';
+import oc from 'open-color';
 
 // Styles
 const Container = styled.div`
@@ -10,6 +10,26 @@ const Container = styled.div`
   align-items: center;
 `;
 
+const Button = styled.button`
+  background: white;
+  width: 120px;
+  padding: 0.4rem 0.25rem;
+  color: ${oc.indigo[8]};
+  border: 2px solid ${oc.indigo[8]};
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: 0.3s;
+  &:hover {
+    color: white;
+    border: 2px outset white;
+    background: ${oc.indigo[8]};
+  }
+  &:active {
+    transform: translateY(3px);
+  }
+`;
+
 interface Props {
   onLink: (url: string) => void;
 }
@@ -17,8 +37,8 @@ interface Props {
 const Welcome: React.FC<Props> = ({ onLink }) => {
   return (
     <Container>
-      <Card title="행사 전표 시스템" num={1} url="/login" onLink={onLink} />
-      <Card title="휴업 현황 시스템" num={2} url="/closed" onLink={onLink} />
+      <Button onClick={() => onLink('/login')}>행사 전표 시스템</Button>
+      <Button onClick={() => onLink('/closed')}>휴업 현황 시스템</Button>
     </Container>
   );
 };

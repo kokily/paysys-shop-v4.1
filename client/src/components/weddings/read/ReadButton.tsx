@@ -6,7 +6,7 @@ import { shadow } from '../../../libs/styles';
 
 const ButtonBox = styled.div`
   margin-bottom: 1rem;
-  display: inline-flex;
+  display: block;
 `;
 
 const Button = styled.button<{
