@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import oc from 'open-color';
-import { shadow } from '../../libs/styles';
 
 // Styles
 const Container = styled.div`
@@ -10,7 +9,6 @@ const Container = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   animation: 0.5s ease-out 0s 1 fadeIn;
-  ${shadow(1)};
 `;
 
 const Button = styled.button`
