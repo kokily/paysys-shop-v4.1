@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import oc from 'open-color';
+import { BrowserView, MobileView } from 'react-device-detect';
 import { shadow } from '../../../libs/styles';
 
 const ButtonBox = styled.div`
@@ -94,16 +95,20 @@ const ReadButton: React.FC<Props> = ({
   return (
     <ButtonBox>
       <Button menu onClick={onList}>
-        목록으로
+        <BrowserView>목록으로</BrowserView>
+        <MobileView>목록</MobileView>
       </Button>
       <Button back onClick={onBack}>
-        뒤로가기
+        <BrowserView>뒤로가기</BrowserView>
+        <MobileView>뒤로</MobileView>
       </Button>
       <Button patch onClick={onUpdate}>
-        수정하기
+        <BrowserView>수정하기</BrowserView>
+        <MobileView>수정</MobileView>
       </Button>
       <Button remove onClick={onRemoveClick}>
-        삭제하기
+        <BrowserView>삭제하기</BrowserView>
+        <MobileView>삭제</MobileView>
       </Button>
     </ButtonBox>
   );
