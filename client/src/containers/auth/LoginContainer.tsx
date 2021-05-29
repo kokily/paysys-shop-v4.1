@@ -57,7 +57,7 @@ function LoginContainer() {
 
         await client.clearStore();
 
-        document.location.href = '/';
+        document.location.href = '/soldier';
       }
     } catch (err) {
       toast.error(err);
