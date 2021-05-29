@@ -10,9 +10,15 @@ const ReadMeal: React.FC<Props> = ({ meal }) => {
     <>
       <tr>
         <th>구분</th>
-        <th className="basic">신랑</th>
-        <th className="basic">신부</th>
-        <th className="basic red">계</th>
+        <th className="basic" style={{ background: 'white' }}>
+          신랑
+        </th>
+        <th className="basic" style={{ background: 'white' }}>
+          신부
+        </th>
+        <th className="basic" style={{ background: 'white' }}>
+          계
+        </th>
       </tr>
 
       <tr>
@@ -43,7 +49,9 @@ const ReadMeal: React.FC<Props> = ({ meal }) => {
         <th>하객인원</th>
         <td>{meal.meals_num_husband}명</td>
         <td>{meal.meals_num_bride}명</td>
-        <td>{meal.meals_num_husband + meal.meals_num_bride}명</td>
+        <td className="sub">
+          {meal.meals_num_husband + meal.meals_num_bride}명
+        </td>
       </tr>
 
       <tr>

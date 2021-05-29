@@ -10,9 +10,15 @@ const ReadReserve: React.FC<Props> = ({ reserve }) => {
     <>
       <tr>
         <th>구분</th>
-        <th className="basic">신랑</th>
-        <th className="basic">신부</th>
-        <th className="basic red">계</th>
+        <th className="basic" style={{ background: 'white' }}>
+          신랑
+        </th>
+        <th className="basic" style={{ background: 'white' }}>
+          신부
+        </th>
+        <th className="basic" style={{ background: 'white' }}>
+          계
+        </th>
       </tr>
 
       <tr>

@@ -36,10 +36,16 @@ const TopMobile: React.FC<Props> = ({
               {hanbok && <ReadHanbok hanbok={hanbok} />}
 
               <tr>
-                <th className="orange">총 예식비용</th>
-                <td>{stringAccounting(wedding.cost_husband)}원</td>
-                <td>{stringAccounting(wedding.cost_bride)}원</td>
-                <td className="sub">
+                <th style={{ color: '#d941c5', background: 'white' }}>
+                  총 예식비용
+                </th>
+                <td style={{ color: '#d941c5' }}>
+                  {stringAccounting(wedding.cost_husband)}원
+                </td>
+                <td style={{ color: '#d941c5' }}>
+                  {stringAccounting(wedding.cost_bride)}원
+                </td>
+                <td style={{ color: '#d941c5', fontWeight: 'bold' }}>
                   {stringAccounting(wedding.cost_husband + wedding.cost_bride)}
                   원
                 </td>

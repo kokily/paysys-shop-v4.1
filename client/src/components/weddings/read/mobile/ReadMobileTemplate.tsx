@@ -48,8 +48,8 @@ const Content = styled.div`
     padding-bottom: 0.15rem;
   }
   th {
-    background: ${oc.violet[4]};
-    color: white;
+    background: #e3e0fa;
+    color: ${oc.violet[9]};
     width: 160px;
     &.basic {
       width: 93.3px;
@@ -61,7 +61,8 @@ const Content = styled.div`
       background: ${oc.cyan[4]};
     }
     &.red {
-      background: ${oc.red[4]};
+      background: white;
+      color: #d941c5;
     }
   }
   td {
@@ -70,7 +71,7 @@ const Content = styled.div`
     overflow: hidden;
     text-align: right;
     &.sub {
-      color: ${oc.blue[9]};
+      color: ${oc.violet[9]};
       font-weight: bold;
     }
   }
