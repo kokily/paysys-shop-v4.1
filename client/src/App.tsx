@@ -47,6 +47,12 @@ const UpdateWeddingPage = loadable(
   () => import('./pages/weddings/UpdateWeddingPage')
 );
 const CanvasPage = loadable(() => import('./pages/Canvas'));
+const ListSeparatesPage = loadable(
+  () => import('./pages/separte/ListSeparatesPage')
+);
+const ReadSeparatePage = loadable(
+  () => import('./pages/separte/ReadSeparatePage')
+);
 
 // Separation according to account authentication
 const LoginRoutes = ({ user }: { user: MeType | null }) => {
@@ -71,6 +77,11 @@ const LoginRoutes = ({ user }: { user: MeType | null }) => {
           <Route exact path="/cart" component={CartPage} />
           <Route exact path="/fronts" component={ListFrontsPage} />
           <Route path="/front/:frontId" component={ReadFrontPage} />
+          <Route exact path="/separate/closeds" component={ListSeparatesPage} />
+          <Route
+            path="/separate/closed/:closedId"
+            component={ReadSeparatePage}
+          />
 
           {user && user.admin && (
             <>

@@ -8,6 +8,7 @@ const ClosedBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 5rem;
 `;
 
 const WhiteBoard = styled.div`

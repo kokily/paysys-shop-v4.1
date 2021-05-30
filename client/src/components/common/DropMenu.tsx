@@ -79,6 +79,10 @@ const DropMenu: React.FC<Props> = ({ user, onClose, onLogout, visible }) => {
 
                 <Split />
 
+                <DropMenuItem to={'/separate/closeds'}>휴업현황</DropMenuItem>
+
+                <Split />
+
                 <DropMenuItem onClick={onLogout}>로그아웃</DropMenuItem>
               </div>
             </Container>
