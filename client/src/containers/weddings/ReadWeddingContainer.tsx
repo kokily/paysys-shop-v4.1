@@ -1,4 +1,5 @@
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useEffect } from 'react';
+import { useApolloClient, useMutation, useQuery } from '@apollo/react-hooks';
 import { BrowserView, MobileView } from 'react-device-detect';
 import { useHistory, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -11,9 +12,10 @@ import { READ_WEDDING, REMOVE_WEDDING } from '../../libs/graphql/weddings';
 import ReadWeddingMobile from '../../components/weddings/read/mobile';
 import TopMobile from '../../components/weddings/read/mobile/TopMobile';
 import BottomMobile from '../../components/weddings/read/mobile/BottomMobile';
-import { useEffect } from 'react';
+import { REMOVE_SIGN } from '../../libs/graphql/sign';
 
 function ReadWeddingContainer() {
+  const client = useApolloClient();
   const history = useHistory();
   const { weddingId }: { weddingId: string } = useParams();
   const { data, loading, error, refetch } = useQuery<{
@@ -30,7 +32,8 @@ function ReadWeddingContainer() {
   }>(READ_WEDDING, {
     variables: { id: weddingId },
   });
-  const [RemoveWedding, { client }] = useMutation(REMOVE_WEDDING);
+  const [RemoveWedding] = useMutation(REMOVE_WEDDING);
+  const [RemoveSign] = useMutation(REMOVE_SIGN);
 
   const onList = () => {
     history.push('/weddings');
@@ -61,6 +64,23 @@ function ReadWeddingContainer() {
     }
   };
 
+  const onRemoveSign = async () => {
+    try {
+      const response = await RemoveSign({
+        variables: { weddingId },
+      });
+
+      if (!response || !response.data) return;
+
+      await client.clearStore();
+      await refetch();
+
+      toast.success('서명이 삭제되었습니다.');
+    } catch (err) {
+      toast.error(err);
+    }
+  };
+
   useEffect(() => {
     refetch();
   }, []);
@@ -77,7 +97,10 @@ function ReadWeddingContainer() {
           onRemove={onRemoveWedding}
           onUpdate={onUpdate}
         >
-          <ReadWedding wedding={data?.ReadWedding.wedding || null} />
+          <ReadWedding
+            wedding={data?.ReadWedding.wedding || null}
+            onRemoveSign={onRemoveSign}
+          />
           <LeftSide
             wedding={data?.ReadWedding.wedding || null}
             convention={data?.ReadWedding.convention || null}

@@ -3,9 +3,10 @@ import SignImage from './SignImage';
 
 interface Props {
   wedding: WeddingType | null;
+  onRemoveSign: () => void;
 }
 
-const ReadWedding: React.FC<Props> = ({ wedding }) => {
+const ReadWedding: React.FC<Props> = ({ wedding, onRemoveSign }) => {
   return (
     <>
       {wedding && (
@@ -20,6 +21,7 @@ const ReadWedding: React.FC<Props> = ({ wedding }) => {
             <SignImage
               husband={wedding.husband_image || undefined}
               bride={wedding.bride_image || undefined}
+              onRemoveSign={onRemoveSign}
             />
           )}
 

@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import RemoveModal from '../../common/RemoveModal';
 
 // Styles
 const Container = styled.div`
@@ -21,20 +22,41 @@ const SignBox = styled.div`
 interface Props {
   husband?: string;
   bride?: string;
+  onRemoveSign?: () => void;
 }
 
-const SignImage: React.FC<Props> = ({ husband, bride }) => {
+const SignImage: React.FC<Props> = ({ husband, bride, onRemoveSign }) => {
+  const [remove, setRemove] = useState(false);
+
+  const onRemoveClick = () => {
+    setRemove(true);
+  };
+
+  const onCancel = () => {
+    setRemove(false);
+  };
+
+  const onConfirm = async () => {
+    if (onRemoveSign) {
+      await onRemoveSign();
+    }
+    setRemove(false);
+  };
+
   return (
-    <Container>
-      <SignBox>
-        <label>신랑님 서명</label>
-        {husband && <img src={husband} alt="" />}
-      </SignBox>
-      <SignBox>
-        <label>신부님 서명</label>
-        {bride && <img src={bride} alt="" />}
-      </SignBox>
-    </Container>
+    <>
+      <Container onClick={onRemoveClick}>
+        <SignBox>
+          <label>신랑님 서명</label>
+          {husband && <img src={husband} alt="" />}
+        </SignBox>
+        <SignBox>
+          <label>신부님 서명</label>
+          {bride && <img src={bride} alt="" />}
+        </SignBox>
+      </Container>
+      <RemoveModal visible={remove} onConfirm={onConfirm} onCancel={onCancel} />
+    </>
   );
 };
 
