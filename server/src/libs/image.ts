@@ -40,7 +40,7 @@ interface fileType {
 const uploadImage = async (file: fileType) => {
   return new Promise((resolve, reject) => {
     const stream = fs.createReadStream(file.path);
-    const saveTime = `${moment().format('YYMMDD_HHmmdd')}`;
+    const saveTime = `${moment().format('YYMMDD_HHmmss')}`;
     const newFilename = `${saveTime}_${file.name.trim()}`;
 
     stream.on('error', function (err) {

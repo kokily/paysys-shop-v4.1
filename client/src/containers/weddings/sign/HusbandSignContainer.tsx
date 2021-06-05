@@ -13,7 +13,7 @@ function HusbandSignContainer({ refetch }: { refetch: any }) {
   const { weddingId }: { weddingId: string } = useParams();
   const [husband, setHusband] = useRecoilState(husbandSign);
   const [, setHusbandImg] = useRecoilState(husbandImage);
-  const [currentImg] = useRecoilState(currentImage);
+  const [currentImg, setCurrentImg] = useRecoilState(currentImage);
   const [AddSign, { client }] = useMutation(ADD_SIGN);
 
   const dataURItoBlob = (dataURI: string) => {
@@ -58,6 +58,7 @@ function HusbandSignContainer({ refetch }: { refetch: any }) {
       const data = await response.json();
 
       setHusbandImg(`https://image.paysys.shop/${data.key}`);
+      setCurrentImg('');
 
       const response2 = await AddSign({
         variables: {

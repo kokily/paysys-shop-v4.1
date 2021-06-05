@@ -20,7 +20,7 @@ interface Coordinate {
 
 const SignCanvas: React.FC<Props> = ({ width, height }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [currentImg, setCurrentImg] = useRecoilState(currentImage);
+  const [, setCurrentImg] = useRecoilState(currentImage);
 
   const [mousePosition, setMousePosition] =
     useState<Coordinate | undefined>(undefined);
@@ -132,14 +132,6 @@ const SignCanvas: React.FC<Props> = ({ width, height }) => {
     canvas.dispatchEvent(mouseEvent);
   }, []);
 
-  const clearCanvas = () => {
-    if (!canvasRef.current) return;
-
-    const canvas: HTMLCanvasElement = canvasRef.current;
-
-    canvas.getContext('2d')!!.clearRect(0, 0, canvas.width, canvas.height);
-  };
-
   useEffect(() => {
     if (!canvasRef.current) return;
 
@@ -152,6 +144,7 @@ const SignCanvas: React.FC<Props> = ({ width, height }) => {
     canvas.addEventListener('touchstart', startTouch);
     canvas.addEventListener('touchmove', touch);
     canvas.addEventListener('touchend', exitTouch);
+    setCurrentImg(canvas.toDataURL('image/png'));
 
     return () => {
       canvas.removeEventListener('mousedown', startPaint);
@@ -161,9 +154,17 @@ const SignCanvas: React.FC<Props> = ({ width, height }) => {
       canvas.removeEventListener('touchstart', startTouch);
       canvas.removeEventListener('touchmove', touch);
       canvas.removeEventListener('touchend', exitTouch);
-      setCurrentImg(canvas.toDataURL('image/png'));
+      setCurrentImg('');
     };
-  }, [startPaint, paint, exitPaint]);
+  }, [
+    startPaint,
+    paint,
+    exitPaint,
+    exitTouch,
+    setCurrentImg,
+    startTouch,
+    touch,
+  ]);
 
   return <Canvas ref={canvasRef} width={width} height={height} />;
 };

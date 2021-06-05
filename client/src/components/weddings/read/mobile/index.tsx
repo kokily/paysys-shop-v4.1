@@ -8,9 +8,14 @@ import SignImage from '../SignImage';
 interface Props {
   wedding: WeddingType | null;
   refetch: any;
+  onRemoveSign: () => void;
 }
 
-const ReadWeddingMobile: React.FC<Props> = ({ wedding, refetch }) => {
+const ReadWeddingMobile: React.FC<Props> = ({
+  wedding,
+  refetch,
+  onRemoveSign,
+}) => {
   const [, setHusband] = useRecoilState(husbandSign);
   const [, setBride] = useRecoilState(brideSign);
 
@@ -31,6 +36,7 @@ const ReadWeddingMobile: React.FC<Props> = ({ wedding, refetch }) => {
             <SignImage
               husband={wedding.husband_image || undefined}
               bride={wedding.bride_image || undefined}
+              onRemoveSign={onRemoveSign}
             />
           )}
 

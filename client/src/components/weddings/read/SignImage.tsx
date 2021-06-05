@@ -22,7 +22,7 @@ const SignBox = styled.div`
 interface Props {
   husband?: string;
   bride?: string;
-  onRemoveSign?: () => void;
+  onRemoveSign: () => void;
 }
 
 const SignImage: React.FC<Props> = ({ husband, bride, onRemoveSign }) => {
@@ -36,11 +36,9 @@ const SignImage: React.FC<Props> = ({ husband, bride, onRemoveSign }) => {
     setRemove(false);
   };
 
-  const onConfirm = async () => {
-    if (onRemoveSign) {
-      await onRemoveSign();
-    }
+  const onConfirm = () => {
     setRemove(false);
+    onRemoveSign();
   };
 
   return (

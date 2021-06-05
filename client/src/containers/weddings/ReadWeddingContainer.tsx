@@ -53,7 +53,7 @@ function ReadWeddingContainer() {
         variables: { id: weddingId },
       });
 
-      if (!response) return;
+      if (!response || !response.data) return;
 
       await client.clearStore();
 
@@ -83,7 +83,7 @@ function ReadWeddingContainer() {
 
   useEffect(() => {
     refetch();
-  }, []);
+  }, [refetch]);
 
   if (loading) return null;
   if (error) return null;
@@ -126,6 +126,7 @@ function ReadWeddingContainer() {
           <ReadWeddingMobile
             wedding={data?.ReadWedding.wedding || null}
             refetch={refetch}
+            onRemoveSign={onRemoveSign}
           />
           <TopMobile
             wedding={data?.ReadWedding.wedding || null}
