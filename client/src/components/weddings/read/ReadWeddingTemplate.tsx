@@ -42,7 +42,7 @@ const Content = styled.div`
   }
   tr {
     &:hover {
-      background: rgba(167, 122, 230, 0.2);
+      background: rgba(165, 102, 255, 0.2);
     }
   }
   th,
@@ -53,7 +53,7 @@ const Content = styled.div`
     padding-bottom: 0.15rem;
   }
   th {
-    background: #b5b2ff;
+    background: #e3e0fa;
     color: ${oc.violet[9]};
     width: 130px;
     &.basic {
@@ -76,7 +76,7 @@ const Content = styled.div`
     overflow: hidden;
     text-align: right;
     &.sub {
-      color: #d941c5;
+      color: ${oc.violet[9]};
       font-weight: bold;
     }
   }

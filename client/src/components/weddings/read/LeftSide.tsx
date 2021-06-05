@@ -45,7 +45,7 @@ const LeftSide: React.FC<Props> = ({
                 <td style={{ color: '#d941c5' }}>
                   {stringAccounting(wedding.cost_bride)}원
                 </td>
-                <td className="sub">
+                <td style={{ color: '#d941c5', fontWeight: 'bold' }}>
                   {stringAccounting(wedding.cost_husband + wedding.cost_bride)}
                   원
                 </td>
