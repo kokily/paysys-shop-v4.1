@@ -85,7 +85,9 @@ interface ClosedUserState {
 interface WeddingType {
   id: string;
   husband_name: string;
+  husband_image: string | null;
   bride_name: string;
+  bride_image: string | null;
   wedding_at: Date;
   event_at: string;
   cost_husband: number;

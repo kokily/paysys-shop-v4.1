@@ -171,7 +171,9 @@ export const READ_WEDDING = gql`
       wedding {
         id
         husband_name
+        husband_image
         bride_name
+        bride_image
         wedding_at
         cost_husband
         cost_bride

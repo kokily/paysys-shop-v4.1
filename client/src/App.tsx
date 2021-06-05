@@ -1,3 +1,4 @@
+import { RecoilRoot } from 'recoil';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import loadable from '@loadable/component';
 import { useQuery } from '@apollo/react-hooks';
@@ -46,7 +47,6 @@ const ReadWeddingPage = loadable(
 const UpdateWeddingPage = loadable(
   () => import('./pages/weddings/UpdateWeddingPage')
 );
-const CanvasPage = loadable(() => import('./pages/Canvas'));
 const ListSeparatesPage = loadable(
   () => import('./pages/separte/ListSeparatesPage')
 );
@@ -124,7 +124,6 @@ const LogoutRoutes = () => (
     <Route exact path="/closed/add" component={AddClosedsPage} />
     <Route exact path="/login" component={LoginPage} />
     <Route exact path="/register" component={RegisterPage} />
-    <Route exact path="/canvas" component={CanvasPage} />
     <Redirect from={'*'} to={'/'} />
   </Switch>
 );
@@ -136,13 +135,15 @@ function App() {
 
   return (
     <>
-      <GlobalStyle />
-      {isLogged() ? (
-        <LoginRoutes user={data?.Me.me || null} />
-      ) : (
-        <LogoutRoutes />
-      )}
-      <ToastContainer position="top-center" draggable={false} />
+      <RecoilRoot>
+        <GlobalStyle />
+        {isLogged() ? (
+          <LoginRoutes user={data?.Me.me || null} />
+        ) : (
+          <LogoutRoutes />
+        )}
+        <ToastContainer position="top-center" draggable={false} />
+      </RecoilRoot>
     </>
   );
 }

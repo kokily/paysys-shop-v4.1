@@ -83,7 +83,9 @@ type Bill {
 type Wedding {
   id: ID!
   husband_name: String!
+  husband_image: String
   bride_name: String!
+  bride_image: String
   wedding_at: String!
   event_at: String!
   cost_husband: Int!

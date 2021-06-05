@@ -1,0 +1,10 @@
+type RemoveSignResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  RemoveSign(
+    weddingId: ID!
+  ): RemoveSignResponse!
+}

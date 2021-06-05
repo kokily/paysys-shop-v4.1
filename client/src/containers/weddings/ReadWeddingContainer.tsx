@@ -11,11 +11,12 @@ import { READ_WEDDING, REMOVE_WEDDING } from '../../libs/graphql/weddings';
 import ReadWeddingMobile from '../../components/weddings/read/mobile';
 import TopMobile from '../../components/weddings/read/mobile/TopMobile';
 import BottomMobile from '../../components/weddings/read/mobile/BottomMobile';
+import { useEffect } from 'react';
 
 function ReadWeddingContainer() {
   const history = useHistory();
   const { weddingId }: { weddingId: string } = useParams();
-  const { data, loading, error } = useQuery<{
+  const { data, loading, error, refetch } = useQuery<{
     ReadWedding: {
       wedding: WeddingType;
       convention: ConventionType;
@@ -59,6 +60,10 @@ function ReadWeddingContainer() {
       toast.error(err);
     }
   };
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   if (loading) return null;
   if (error) return null;

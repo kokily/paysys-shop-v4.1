@@ -23,8 +23,14 @@ class Wedding extends BaseEntity {
   @Column({ type: 'text' })
   husband_name!: string;
 
+  @Column({ type: 'text', nullable: true })
+  husband_image!: string;
+
   @Column({ type: 'text' })
   bride_name!: string;
+
+  @Column({ type: 'text', nullable: true })
+  bride_image!: string;
 
   @Column({ type: 'text' })
   wedding_at!: string;

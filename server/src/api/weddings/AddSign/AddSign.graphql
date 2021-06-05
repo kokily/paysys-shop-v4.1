@@ -1,0 +1,12 @@
+type AddSignResponse {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  AddSign(
+    weddingId: ID!
+    sex: String!
+    image: String!
+  ): AddSignResponse!
+}

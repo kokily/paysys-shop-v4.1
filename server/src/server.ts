@@ -32,7 +32,7 @@ const _bootstrap = async () => {
     .then(() => {
       server.listen(config.port, () => {
         console.log(
-          `> Paysys Server on http${config.ssl ? 's' : ''}//${
+          `> Paysys Server on http:${config.ssl ? 's' : ''}//${
             config.hostname
           }:${config.port}`
         );

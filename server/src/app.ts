@@ -7,6 +7,7 @@ import serve from 'koa-static';
 import send from 'koa-send';
 import path from 'path';
 import upload from './libs/upload';
+import image from './libs/image';
 import schema from './libs/schema';
 
 const app = new Koa();
@@ -29,7 +30,8 @@ app.use(async (ctx: Context) => {
   if (
     ctx.status === 404 &&
     ctx.path.indexOf('/graphql') !== 0 &&
-    ctx.path.indexOf('/upload') !== 0
+    ctx.path.indexOf('/upload') !== 0 &&
+    ctx.path.indexOf('/image') !== 0
   ) {
     await send(ctx, 'index.html', {
       root: rootDir,
@@ -43,6 +45,7 @@ const apollo = new ApolloServer({
 });
 
 router.use('/upload', upload.routes());
+router.use('/image', image.routes());
 router.get('/graphql', apollo.getMiddleware());
 router.post('/graphql', apollo.getMiddleware());
 
