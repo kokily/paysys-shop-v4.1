@@ -305,7 +305,7 @@ function UpdateWeddingContainer() {
         reserve_bride = 0;
       } else {
         reserve_husband = 0;
-        reserve_bride = parseInt(reserve_pay) / 2;
+        reserve_bride = parseInt(reserve_pay);
       }
 
       let meal_husband = 0;
