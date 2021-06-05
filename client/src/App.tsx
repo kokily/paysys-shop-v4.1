@@ -53,6 +53,9 @@ const ListSeparatesPage = loadable(
 const ReadSeparatePage = loadable(
   () => import('./pages/separte/ReadSeparatePage')
 );
+const AddSeparatePage = loadable(
+  () => import('./pages/separte/AddSeparatePage')
+);
 
 // Separation according to account authentication
 const LoginRoutes = ({ user }: { user: MeType | null }) => {
@@ -93,6 +96,7 @@ const LoginRoutes = ({ user }: { user: MeType | null }) => {
                 path="/item/update/:itemId"
                 component={UpdateItemPage}
               />
+              <Route exact path="/separate/add" component={AddSeparatePage} />
               <Route exact path="/users" component={ListUsersPage} />
               <Route path="/user/:userId" component={ReadUserPage} />
               <Route exact path="/password" component={PasswordPage} />
