@@ -42,7 +42,7 @@ const ReadWeddingMobile: React.FC<Props> = ({
           )}
 
           <h4>
-            웨딩일자: {new Date(moment().format('YYYY. M. D.'))}{' '}
+            웨딩일자: {moment(new Date()).format('YYYY. M. D.')}{' '}
             {wedding.event_at}
           </h4>
 
