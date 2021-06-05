@@ -1,4 +1,5 @@
 import React from 'react';
+import SignImage from './SignImage';
 
 interface Props {
   wedding: WeddingType | null;
@@ -14,6 +15,13 @@ const ReadWedding: React.FC<Props> = ({ wedding }) => {
             <strong style={{ color: 'pink' }}>♡</strong> 신부님:{' '}
             <strong>{wedding.bride_name}</strong>
           </h3>
+
+          {(wedding.husband_image || wedding.bride_image) && (
+            <SignImage
+              husband={wedding.husband_image || undefined}
+              bride={wedding.bride_image || undefined}
+            />
+          )}
 
           <h4>
             웨딩일시: {new Date(wedding.wedding_at).toLocaleDateString()}

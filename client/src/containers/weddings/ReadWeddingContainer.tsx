@@ -100,7 +100,10 @@ function ReadWeddingContainer() {
           onRemove={onRemoveWedding}
           onUpdate={onUpdate}
         >
-          <ReadWeddingMobile wedding={data?.ReadWedding.wedding || null} />
+          <ReadWeddingMobile
+            wedding={data?.ReadWedding.wedding || null}
+            refetch={refetch}
+          />
           <TopMobile
             wedding={data?.ReadWedding.wedding || null}
             convention={data?.ReadWedding.convention || null}

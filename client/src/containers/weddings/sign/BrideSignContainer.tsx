@@ -1,18 +1,14 @@
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
-import {
-  currentImage,
-  husbandImage,
-  husbandSign,
-} from '../../../libs/store/sign';
-import SignModal from '../../../components/weddings/read/SignModal';
+import { brideImage, brideSign, currentImage } from '../../../libs/store/sign';
 import { useMutation } from '@apollo/react-hooks';
 import { ADD_SIGN } from '../../../libs/graphql/sign';
+import SignModal from '../../../components/weddings/read/SignModal';
 
-function HusbandSignContainer({ refetch }: { refetch: any }) {
+function BrideSignContainer({ refetch }: { refetch: any }) {
   const { weddingId }: { weddingId: string } = useParams();
-  const [husband, setHusband] = useRecoilState(husbandSign);
-  const [, setHusbandImg] = useRecoilState(husbandImage);
+  const [bride, setBride] = useRecoilState(brideSign);
+  const [, setBrideImg] = useRecoilState(brideImage);
   const [currentImg] = useRecoilState(currentImage);
   const [AddSign, { client }] = useMutation(ADD_SIGN);
 
@@ -57,12 +53,12 @@ function HusbandSignContainer({ refetch }: { refetch: any }) {
 
       const data = await response.json();
 
-      setHusbandImg(`https://image.paysys.shop/${data.key}`);
+      setBrideImg(`https://image.paysys.shop/${data.key}`);
 
       const response2 = await AddSign({
         variables: {
           weddingId,
-          sex: 'husband',
+          sex: 'bride',
           image: `https://image.paysys.shop/${data.key}`,
         },
       });
@@ -72,7 +68,7 @@ function HusbandSignContainer({ refetch }: { refetch: any }) {
       await client.clearStore();
       await refetch();
 
-      setHusband(false);
+      setBride(false);
     } catch (err) {
       alert(err);
     }
@@ -80,12 +76,12 @@ function HusbandSignContainer({ refetch }: { refetch: any }) {
 
   return (
     <SignModal
-      visible={husband}
-      title="신랑 서명"
-      onCancel={() => setHusband(false)}
+      visible={bride}
+      title="신부님 서명"
+      onCancel={() => setBride(false)}
       onConfirm={onUpload}
     />
   );
 }
 
-export default HusbandSignContainer;
+export default BrideSignContainer;

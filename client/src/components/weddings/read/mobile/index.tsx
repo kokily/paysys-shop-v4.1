@@ -1,14 +1,18 @@
 import React from 'react';
 import { useRecoilState } from 'recoil';
-import { husbandSign } from '../../../../libs/store/sign';
+import { husbandSign, brideSign } from '../../../../libs/store/sign';
 import HusbandSignContainer from '../../../../containers/weddings/sign/HusbandSignContainer';
+import BrideSignContainer from '../../../../containers/weddings/sign/BrideSignContainer';
+import SignImage from '../SignImage';
 
 interface Props {
   wedding: WeddingType | null;
+  refetch: any;
 }
 
-const ReadWeddingMobile: React.FC<Props> = ({ wedding }) => {
+const ReadWeddingMobile: React.FC<Props> = ({ wedding, refetch }) => {
   const [, setHusband] = useRecoilState(husbandSign);
+  const [, setBride] = useRecoilState(brideSign);
 
   return (
     <>
@@ -20,21 +24,23 @@ const ReadWeddingMobile: React.FC<Props> = ({ wedding }) => {
               {wedding.husband_name}
             </strong>
             <strong style={{ color: 'pink' }}> ♡</strong> 신부님:{' '}
-            <strong>{wedding.bride_name}</strong>
+            <strong onClick={() => setBride(true)}>{wedding.bride_name}</strong>
           </h3>
 
-          <div>
-            {wedding.husband_image && (
-              <img src={wedding.husband_image} alt="신랑" />
-            )}
-          </div>
+          {(wedding.husband_image || wedding.bride_image) && (
+            <SignImage
+              husband={wedding.husband_image || undefined}
+              bride={wedding.bride_image || undefined}
+            />
+          )}
 
           <h4>
             웨딩일자: {new Date(wedding.wedding_at).toLocaleDateString()}{' '}
             {wedding.event_at}
           </h4>
 
-          <HusbandSignContainer />
+          <HusbandSignContainer refetch={refetch} />
+          <BrideSignContainer refetch={refetch} />
 
           <hr style={{ width: '90%' }} />
 
