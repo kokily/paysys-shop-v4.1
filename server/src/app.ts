@@ -10,6 +10,8 @@ import upload from './libs/upload';
 import image from './libs/image';
 import schema from './libs/schema';
 
+const { default: enforceHttps } = require('koa-sslify');
+
 const app = new Koa();
 const router = new Router();
 const rootDir = path.resolve(process.cwd(), './../client/build');
@@ -20,6 +22,11 @@ app.use(
       process.env.NODE_ENV === 'production'
         ? 'https://paysys.shop'
         : 'http://localhost:3000',
+  })
+);
+app.use(
+  enforceHttps({
+    port: 443,
   })
 );
 app.use(bodyParser({ multipart: true }));

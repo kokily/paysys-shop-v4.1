@@ -14,31 +14,42 @@ const _bootstrap = async () => {
   const environment = process.env.NODE_ENV || 'production';
   const config = configurations[environment];
 
-  let server;
+  let httpServer;
+  let httpsServer;
 
   if (config.ssl) {
-    server = https.createServer(
+    httpServer = http.createServer(app.callback());
+    httpsServer = https.createServer(
       {
         key: fs.readFileSync(`${process.env.SSL_KEY}`),
         cert: fs.readFileSync(`${process.env.SSL_CERT}`),
       },
       app.callback()
     );
-  } else {
-    server = http.createServer(app.callback());
-  }
 
-  createConnection(ConnectionOptions)
-    .then(() => {
-      server.listen(config.port, () => {
-        console.log(
-          `> Paysys Server on http:${config.ssl ? 's' : ''}//${
-            config.hostname
-          }:${config.port}`
-        );
-      });
-    })
-    .catch((err) => console.error(err));
+    createConnection(ConnectionOptions)
+      .then(() => {
+        httpServer.listen(80);
+        httpsServer.listen(config.port, () => {
+          console.log(
+            `> Paysys Server on https://${config.hostname}:${config.port}`
+          );
+        });
+      })
+      .catch((err) => console.error(err));
+  } else {
+    httpServer = http.createServer(app.callback());
+
+    createConnection(ConnectionOptions)
+      .then(() => {
+        httpServer.listen(config.port, () => {
+          console.log(
+            `> Paysys Local Server on http://${config.hostname}:${config.port}`
+          );
+        });
+      })
+      .catch((err) => console.error(err));
+  }
 };
 
 _bootstrap();
