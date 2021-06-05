@@ -1,5 +1,6 @@
 import React from 'react';
 import { useRecoilState } from 'recoil';
+import moment from 'moment';
 import { husbandSign, brideSign } from '../../../../libs/store/sign';
 import HusbandSignContainer from '../../../../containers/weddings/sign/HusbandSignContainer';
 import BrideSignContainer from '../../../../containers/weddings/sign/BrideSignContainer';
@@ -41,7 +42,7 @@ const ReadWeddingMobile: React.FC<Props> = ({
           )}
 
           <h4>
-            웨딩일자: {new Date(wedding.wedding_at).toLocaleDateString()}{' '}
+            웨딩일자: {new Date(moment().format('YYYY. M. D.'))}{' '}
             {wedding.event_at}
           </h4>
 

@@ -17,7 +17,7 @@ const s3 = new aws.S3({
   apiVersion: '2006-03-01',
 });
 
-const Bucket = 'file.closed-status.shop';
+const Bucket = 'image.paysys.shop';
 
 upload.post('/', async (ctx: Context, next: Next) => {
   if (ctx.request.files) {
