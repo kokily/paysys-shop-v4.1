@@ -10,11 +10,6 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 // Logout Routes Loadable
-const ListClosedsPage = loadable(
-  () => import('./pages/closed/ListClosedsPage')
-);
-const ReadClosedsPage = loadable(() => import('./pages/closed/ReadClosedPage'));
-const AddClosedsPage = loadable(() => import('./pages/closed/AddClosedPage'));
 const LoginPage = loadable(() => import('./pages/auth/LoginPage'));
 const RegisterPage = loadable(() => import('./pages/auth/RegisterPage'));
 
@@ -59,9 +54,6 @@ const LoginRoutes = ({ user }: { user: MeType | null }) => {
       {user && (
         <Switch>
           <Route exact path="/" render={() => <Redirect to="/soldier" />} />
-          <Route exact path="/closed" component={ListClosedsPage} />
-          <Route path="/closed/read/:id" component={ReadClosedsPage} />
-          <Route exact path="/closed/add" component={AddClosedsPage} />
           <Route exact path="/soldier" component={SoldierPage} />
           <Route exact path="/reserve" component={ReservePage} />
           <Route exact path="/general" component={GeneralPage} />
