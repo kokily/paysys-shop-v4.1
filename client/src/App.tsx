@@ -10,7 +10,6 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 // Logout Routes Loadable
-const WelcomePage = loadable(() => import('./pages/WelcomePage'));
 const ListClosedsPage = loadable(
   () => import('./pages/closed/ListClosedsPage')
 );
@@ -47,15 +46,6 @@ const ReadWeddingPage = loadable(
 const UpdateWeddingPage = loadable(
   () => import('./pages/weddings/UpdateWeddingPage')
 );
-const ListSeparatesPage = loadable(
-  () => import('./pages/separte/ListSeparatesPage')
-);
-const ReadSeparatePage = loadable(
-  () => import('./pages/separte/ReadSeparatePage')
-);
-const AddSeparatePage = loadable(
-  () => import('./pages/separte/AddSeparatePage')
-);
 
 // Separation according to account authentication
 const LoginRoutes = ({ user }: { user: MeType | null }) => {
@@ -80,11 +70,6 @@ const LoginRoutes = ({ user }: { user: MeType | null }) => {
           <Route exact path="/cart" component={CartPage} />
           <Route exact path="/fronts" component={ListFrontsPage} />
           <Route path="/front/:frontId" component={ReadFrontPage} />
-          <Route exact path="/separate/closeds" component={ListSeparatesPage} />
-          <Route
-            path="/separate/closed/:closedId"
-            component={ReadSeparatePage}
-          />
 
           {user && user.admin && (
             <>
@@ -96,7 +81,6 @@ const LoginRoutes = ({ user }: { user: MeType | null }) => {
                 path="/item/update/:itemId"
                 component={UpdateItemPage}
               />
-              <Route exact path="/separate/add" component={AddSeparatePage} />
               <Route exact path="/users" component={ListUsersPage} />
               <Route path="/user/:userId" component={ReadUserPage} />
               <Route exact path="/password" component={PasswordPage} />
@@ -122,11 +106,7 @@ const LoginRoutes = ({ user }: { user: MeType | null }) => {
 
 const LogoutRoutes = () => (
   <Switch>
-    <Route exact path="/" component={WelcomePage} />
-    <Route exact path="/closed" component={ListClosedsPage} />
-    <Route path="/closed/read/:id" component={ReadClosedsPage} />
-    <Route exact path="/closed/add" component={AddClosedsPage} />
-    <Route exact path="/login" component={LoginPage} />
+    <Route exact path="/" component={LoginPage} />
     <Route exact path="/register" component={RegisterPage} />
     <Redirect from={'*'} to={'/'} />
   </Switch>
