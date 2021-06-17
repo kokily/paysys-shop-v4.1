@@ -20,6 +20,11 @@ interface CartAction {
   value: string;
 }
 
+interface QueryType {
+  native?: string;
+  divide?: string;
+}
+
 interface MeType {
   id: string;
   username: string;

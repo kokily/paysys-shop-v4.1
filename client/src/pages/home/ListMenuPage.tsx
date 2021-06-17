@@ -1,10 +1,10 @@
 import PageTemplate from '../../components/common/PageTemplate';
-import ListMenuContainer from '../../containers/home/ListMenuContainer';
+import ListMenu from '../../components/home/ListMenu';
 
 function ListMenuPage() {
   return (
     <PageTemplate>
-      <ListMenuContainer />
+      <ListMenu />
     </PageTemplate>
   );
 }

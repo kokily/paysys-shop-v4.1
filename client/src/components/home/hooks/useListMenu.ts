@@ -1,19 +1,13 @@
+import { useQuery } from '@apollo/react-hooks';
 import { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import { useQuery } from '@apollo/react-hooks';
-import qs from 'qs';
-import { LIST_ITEMS } from '../../libs/graphql/items';
-import ListMenu from '../../components/home/ListMenu';
 import loadable from '@loadable/component';
+import qs from 'qs';
+import { LIST_ITEMS } from '../../../libs/graphql/items';
 
-const ListMenuPage = loadable(() => import('./../../pages/home/ListMenuPage'));
+const ListMenuPage = loadable(() => import('../../../pages/home/ListMenuPage'));
 
-type QueryType = {
-  native?: string;
-  divide?: string;
-};
-
-function ListMenuContainer() {
+function useListMenu() {
   const history = useHistory();
   const location = useLocation();
   const [native, setNative] = useState<string>('');
@@ -45,17 +39,14 @@ function ListMenuContainer() {
     if (divide) setDivide(divide);
   }, [location.search]);
 
-  if (loading) return null;
-  if (error) return null;
-
-  return (
-    <ListMenu
-      menu={data?.ListItems.items || []}
-      onBack={onBack}
-      onMenu={onMenu}
-      onLoading={onLoading}
-    />
-  );
+  return {
+    menu: data?.ListItems.items || [],
+    onBack,
+    onMenu,
+    onLoading,
+    loading,
+    error,
+  };
 }
 
-export default ListMenuContainer;
+export default useListMenu;
