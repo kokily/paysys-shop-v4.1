@@ -1,7 +1,6 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
-import oc from 'open-color';
-import { shadow } from '../../libs/styles';
+import styled from 'styled-components';
+import Menu from './common/Menu';
+import useHome from './hooks/useHome';
 
 // Styles
 const Container = styled.div`
@@ -18,80 +17,9 @@ const MenuBox = styled.div`
   margin-bottom: 1rem;
 `;
 
-const MenuItem = styled.div<ItemColor>`
-  ${(props) =>
-    props.soldier &&
-    css`
-      background: ${oc.cyan[7]};
-    `}
-  ${(props) =>
-    props.reserve &&
-    css`
-      background: ${oc.lime[7]};
-    `}
-  ${(props) =>
-    props.general &&
-    css`
-      background: ${oc.orange[6]};
-    `}
-  color: white;
-  ${shadow(1)};
-  font-size: 1.215rem;
-  font-weight: 700;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  width: 100%;
-  height: 55px;
-  cursor: pointer;
-  -webkit-filter: brightness(0.9);
-  filter: brightness(0.9);
-  &:hover {
-    -webkit-filter: brightness(1);
-    filter: brightness(1);
-  }
-  &:active {
-    transform: translateY(3px);
-  }
-`;
+function Home() {
+  const { menu, native, onMenu } = useHome();
 
-interface ItemColor {
-  soldier?: boolean;
-  reserve?: boolean;
-  general?: boolean;
-}
-
-interface MenuProps extends ItemColor {
-  divide: string;
-  onMenu: (e: React.MouseEvent) => void;
-}
-
-interface Props {
-  menu: HomeMenuType[];
-  native: string;
-  onMenu: (divide: string) => void;
-}
-
-const Menu: React.FC<MenuProps> = ({
-  divide,
-  onMenu,
-  soldier,
-  reserve,
-  general,
-}) => (
-  <MenuItem
-    onClick={onMenu}
-    soldier={soldier && true}
-    reserve={reserve && true}
-    general={general && true}
-  >
-    {divide}
-  </MenuItem>
-);
-
-function Home({ menu, native, onMenu }: Props) {
   return (
     <Container>
       <MenuBox>

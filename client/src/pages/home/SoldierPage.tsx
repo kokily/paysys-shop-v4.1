@@ -1,10 +1,10 @@
 import PageTemplate from '../../components/common/PageTemplate';
-import HomeContainer from '../../containers/home/HomeContainer';
+import Home from '../../components/home/Home';
 
 function SoldierPage() {
   return (
     <PageTemplate>
-      <HomeContainer />
+      <Home />
     </PageTemplate>
   );
 }

@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import Home from '../../components/home/Home';
-import { menu } from '../../libs/menu';
+import { menu } from '../../../libs/menu';
 
-function HomeContainer() {
+function useHome() {
   const history = useHistory();
   const [native] = useState(history.location.pathname.substring(1));
 
@@ -21,7 +20,11 @@ function HomeContainer() {
     history.push(`/menu?native=${menu}&divide=${divide}`);
   };
 
-  return <Home menu={menu} native={native} onMenu={onMenu} />;
+  return {
+    menu,
+    native,
+    onMenu,
+  };
 }
 
-export default HomeContainer;
+export default useHome;
