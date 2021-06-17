@@ -1,21 +1,9 @@
-import React, { useEffect, useReducer, useState } from 'react';
-import { useHistory } from 'react-router';
+import { useEffect, useReducer, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useApolloClient, useMutation, useQuery } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
-import { REMOVE_CART, REMOVE_ONE, VIEW_CART } from '../../libs/graphql/cart';
-import { ADD_BILL } from '../../libs/graphql/bills';
-import Cart from '../../components/cart/Cart';
-
-type CartState = {
-  title: string;
-  hall: string;
-  etc: string;
-};
-
-type CartAction = {
-  name: string;
-  value: string;
-};
+import { ADD_BILL } from '../../../libs/graphql/bills';
+import { REMOVE_CART, REMOVE_ONE, VIEW_CART } from '../../../libs/graphql/cart';
 
 const reducer = (state: CartState, action: CartAction) => {
   return {
@@ -24,7 +12,7 @@ const reducer = (state: CartState, action: CartAction) => {
   };
 };
 
-function CartContainer() {
+function useCart() {
   const client = useApolloClient();
   const history = useHistory();
   const { data, loading, error, refetch } = useQuery<{
@@ -76,18 +64,6 @@ function CartContainer() {
     }
   };
 
-  const onRemoveCart = async () => {
-    try {
-      await client.clearStore();
-      await RemoveCart();
-
-      toast.success('카트 전체 삭제!');
-      history.push('/soldier');
-    } catch (err) {
-      toast.error(err);
-    }
-  };
-
   const onRemoveOne = async (id: string, name: string) => {
     if (window.confirm(`${name} 품목을 삭제합니다!!`)) {
       try {
@@ -129,22 +105,18 @@ function CartContainer() {
     }
   }, [data]);
 
-  if (loading) return null;
-  if (error) return null;
-
-  return (
-    <Cart
-      title={title}
-      hall={hall}
-      etc={etc}
-      cart={data?.ViewCart.cart || null}
-      onChange={onChange}
-      totalAmount={totalAmount}
-      onRemoveCart={onRemoveCart}
-      onRemoveOne={onRemoveOne}
-      onSubmit={onSubmit}
-    />
-  );
+  return {
+    title,
+    hall,
+    etc,
+    cart: data?.ViewCart.cart || null,
+    onChange,
+    totalAmount,
+    onRemoveOne,
+    onSubmit,
+    loading,
+    error,
+  };
 }
 
-export default CartContainer;
+export default useCart;

@@ -1,10 +1,10 @@
 import PageTemplate from '../../components/common/PageTemplate';
-import CartContainer from '../../containers/cart/CartContainer';
+import Cart from '../../components/cart/Cart';
 
 function CartPage() {
   return (
     <PageTemplate>
-      <CartContainer />
+      <Cart />
     </PageTemplate>
   );
 }

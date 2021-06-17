@@ -9,6 +9,17 @@ interface ActionProps {
   value: string;
 }
 
+interface CartState {
+  title: string;
+  hall: string;
+  etc: string;
+}
+
+interface CartAction {
+  name: string;
+  value: string;
+}
+
 interface MeType {
   id: string;
   username: string;
