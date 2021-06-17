@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router';
-import ListFronts from '../../components/fronts/Listfronts';
-import useListBills from './hooks/useListBills';
+import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import useScrollFronts from './useScrollFronts';
 
-function ListFrontsContainer() {
+function useListFronts() {
   const history = useHistory();
   const [search, setSearch] = useState('');
   const [title, setTitle] = useState('');
   const [user_id, setUserId] = useState('');
   const [hall, setHall] = useState('');
-  const { data, loading, error } = useListBills(title, user_id, hall);
+  const { data, loading, error } = useScrollFronts(title, user_id, hall);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -45,21 +44,18 @@ function ListFrontsContainer() {
     }
   };
 
-  if (loading) return null;
-  if (error) return null;
-
-  return (
-    <ListFronts
-      fronts={data?.ListBills.bills || []}
-      search={search}
-      onChange={onChange}
-      onSearch={onSearch}
-      onUserList={onUserList}
-      onHallList={onHallList}
-      onDetail={onDetail}
-      onKeyPress={onKeyPress}
-    />
-  );
+  return {
+    fronts: data?.ListBills.bills || [],
+    search,
+    onChange,
+    onSearch,
+    onUserList,
+    onHallList,
+    onDetail,
+    onKeyPress,
+    loading,
+    error,
+  };
 }
 
-export default ListFrontsContainer;
+export default useListFronts;

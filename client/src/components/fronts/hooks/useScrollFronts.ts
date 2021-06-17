@@ -3,12 +3,9 @@ import { useQuery } from '@apollo/react-hooks';
 import { LIST_BILLS } from '../../../libs/graphql/bills';
 import useScroll from '../../../libs/hooks/useScroll';
 
-function useListBills(title?: string, user_id?: string, hall?: string) {
-  const { data, loading, error, fetchMore } = useQuery<{
-    ListBills: { bills: BillType[] };
-  }>(LIST_BILLS, {
-    variables: { title, user_id, hall },
-  });
+function useScrollFronts(title?: string, user_id?: string, hall?: string) {
+  const { data, loading, error, fetchMore } =
+    useQuery<{ ListBills: { bills: BillType[] } }>(LIST_BILLS);
   const [isFinished, setIsFinished] = useState(false);
 
   const onLoadMore = useCallback(
@@ -22,7 +19,6 @@ function useListBills(title?: string, user_id?: string, hall?: string) {
         },
         updateQuery: (prev, { fetchMoreResult }) => {
           if (!fetchMoreResult) return prev;
-          if (!fetchMoreResult.ListBills.bills) return prev;
           if (fetchMoreResult.ListBills.bills.length === 0) {
             setIsFinished(true);
           }
@@ -39,7 +35,7 @@ function useListBills(title?: string, user_id?: string, hall?: string) {
         },
       });
     },
-    [fetchMore, title, user_id, hall]
+    [title, user_id, hall, fetchMore]
   );
 
   const cursor = data?.ListBills.bills[data.ListBills.bills.length - 1]?.id;
@@ -49,7 +45,12 @@ function useListBills(title?: string, user_id?: string, hall?: string) {
     onLoadMore,
   });
 
-  return { data, loading, error, isFinished };
+  return {
+    data,
+    loading,
+    error,
+    isFinished,
+  };
 }
 
-export default useListBills;
+export default useScrollFronts;

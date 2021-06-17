@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import oc from 'open-color';
 import { media } from '../../libs/styles';
 import Search from '../common/Search';
+import useListFronts from './hooks/useListFronts';
 
 // Styles
 const Container = styled.div`
@@ -67,29 +68,18 @@ const Container = styled.div`
   }
 `;
 
-interface Props {
-  fronts: BillType[] | null;
-  search: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onSearch: (e: React.MouseEvent) => void;
-  onUserList: (user_id: string) => void;
-  onHallList: (hall: string) => void;
-  onDetail: (id: string) => void;
-  onKeyPress: (
-    e: React.KeyboardEvent<HTMLInputElement> & React.MouseEvent
-  ) => void;
-}
+function ListFronts() {
+  const {
+    fronts,
+    search,
+    onChange,
+    onSearch,
+    onUserList,
+    onHallList,
+    onDetail,
+    onKeyPress,
+  } = useListFronts();
 
-const ListFronts: React.FC<Props> = ({
-  fronts,
-  search,
-  onChange,
-  onSearch,
-  onUserList,
-  onHallList,
-  onDetail,
-  onKeyPress,
-}) => {
   return (
     <Container>
       <h2>프런트 전표 현황</h2>
@@ -147,6 +137,6 @@ const ListFronts: React.FC<Props> = ({
       </table>
     </Container>
   );
-};
+}
 
 export default ListFronts;
