@@ -1,13 +1,15 @@
-import { useQuery } from '@apollo/react-hooks';
 import { useCallback, useState } from 'react';
+import { useQuery } from '@apollo/react-hooks';
 import { LIST_USERS } from '../../../libs/graphql/users';
 import useScroll from '../../../libs/hooks/useScroll';
 
-function useListUsers(username?: string) {
+function useScrollUsers(username?: string) {
   const { data, loading, error, fetchMore } = useQuery<{
     ListUsers: { users: UserType[] };
   }>(LIST_USERS, {
-    variables: { username },
+    variables: {
+      username,
+    },
   });
   const [isFinished, setIsFinished] = useState(false);
 
@@ -36,7 +38,7 @@ function useListUsers(username?: string) {
         },
       });
     },
-    [fetchMore, username]
+    [username, fetchMore]
   );
 
   const cursor = data?.ListUsers.users[data.ListUsers.users.length - 1]?.id;
@@ -54,4 +56,4 @@ function useListUsers(username?: string) {
   };
 }
 
-export default useListUsers;
+export default useScrollUsers;

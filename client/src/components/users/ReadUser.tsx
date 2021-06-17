@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import oc from 'open-color';
 import { media, shadow } from '../../libs/styles';
-import ReadButton from './ReadButton';
+import ReadButton from './common/ReadButton';
+import useReadUser from './hooks/useReadUser';
+import useReadModal from './hooks/useReadModal';
 
 // Styles
 const Container = styled.div`
@@ -73,23 +75,20 @@ const Content = styled.div`
   }
 `;
 
-interface Props {
-  user: UserType | null;
-  onBack: () => void;
-  onRemoveUser: () => void;
-  onSetAdmin: () => void;
-  onSetEmployee: () => void;
-  onInitPassword: () => void;
-}
+function ReadUser() {
+  const {
+    user,
+    onBack,
+    onSetAdmin,
+    onSetEmployee,
+    onInitPassword,
+    loading,
+    error,
+  } = useReadUser();
 
-const ReadUser: React.FC<Props> = ({
-  user,
-  onBack,
-  onRemoveUser,
-  onSetAdmin,
-  onSetEmployee,
-  onInitPassword,
-}) => {
+  if (loading) return null;
+  if (error) return null;
+
   return (
     <Container>
       <WhiteBoard>
@@ -101,7 +100,6 @@ const ReadUser: React.FC<Props> = ({
 
         <ReadButton
           onBack={onBack}
-          onRemove={onRemoveUser}
           onAdmin={onSetAdmin}
           onEmployee={onSetEmployee}
           onInitPassword={onInitPassword}
@@ -140,6 +138,6 @@ const ReadUser: React.FC<Props> = ({
       </WhiteBoard>
     </Container>
   );
-};
+}
 
 export default ReadUser;

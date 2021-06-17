@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import styled, { css } from 'styled-components';
 import oc from 'open-color';
-import { media, shadow } from '../../libs/styles';
-import RemoveModal from '../../components/common/RemoveModal';
+import { media, shadow } from '../../../libs/styles';
+import RemoveModal from '../../../components/common/RemoveModal';
+import useReadModal from '../hooks/useReadModal';
 
 // Styles
 const Container = styled.div`
@@ -100,7 +101,6 @@ const Button = styled.button<{
 
 interface Props {
   onBack: () => void;
-  onRemove: () => void;
   onAdmin: () => void;
   onEmployee: () => void;
   onInitPassword: () => void;
@@ -108,25 +108,11 @@ interface Props {
 
 const ReadButton: React.FC<Props> = ({
   onBack,
-  onRemove,
   onAdmin,
   onEmployee,
   onInitPassword,
 }) => {
-  const [modal, setModal] = useState(false);
-
-  const onRemoveClick = () => {
-    setModal(true);
-  };
-
-  const onCancel = () => {
-    setModal(false);
-  };
-
-  const onConfirm = () => {
-    setModal(false);
-    onRemove();
-  };
+  const { modal, onRemoveClick, onCancel, onConfirm } = useReadModal();
 
   return (
     <>

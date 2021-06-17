@@ -1,10 +1,10 @@
 import PageTemplate from '../../components/common/PageTemplate';
-import ListUsersContainer from '../../containers/users/ListUsersContainer';
+import ListUsers from '../../components/users/ListUsers';
 
 function ListUsersPage() {
   return (
     <PageTemplate>
-      <ListUsersContainer />
+      <ListUsers />
     </PageTemplate>
   );
 }

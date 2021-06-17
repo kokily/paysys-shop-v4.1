@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import ListUsers from '../../components/users/ListUsers';
-import useListUsers from './hooks/useListUsers';
+import useScrollUsers from './useScrollUsers';
 
-function ListUsersContainer() {
+function useListUsers() {
   const history = useHistory();
   const [search, setSearch] = useState('');
   const [username, setUsername] = useState('');
-  const { data, loading, error } = useListUsers(username);
+  const { data, loading, error } = useScrollUsers(username);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -35,19 +34,16 @@ function ListUsersContainer() {
     history.push(`/user/${id}`);
   };
 
-  if (loading) return null;
-  if (error) return null;
-
-  return (
-    <ListUsers
-      users={data?.ListUsers.users || []}
-      search={search}
-      onChange={onChange}
-      onSearch={onSearch}
-      onKeyPress={onKeyPress}
-      onDetail={onDetail}
-    />
-  );
+  return {
+    users: data?.ListUsers.users || [],
+    search,
+    onChange,
+    onSearch,
+    onKeyPress,
+    onDetail,
+    loading,
+    error,
+  };
 }
 
-export default ListUsersContainer;
+export default useListUsers;

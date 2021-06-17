@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import oc from 'open-color';
 import { shadow, media } from '../../libs/styles';
 import Search from '../common/Search';
+import useListUsers from './hooks/useListUsers';
 
 // Styles
 const Container = styled.div`
@@ -47,25 +48,21 @@ const Container = styled.div`
   }
 `;
 
-interface Props {
-  users: UserType[];
-  search: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onSearch: (e: React.MouseEvent) => void;
-  onKeyPress: (
-    e: React.KeyboardEvent<HTMLInputElement> & React.MouseEvent
-  ) => void;
-  onDetail: (id: string) => void;
-}
+function ListUsers() {
+  const {
+    users,
+    search,
+    onChange,
+    onSearch,
+    onKeyPress,
+    onDetail,
+    loading,
+    error,
+  } = useListUsers();
 
-const ListUsers: React.FC<Props> = ({
-  users,
-  search,
-  onChange,
-  onSearch,
-  onKeyPress,
-  onDetail,
-}) => {
+  if (loading) return null;
+  if (error) return null;
+
   return (
     <Container>
       <h1>사용자 목록</h1>
@@ -111,6 +108,6 @@ const ListUsers: React.FC<Props> = ({
       </table>
     </Container>
   );
-};
+}
 
 export default ListUsers;

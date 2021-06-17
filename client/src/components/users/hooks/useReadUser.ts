@@ -1,16 +1,14 @@
 import { useApolloClient, useMutation, useQuery } from '@apollo/react-hooks';
 import { useHistory, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import ReadUser from '../../components/users/ReadUser';
 import {
   INIT_PASSWORD,
   READ_USER,
-  REMOVE_USER,
   SET_ADMIN,
   SET_EMPLOYEE,
-} from '../../libs/graphql/users';
+} from '../../../libs/graphql/users';
 
-function ReadUserContainer() {
+function useReadUser() {
   const client = useApolloClient();
   const history = useHistory();
   const { userId }: { userId: string } = useParams();
@@ -20,30 +18,12 @@ function ReadUserContainer() {
       variables: { id: userId },
     }
   );
-  const [RemoveUser] = useMutation(REMOVE_USER);
   const [SetAdmin] = useMutation(SET_ADMIN);
   const [SetEmployee] = useMutation(SET_EMPLOYEE);
   const [InitPassword] = useMutation(INIT_PASSWORD);
 
   const onBack = () => {
     history.push('/users');
-  };
-
-  const onRemoveUser = async () => {
-    try {
-      const response = await RemoveUser({
-        variables: { id: userId },
-      });
-
-      if (!response) return;
-
-      await client.clearStore();
-
-      toast.success('사용자 삭제 완료');
-      history.push('/users');
-    } catch (err) {
-      toast.error(err);
-    }
   };
 
   const onSetAdmin = async () => {
@@ -97,19 +77,15 @@ function ReadUserContainer() {
     }
   };
 
-  if (loading) return null;
-  if (error) return null;
-
-  return (
-    <ReadUser
-      user={data?.ReadUser.user || null}
-      onBack={onBack}
-      onRemoveUser={onRemoveUser}
-      onSetAdmin={onSetAdmin}
-      onSetEmployee={onSetEmployee}
-      onInitPassword={onInitPassword}
-    />
-  );
+  return {
+    user: data?.ReadUser.user || null,
+    onBack,
+    onSetAdmin,
+    onSetEmployee,
+    onInitPassword,
+    loading,
+    error,
+  };
 }
 
-export default ReadUserContainer;
+export default useReadUser;

@@ -1,10 +1,10 @@
 import PageTemplate from '../../components/common/PageTemplate';
-import ReadUserContainer from '../../containers/users/ReadUserContainer';
+import ReadUser from '../../components/users/ReadUser';
 
 function ReadUserPage() {
   return (
     <PageTemplate>
-      <ReadUserContainer />
+      <ReadUser />
     </PageTemplate>
   );
 }
