@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import oc from 'open-color';
-import { media, shadow } from '../../libs/styles';
+import { media, shadow } from '../../../libs/styles';
 import { BrowserView, MobileView } from 'react-device-detect';
 
 interface ButtonProps {

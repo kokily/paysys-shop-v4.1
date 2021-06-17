@@ -1,14 +1,15 @@
 import { useHistory, useParams } from 'react-router-dom';
 import { useApolloClient, useMutation, useQuery } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
-import { BrowserView, MobileView } from 'react-device-detect';
-import { READ_BILL, REMOVE_BILL, RESTORE_BILL } from '../../libs/graphql/bills';
-import { ME } from '../../libs/graphql/auth';
-import { REMOVE_RESERVE } from '../../libs/graphql/reserve';
-import ReadFrontMobile from '../../components/fronts/ReadFrontMobile';
-import ReadFront from '../../components/fronts/ReadFront';
+import { ME } from '../../../libs/graphql/auth';
+import {
+  READ_BILL,
+  REMOVE_BILL,
+  RESTORE_BILL,
+} from '../../../libs/graphql/bills';
+import { REMOVE_RESERVE } from '../../../libs/graphql/reserve';
 
-function ReadFrontContainer() {
+function useReadFront() {
   const client = useApolloClient();
   const history = useHistory();
   const { frontId }: { frontId: string } = useParams();
@@ -25,23 +26,6 @@ function ReadFrontContainer() {
 
   const onList = () => {
     history.push('/fronts');
-  };
-
-  const onRemove = async () => {
-    try {
-      const response = await RemoveBill({
-        variables: { id: frontId },
-      });
-
-      if (!response) return;
-
-      toast.success('삭제 완료, 리스트로 이동합니다.');
-      await client.clearStore();
-
-      history.goBack();
-    } catch (err) {
-      toast.error(err);
-    }
   };
 
   const onRestore = async () => {
@@ -86,36 +70,17 @@ function ReadFrontContainer() {
     }
   };
 
-  if (loading) return null;
-  if (meLoading) return null;
-  if (error) return null;
-
-  return (
-    <>
-      <BrowserView>
-        <ReadFront
-          front={data?.ReadBill.bill || null}
-          user={me?.Me.me || null}
-          onList={onList}
-          onRemove={onRemove}
-          onRestore={onRestore}
-          onReserve={onReserve}
-          onRemoveReserve={onRemoveReserve}
-        />
-      </BrowserView>
-      <MobileView>
-        <ReadFrontMobile
-          front={data?.ReadBill.bill || null}
-          user={me?.Me.me || null}
-          onList={onList}
-          onRemove={onRemove}
-          onRestore={onRestore}
-          onReserve={onReserve}
-          onRemoveReserve={onRemoveReserve}
-        />
-      </MobileView>
-    </>
-  );
+  return {
+    front: data?.ReadBill.bill || null,
+    user: me?.Me.me || null,
+    onList,
+    onRestore,
+    onReserve,
+    onRemoveReserve,
+    loading,
+    meLoading,
+    error,
+  };
 }
 
-export default ReadFrontContainer;
+export default useReadFront;
