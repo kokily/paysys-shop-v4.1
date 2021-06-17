@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import oc from 'open-color';
 import { shadow } from '../../libs/styles';
 import Button from '../../components/common/Button';
+import DetailTable from './common/DetailTable';
+import useDetailMenu from './hooks/useDetailMenu';
+import DetailInputLabel from './common/DetailInputLabel';
 
 // Styles
 const Container = styled.div`
@@ -30,30 +33,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    tr {
-      &:hover {
-        background: rgba(0, 0, 0, 0.2);
-      }
-    }
-    th,
-    td {
-      width: 160px;
-      border-radius: 8px;
-      padding-top: 0.25rem;
-      padding-bottom: 0.25rem;
-      text-align: center;
-      input {
-        width: 75%;
-        height: 1.5rem;
-        padding: 0.5rem;
-        border-radius: 4px;
-        outline: none;
-      }
-    }
-    th {
-      background: ${oc.indigo[4]};
-      color: white;
-    }
+
     input {
       outline: none;
       padding: 0.5rem;
@@ -98,29 +78,23 @@ const ButtonWrapper = styled.div`
   margin-right: auto;
 `;
 
-interface Props {
-  menu: MenuType | null;
-  price: number;
-  count: string;
-  onChangeCount: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onChangePrice: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onKeyPress: (
-    e: React.KeyboardEvent<HTMLInputElement> & React.MouseEvent
-  ) => void;
-  onBack: () => void;
-  onSubmit: (e: React.MouseEvent) => void;
-}
+function DetailMenu() {
+  const {
+    menu,
+    price,
+    count,
+    onChangeCount,
+    onChangePrice,
+    onKeyPress,
+    onBack,
+    onSubmit,
+    loading,
+    error,
+  } = useDetailMenu();
 
-const DetailMenu: React.FC<Props> = ({
-  menu,
-  price,
-  count,
-  onChangeCount,
-  onChangePrice,
-  onKeyPress,
-  onBack,
-  onSubmit,
-}) => {
+  if (loading) return null;
+  if (error) return null;
+
   return (
     <>
       {menu && (
@@ -130,73 +104,21 @@ const DetailMenu: React.FC<Props> = ({
           </Logo>
 
           <div className="contents">
-            <table>
-              <tbody>
-                <tr>
-                  <th>구 분</th>
-                  <td>{menu.name}</td>
-                </tr>
-                <tr>
-                  <th>단 가</th>
-                  <td>
-                    {menu.price === 0 ? (
-                      <input
-                        type="number"
-                        name="price"
-                        value={price}
-                        onChange={onChangePrice}
-                      />
-                    ) : (
-                      <>
-                        {menu.price
-                          .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                        원
-                      </>
-                    )}
-                  </td>
-                </tr>
-                <tr>
-                  <th>단 위</th>
-                  <td>{menu.unit}</td>
-                </tr>
-              </tbody>
-            </table>
+            <DetailTable
+              menu={menu}
+              price={price}
+              onChangePrice={onChangePrice}
+            />
 
             <hr />
 
-            <div className="number">
-              <label htmlFor="count">수 량 : </label>
-              <input
-                type="text"
-                name="count"
-                value={count}
-                onChange={onChangeCount}
-                onKeyPress={onKeyPress}
-                autoFocus
-              />
-            </div>
-
-            <div className="total">
-              <h3>
-                합계 금액:{' '}
-                {menu.price === 0 ? (
-                  <>
-                    {(price * parseInt(count))
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                    원
-                  </>
-                ) : (
-                  <>
-                    {(menu.price * parseInt(count))
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-                    원
-                  </>
-                )}
-              </h3>
-            </div>
+            <DetailInputLabel
+              menu={menu}
+              price={price}
+              count={count}
+              onChangeCount={onChangeCount}
+              onKeyPress={onKeyPress}
+            />
 
             <ButtonWrapper>
               <Button
@@ -211,6 +133,6 @@ const DetailMenu: React.FC<Props> = ({
       )}
     </>
   );
-};
+}
 
 export default DetailMenu;

@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { READ_ITEM } from '../../libs/graphql/items';
-import { ADD_CART } from '../../libs/graphql/cart';
 import { toast } from 'react-toastify';
-import DetailMenu from '../../components/home/DetailMenu';
+import { ADD_CART } from '../../../libs/graphql/cart';
+import { READ_ITEM } from '../../../libs/graphql/items';
 
-function DetailMenuContainer() {
+function useDetailMenu() {
   const history = useHistory();
   const { menuId }: { menuId: string } = useParams();
   const { data, loading, error } = useQuery<{
@@ -74,21 +73,18 @@ function DetailMenuContainer() {
     }
   }, [data]);
 
-  if (loading) return null;
-  if (error) return null;
-
-  return (
-    <DetailMenu
-      menu={data?.ReadItem.item || null}
-      price={price}
-      count={count}
-      onChangeCount={onChangeCount}
-      onChangePrice={onChangePrice}
-      onKeyPress={onKeyPress}
-      onBack={onBack}
-      onSubmit={onSubmit}
-    />
-  );
+  return {
+    menu: data?.ReadItem.item || null,
+    price,
+    count,
+    onChangeCount,
+    onChangePrice,
+    onKeyPress,
+    onBack,
+    onSubmit,
+    loading,
+    error,
+  };
 }
 
-export default DetailMenuContainer;
+export default useDetailMenu;

@@ -1,10 +1,10 @@
 import PageTemplate from '../../components/common/PageTemplate';
-import DetailMenuContainer from '../../containers/home/DetailMenuContainer';
+import DetailMenu from '../../components/home/DetailMenu';
 
 function DetailMenuPage() {
   return (
     <PageTemplate>
-      <DetailMenuContainer />
+      <DetailMenu />
     </PageTemplate>
   );
 }
