@@ -1,3 +1,14 @@
+interface StateProps {
+  username: string;
+  password: string;
+  passwordConfirm?: string;
+}
+
+interface ActionProps {
+  name: string;
+  value: string;
+}
+
 interface MeType {
   id: string;
   username: string;

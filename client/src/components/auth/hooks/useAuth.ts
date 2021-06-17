@@ -1,18 +1,8 @@
 import React, { useReducer } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
-import { LOGIN } from '../../libs/graphql/auth';
-import AuthForm from '../../components/auth/AuthForm';
-
-type StateProps = {
-  username: string;
-  password: string;
-};
-
-type ActionProps = {
-  name: string;
-  value: string;
-};
+import { LOGIN } from '../../../libs/graphql/auth';
 
 const reducer = (state: StateProps, action: ActionProps) => {
   return {
@@ -21,13 +11,18 @@ const reducer = (state: StateProps, action: ActionProps) => {
   };
 };
 
-function LoginContainer() {
+function useAuth() {
+  const history = useHistory();
   const [state, dispatch] = useReducer(reducer, {
     username: '',
     password: '',
   });
   const { username, password } = state;
   const [Login, { client }] = useMutation(LOGIN);
+
+  const onBack = () => {
+    history.goBack();
+  };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(e.target);
@@ -64,15 +59,13 @@ function LoginContainer() {
     }
   };
 
-  return (
-    <AuthForm
-      mode="login"
-      username={username}
-      password={password}
-      onChange={onChange}
-      onSubmit={onSubmit}
-    />
-  );
+  return {
+    username,
+    password,
+    onBack,
+    onChange,
+    onSubmit,
+  };
 }
 
-export default LoginContainer;
+export default useAuth;

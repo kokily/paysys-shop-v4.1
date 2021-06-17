@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router';
+import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
-import { CHANGE_PASSWORD } from '../../libs/graphql/auth';
+import { CHANGE_PASSWORD } from '../../../libs/graphql/auth';
 import { toast } from 'react-toastify';
-import Password from '../../components/auth/Password';
 
-function PasswordContainer() {
+function usePassword() {
   const history = useHistory();
   const [password, setPassword] = useState('');
   const [ChangePassword, { client }] = useMutation(CHANGE_PASSWORD);
@@ -45,15 +44,13 @@ function PasswordContainer() {
     history.push('/soldier');
   };
 
-  return (
-    <Password
-      password={password}
-      onChange={onChange}
-      onSubmit={onSubmit}
-      onKeyPress={onKeyPress}
-      onCancel={onCancel}
-    />
-  );
+  return {
+    password,
+    onChange,
+    onSubmit,
+    onKeyPress,
+    onCancel,
+  };
 }
 
-export default PasswordContainer;
+export default usePassword;

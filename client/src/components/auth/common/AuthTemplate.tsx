@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import oc from 'open-color';
-import { shadow } from '../../libs/styles';
+import { shadow } from '../../../libs/styles';
 
 // Styles
 const Container = styled.div`

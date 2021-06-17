@@ -24,11 +24,14 @@ app.use(
         : 'http://localhost:3000',
   })
 );
-app.use(
-  enforceHttps({
-    port: 443,
-  })
-);
+
+process.env.NODE_ENV === 'production' &&
+  app.use(
+    enforceHttps({
+      port: 443,
+    })
+  );
+
 app.use(bodyParser({ multipart: true }));
 app.use(router.routes());
 app.use(router.allowedMethods());

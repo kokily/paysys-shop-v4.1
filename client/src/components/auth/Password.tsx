@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import oc from 'open-color';
 import { shadow } from '../../libs/styles';
 import Button from '../../components/common/Button';
+import usePassword from './hooks/usePassword';
 
 // Styles
 const Container = styled.div`
@@ -85,23 +86,9 @@ const Input = styled.input`
   border-radius: 4px;
 `;
 
-interface Props {
-  password: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onSubmit: (e: React.MouseEvent) => void;
-  onKeyPress: (
-    e: React.KeyboardEvent<HTMLInputElement> & React.MouseEvent
-  ) => void;
-  onCancel: () => void;
-}
+function Password() {
+  const { password, onChange, onSubmit, onKeyPress, onCancel } = usePassword();
 
-const Password: React.FC<Props> = ({
-  password,
-  onChange,
-  onSubmit,
-  onKeyPress,
-  onCancel,
-}) => {
   return (
     <Container>
       <LogoBox>
@@ -135,6 +122,6 @@ const Password: React.FC<Props> = ({
       />
     </Container>
   );
-};
+}
 
 export default Password;

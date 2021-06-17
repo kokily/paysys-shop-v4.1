@@ -1,10 +1,10 @@
 import PageTemplate from '../../components/common/PageTemplate';
-import PasswordContainer from '../../containers/auth/PasswordContainer';
+import Password from '../../components/auth/Password';
 
 function PasswordPage() {
   return (
     <PageTemplate>
-      <PasswordContainer />
+      <Password />
     </PageTemplate>
   );
 }
