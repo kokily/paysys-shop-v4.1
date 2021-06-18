@@ -1,5 +1,5 @@
 import React from 'react';
-import { stringAccounting } from '../../../../libs/utils';
+import { stringAccounting } from '../../../../../libs/utils';
 
 interface Props {
   event: EventType;

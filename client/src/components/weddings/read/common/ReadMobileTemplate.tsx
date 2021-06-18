@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import oc from 'open-color';
 import { shadow } from '../../../../libs/styles';
-import ReadButton from '../ReadButton';
+import ReadButton from './ReadButton';
 import RemoveModal from '../../../common/RemoveModal';
+import useReadWedding from '../hooks/useReadWedding';
+import useReadModal from '../hooks/useReadModal';
 
 // Styles
 const Container = styled.div`
@@ -78,33 +80,12 @@ const Content = styled.div`
 `;
 
 interface Props {
-  onList: () => void;
-  onBack: () => void;
-  onRemove: () => void;
-  onUpdate: () => void;
+  children: React.ReactNode;
 }
 
-const ReadMobileTemplate: React.FC<Props> = ({
-  children,
-  onList,
-  onBack,
-  onRemove,
-  onUpdate,
-}) => {
-  const [modal, setModal] = useState(false);
-
-  const onRemoveClick = () => {
-    setModal(true);
-  };
-
-  const onCancel = () => {
-    setModal(false);
-  };
-
-  const onConfirm = () => {
-    setModal(false);
-    onRemove();
-  };
+function ReadMobileTemplate({ children }: Props) {
+  const { onList, onBack, onUpdate } = useReadWedding();
+  const { modal, onRemoveClick, onCancel, onConfirm } = useReadModal();
 
   return (
     <Container>
@@ -123,6 +104,6 @@ const ReadMobileTemplate: React.FC<Props> = ({
       <RemoveModal visible={modal} onConfirm={onConfirm} onCancel={onCancel} />
     </Container>
   );
-};
+}
 
 export default ReadMobileTemplate;

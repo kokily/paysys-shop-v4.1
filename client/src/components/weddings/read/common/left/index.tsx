@@ -1,25 +1,13 @@
-import React from 'react';
-import { stringAccounting } from '../../../libs/utils';
-import ReadCompany from './left/ReadCompany';
-import ReadConvention from './left/ReadConvention';
-import ReadEvent from './left/ReadEvent';
-import ReadHanbok from './left/ReadHanbok';
+import { stringAccounting } from '../../../../../libs/utils';
+import useReadWedding from '../../hooks/useReadWedding';
+import ReadConvention from './ReadConvention';
+import ReadCompany from './ReadCompany';
+import ReadEvent from './ReadEvent';
+import ReadHanbok from './ReadHanbok';
 
-interface Props {
-  wedding: WeddingType | null;
-  convention: ConventionType | null;
-  company: CompanyType | null;
-  event: EventType | null;
-  hanbok: HanbokType | null;
-}
+function LeftSide() {
+  const { wedding, convention, company, event, hanbok } = useReadWedding();
 
-const LeftSide: React.FC<Props> = ({
-  wedding,
-  convention,
-  company,
-  event,
-  hanbok,
-}) => {
   return (
     <>
       {wedding && (
@@ -56,6 +44,6 @@ const LeftSide: React.FC<Props> = ({
       )}
     </>
   );
-};
+}
 
 export default LeftSide;

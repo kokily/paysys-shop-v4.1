@@ -1,15 +1,8 @@
-import React from 'react';
 import { stringAccounting } from '../../../../libs/utils';
-import ReadMeal from '../right/ReadMeal';
-import ReadPresent from '../right/ReadPresent';
-import ReadReserve from '../right/ReadReserve';
-
-interface Props {
-  wedding: WeddingType | null;
-  meal: MealType | null;
-  present: PresentType | null;
-  reserve: ReserveType | null;
-}
+import ReadMeal from '../common/right/ReadMeal';
+import ReadPresent from '../common/right/ReadPresent';
+import ReadReserve from '../common/right/ReadReserve';
+import useReadWedding from '../hooks/useReadWedding';
 
 const Vacuity = () => (
   <tr>
@@ -26,7 +19,9 @@ const Vacuity = () => (
   </tr>
 );
 
-const BottomMobile: React.FC<Props> = ({ wedding, meal, present, reserve }) => {
+function BottomMobile() {
+  const { wedding, meal, present, reserve } = useReadWedding();
+
   return (
     <>
       {wedding && (
@@ -104,6 +99,6 @@ const BottomMobile: React.FC<Props> = ({ wedding, meal, present, reserve }) => {
       )}
     </>
   );
-};
+}
 
 export default BottomMobile;

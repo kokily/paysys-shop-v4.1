@@ -3,7 +3,6 @@ import oc from 'open-color';
 import { media, shadow } from '../../libs/styles';
 import ReadButton from './common/ReadButton';
 import useReadUser from './hooks/useReadUser';
-import useReadModal from './hooks/useReadModal';
 
 // Styles
 const Container = styled.div`

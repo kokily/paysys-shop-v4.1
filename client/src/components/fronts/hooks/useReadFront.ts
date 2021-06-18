@@ -2,11 +2,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useApolloClient, useMutation, useQuery } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
 import { ME } from '../../../libs/graphql/auth';
-import {
-  READ_BILL,
-  REMOVE_BILL,
-  RESTORE_BILL,
-} from '../../../libs/graphql/bills';
+import { READ_BILL, RESTORE_BILL } from '../../../libs/graphql/bills';
 import { REMOVE_RESERVE } from '../../../libs/graphql/reserve';
 
 function useReadFront() {
@@ -20,7 +16,6 @@ function useReadFront() {
   });
   const { data: me, loading: meLoading } =
     useQuery<{ Me: { me: MeType | null } }>(ME);
-  const [RemoveBill] = useMutation(REMOVE_BILL);
   const [RestoreBill] = useMutation(RESTORE_BILL);
   const [RemoveReserve] = useMutation(REMOVE_RESERVE);
 

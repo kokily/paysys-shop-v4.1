@@ -1,12 +1,12 @@
-import React from 'react';
+import useReadWedding from './hooks/useReadWedding';
 import SignImage from './SignImage';
 
-interface Props {
-  wedding: WeddingType | null;
-  onRemoveSign: () => void;
-}
+function ReadWedding() {
+  const { wedding, onRemoveSign, loading, error } = useReadWedding();
 
-const ReadWedding: React.FC<Props> = ({ wedding, onRemoveSign }) => {
+  if (loading) return null;
+  if (error) return null;
+
   return (
     <>
       {wedding && (
@@ -37,6 +37,6 @@ const ReadWedding: React.FC<Props> = ({ wedding, onRemoveSign }) => {
       )}
     </>
   );
-};
+}
 
 export default ReadWedding;

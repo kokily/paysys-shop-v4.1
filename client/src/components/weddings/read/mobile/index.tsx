@@ -1,22 +1,13 @@
-import React from 'react';
 import { useRecoilState } from 'recoil';
 import moment from 'moment';
 import { husbandSign, brideSign } from '../../../../libs/store/sign';
 import HusbandSignContainer from '../../../../containers/weddings/sign/HusbandSignContainer';
 import BrideSignContainer from '../../../../containers/weddings/sign/BrideSignContainer';
 import SignImage from '../SignImage';
+import useReadWedding from '../hooks/useReadWedding';
 
-interface Props {
-  wedding: WeddingType | null;
-  refetch: any;
-  onRemoveSign: () => void;
-}
-
-const ReadWeddingMobile: React.FC<Props> = ({
-  wedding,
-  refetch,
-  onRemoveSign,
-}) => {
+function ReadMobileWedding() {
+  const { wedding, refetch, onRemoveSign } = useReadWedding();
   const [, setHusband] = useRecoilState(husbandSign);
   const [, setBride] = useRecoilState(brideSign);
 
@@ -56,6 +47,6 @@ const ReadWeddingMobile: React.FC<Props> = ({
       )}
     </>
   );
-};
+}
 
-export default ReadWeddingMobile;
+export default ReadMobileWedding;

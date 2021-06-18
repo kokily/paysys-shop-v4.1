@@ -1,25 +1,13 @@
-import React from 'react';
 import { stringAccounting } from '../../../../libs/utils';
-import ReadConvention from '../left/ReadConvention';
-import ReadCompany from '../left/ReadCompany';
-import ReadEvent from '../left/ReadEvent';
-import ReadHanbok from '../left/ReadHanbok';
+import ReadConvention from '../common/left/ReadConvention';
+import ReadCompany from '../common/left/ReadCompany';
+import ReadEvent from '../common/left/ReadEvent';
+import ReadHanbok from '../common/left/ReadHanbok';
+import useReadWedding from '../hooks/useReadWedding';
 
-interface Props {
-  wedding: WeddingType | null;
-  convention: ConventionType | null;
-  company: CompanyType | null;
-  event: EventType | null;
-  hanbok: HanbokType | null;
-}
+function TopMobile() {
+  const { wedding, convention, company, event, hanbok } = useReadWedding();
 
-const TopMobile: React.FC<Props> = ({
-  wedding,
-  convention,
-  company,
-  event,
-  hanbok,
-}) => {
   return (
     <>
       {wedding && (
@@ -56,6 +44,6 @@ const TopMobile: React.FC<Props> = ({
       )}
     </>
   );
-};
+}
 
 export default TopMobile;

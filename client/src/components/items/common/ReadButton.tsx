@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import oc from 'open-color';
 import { media, shadow } from '../../../libs/styles';

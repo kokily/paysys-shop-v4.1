@@ -75,7 +75,10 @@ const DownBorder = styled.div`
 
 function ReadItem() {
   const { item, onList, onEdit, loading, error } = useReadItem();
-  
+
+  if (loading) return null;
+  if (error) return null;
+
   return (
     <Container>
       <WhiteBoard>
