@@ -140,10 +140,6 @@ function useExpensive() {
     });
   };
 
-  const onChangeDate = (e: any) => {
-    setStartDate(e.taget.value);
-  };
-
   const onBack = () => {
     history.goBack();
   };
@@ -479,7 +475,7 @@ function useExpensive() {
     bride_name,
     wedding_at: startDate,
     event_at,
-    onChangeDate,
+    setStartDate,
     // Convention
     rental_husband,
     rental_bride,

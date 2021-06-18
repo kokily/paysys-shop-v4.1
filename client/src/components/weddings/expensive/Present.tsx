@@ -1,15 +1,20 @@
 import { stringAccounting } from '../../../libs/utils';
-import useExpensive from './hooks/useExpensive';
 
-function Present() {
-  const {
-    present,
-    present_price,
-    present_num_husband,
-    present_num_bride,
-    onChange,
-  } = useExpensive();
+interface Props extends ExpensivePresentType {
+  onChange: (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ) => void;
+}
 
+const Present: React.FC<Props> = ({
+  present,
+  present_price,
+  present_num_husband,
+  present_num_bride,
+  onChange,
+}) => {
   return (
     <>
       <h3>답례품비용</h3>
@@ -81,6 +86,6 @@ function Present() {
       </table>
     </>
   );
-}
+};
 
 export default Present;

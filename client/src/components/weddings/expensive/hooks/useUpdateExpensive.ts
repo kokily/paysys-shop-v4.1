@@ -1,26 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { READ_WEDDING, UPDATE_WEDDING } from '../../libs/graphql/weddings';
 import { toast } from 'react-toastify';
-import ExpensiveTemplate from '../../components/weddings/expensive/common/ExpensiveTemplate';
-import ExpensiveWedding from '../../components/weddings/expensive';
-import Convention from '../../components/weddings/expensive/Convention';
-import Company from '../../components/weddings/expensive/Company';
-import Hanbok from '../../components/weddings/expensive/Hanbok';
-import Event from '../../components/weddings/expensive/Event';
-import Meal from '../../components/weddings/expensive/Meal';
-import Present from '../../components/weddings/expensive/Present';
-import Reserve from '../../components/weddings/expensive/Reserve';
-import ExpenseButton from '../../components/weddings/expensive/ExpenseButton';
+import {
+  READ_WEDDING,
+  UPDATE_WEDDING,
+} from '../../../../libs/graphql/weddings';
 
-function UpdateWeddingContainer() {
+function useUpdateExpensive() {
   const history = useHistory();
   const { weddingId }: { weddingId: string } = useParams();
   const { data, loading, error } = useQuery<{
     ReadWedding: {
       wedding: WeddingType;
-
       convention: ConventionType;
       company: CompanyType;
       event: EventType;
@@ -151,7 +143,7 @@ function UpdateWeddingContainer() {
     reserve_pay,
   } = inputs;
   const [startDate, setStartDate] = useState(new Date());
-  const [UpdateWeddingResolver, { client }] = useMutation(UPDATE_WEDDING);
+  const [UpdateWedding, { client }] = useMutation(UPDATE_WEDDING);
 
   const onChange = (
     e:
@@ -164,6 +156,10 @@ function UpdateWeddingContainer() {
       ...inputs,
       [name]: value,
     });
+  };
+
+  const onBack = () => {
+    history.goBack();
   };
 
   const onSubmit = async (e: React.MouseEvent) => {
@@ -230,65 +226,6 @@ function UpdateWeddingContainer() {
         reserve_pay,
       ].includes('')
     ) {
-      console.log(
-        husband_name,
-        bride_name,
-        event_at,
-        company_husband,
-        company_bride,
-        rooftop_husband,
-        rooftop_bride,
-        owner_woman_husband,
-        owner_woman_bride,
-        owner_man_husband,
-        owner_man_bride,
-        select_husband,
-        select_bride,
-        frame_husband,
-        frame_bride,
-        dress_husband,
-        dress_bride,
-        hairpin_husband,
-        hairpin_bride,
-        wig_husband,
-        wig_bride,
-        video_husband,
-        video_bride,
-        etc_husband,
-        etc_bride,
-        rental_husband,
-        rental_bride,
-        sword_husband,
-        sword_bride,
-        glove_husband,
-        glove_bride,
-        bouquet_husband,
-        bouquet_bride,
-        ceremony_husband,
-        ceremony_bride,
-        play_husband,
-        play_bride,
-        anthem_husband,
-        anthem_bride,
-        moderator_husband,
-        moderator_bride,
-        officiate_husband,
-        officiate_bride,
-        hanbok_pre_husband,
-        hanbok_pre_bride,
-        hanbok_post_husband,
-        hanbok_post_bride,
-        meals,
-        meals_price,
-        meals_num_husband,
-        meals_num_bride,
-        present,
-        present_price,
-        present_num_husband,
-        present_num_bride,
-        reserve,
-        reserve_pay
-      );
       toast.error('빈 칸이 없도록 입력해주세요');
       return;
     }
@@ -363,7 +300,7 @@ function UpdateWeddingContainer() {
           2;
       }
 
-      const response = await UpdateWeddingResolver({
+      const response = await UpdateWedding({
         variables: {
           id: weddingId,
           husband_name,
@@ -490,10 +427,6 @@ function UpdateWeddingContainer() {
     }
   };
 
-  const onBack = () => {
-    history.goBack();
-  };
-
   useEffect(() => {
     if (
       data?.ReadWedding.wedding &&
@@ -572,13 +505,86 @@ function UpdateWeddingContainer() {
         reserve: data.ReadWedding.reserve.reserve,
         reserve_pay: data.ReadWedding.reserve.reserve_pay.toString(),
       });
+      setStartDate(new Date(data.ReadWedding.wedding.wedding_at));
     }
   }, [data]);
 
-  if (loading) return null;
-  if (error) return null;
-
-  return <ExpensiveTemplate></ExpensiveTemplate>;
+  return {
+    // common
+    onChange,
+    loading,
+    error,
+    // Expensive Wedding
+    husband_name,
+    bride_name,
+    wedding_at: startDate,
+    event_at,
+    setStartDate,
+    // Convention
+    rental_husband,
+    rental_bride,
+    sword_husband,
+    sword_bride,
+    glove_husband,
+    glove_bride,
+    bouquet_husband,
+    bouquet_bride,
+    ceremony_husband,
+    ceremony_bride,
+    // Company
+    company_husband,
+    company_bride,
+    rooftop_husband,
+    rooftop_bride,
+    owner_woman_husband,
+    owner_woman_bride,
+    owner_man_husband,
+    owner_man_bride,
+    select_husband,
+    select_bride,
+    frame_husband,
+    frame_bride,
+    dress_husband,
+    dress_bride,
+    hairpin_husband,
+    hairpin_bride,
+    wig_husband,
+    wig_bride,
+    video_husband,
+    video_bride,
+    etc_husband,
+    etc_bride,
+    // Hanbok
+    hanbok_pre_husband,
+    hanbok_pre_bride,
+    hanbok_post_husband,
+    hanbok_post_bride,
+    // Event
+    play_husband,
+    play_bride,
+    anthem_husband,
+    anthem_bride,
+    moderator_husband,
+    moderator_bride,
+    officiate_husband,
+    officiate_bride,
+    // Meal
+    meals,
+    meals_price,
+    meals_num_husband,
+    meals_num_bride,
+    // Present
+    present,
+    present_price,
+    present_num_husband,
+    present_num_bride,
+    // Reserve
+    reserve,
+    reserve_pay,
+    // Button
+    onBack,
+    onSubmit,
+  };
 }
 
-export default UpdateWeddingContainer;
+export default useUpdateExpensive;

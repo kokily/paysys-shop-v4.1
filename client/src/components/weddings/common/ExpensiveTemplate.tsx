@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import oc from 'open-color';
-import { shadow } from '../../../../libs/styles';
+import { shadow } from '../../../libs/styles';
 
 // Styles
 const Container = styled.div`
@@ -128,12 +128,14 @@ const Content = styled.div`
   }
 `;
 
-interface Props {}
+interface Props {
+  edit?: boolean;
+}
 
-const ExpensiveTemplate: React.FC<Props> = ({ children }) => {
+const ExpensiveTemplate: React.FC<Props> = ({ children, edit }) => {
   return (
     <Container>
-      <h2 className="title">웨딩 정산 입력</h2>
+      <h2 className="title">웨딩 정산 {edit ? '수정' : '작성'}</h2>
 
       <Content>{children}</Content>
     </Container>

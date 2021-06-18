@@ -1,15 +1,20 @@
 import { stringAccounting } from '../../../libs/utils';
-import useExpensive from './hooks/useExpensive';
 
-function Hanbok() {
-  const {
-    hanbok_pre_husband,
-    hanbok_pre_bride,
-    hanbok_post_husband,
-    hanbok_post_bride,
-    onChange,
-  } = useExpensive();
+interface Props extends ExpensiveHanbokType {
+  onChange: (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ) => void;
+}
 
+const Hanbok: React.FC<Props> = ({
+  hanbok_pre_husband,
+  hanbok_pre_bride,
+  hanbok_post_husband,
+  hanbok_post_bride,
+  onChange,
+}) => {
   return (
     <>
       <h3>한복업체</h3>
@@ -82,6 +87,6 @@ function Hanbok() {
       </table>
     </>
   );
-}
+};
 
 export default Hanbok;

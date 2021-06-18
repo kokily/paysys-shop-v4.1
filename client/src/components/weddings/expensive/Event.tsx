@@ -1,19 +1,24 @@
 import { stringAccounting } from '../../../libs/utils';
-import useExpensive from './hooks/useExpensive';
 
-function Event() {
-  const {
-    play_husband,
-    play_bride,
-    anthem_husband,
-    anthem_bride,
-    moderator_husband,
-    moderator_bride,
-    officiate_husband,
-    officiate_bride,
-    onChange,
-  } = useExpensive();
+interface Props extends ExpensiveEventType {
+  onChange: (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ) => void;
+}
 
+const Event: React.FC<Props> = ({
+  play_husband,
+  play_bride,
+  anthem_husband,
+  anthem_bride,
+  moderator_husband,
+  moderator_bride,
+  officiate_husband,
+  officiate_bride,
+  onChange,
+}) => {
   return (
     <>
       <h3>행사업체 비용</h3>
@@ -136,6 +141,6 @@ function Event() {
       </table>
     </>
   );
-}
+};
 
 export default Event;
