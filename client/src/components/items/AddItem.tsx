@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import oc from 'open-color';
 import { shadow } from '../../libs/styles';
+import useAddItem from './hooks/useAddItem';
 
 // Styles
 const Container = styled.div`
@@ -146,35 +147,19 @@ const Button = styled.button<{ cyan?: boolean }>`
     `}
 `;
 
-interface Props {
-  name: string;
-  divide: string;
-  native: string;
-  unit: string;
-  price: string;
-  onChange: (
-    e:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLSelectElement>
-  ) => void;
-  onSubmit: (e: React.MouseEvent) => void;
-  onBack: () => void;
-  onKeyPress: (
-    e: React.KeyboardEvent<HTMLInputElement> & React.MouseEvent
-  ) => void;
-}
+function AddItem() {
+  const {
+    name,
+    divide,
+    native,
+    unit,
+    price,
+    onChange,
+    onSubmit,
+    onBack,
+    onKeyPress,
+  } = useAddItem();
 
-const AddItem: React.FC<Props> = ({
-  name,
-  divide,
-  native,
-  unit,
-  price,
-  onChange,
-  onSubmit,
-  onBack,
-  onKeyPress,
-}) => {
   return (
     <Container>
       <div className="logo">품목 등록</div>
@@ -254,6 +239,6 @@ const AddItem: React.FC<Props> = ({
       </form>
     </Container>
   );
-};
+}
 
 export default AddItem;

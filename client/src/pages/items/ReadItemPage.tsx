@@ -1,10 +1,10 @@
 import PageTemplate from '../../components/common/PageTemplate';
-import ReadItemContainer from '../../containers/items/ReadItemContainer';
+import ReadItem from '../../components/items/ReadItem';
 
 function ReadItemPage() {
   return (
     <PageTemplate>
-      <ReadItemContainer />
+      <ReadItem />
     </PageTemplate>
   );
 }

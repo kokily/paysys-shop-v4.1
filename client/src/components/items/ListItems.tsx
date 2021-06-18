@@ -1,9 +1,9 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import oc from 'open-color';
 import { media } from '../../libs/styles';
 import Search from '../common/Search';
+import useListItems from './hooks/useListItems';
 
 // Styles
 const Container = styled.div`
@@ -61,25 +61,21 @@ const AddButton = styled(Link)`
   }
 `;
 
-interface Props {
-  items: ItemType[] | null;
-  search: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onSearch: (e: React.MouseEvent) => void;
-  onKeyPress: (
-    e: React.KeyboardEvent<HTMLInputElement> & React.MouseEvent
-  ) => void;
-  onDetail: (id: string) => void;
-}
+function ListItems() {
+  const {
+    items,
+    search,
+    onChange,
+    onSearch,
+    onKeyPress,
+    onDetail,
+    loading,
+    error,
+  } = useListItems();
 
-const ListItems: React.FC<Props> = ({
-  items,
-  search,
-  onChange,
-  onSearch,
-  onKeyPress,
-  onDetail,
-}) => {
+  if (loading) return null;
+  if (error) return null;
+
   return (
     <Container>
       <Search
@@ -133,6 +129,6 @@ const ListItems: React.FC<Props> = ({
       </table>
     </Container>
   );
-};
+}
 
 export default ListItems;

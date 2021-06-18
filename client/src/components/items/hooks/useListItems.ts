@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import ListItems from '../../components/items/ListItems';
-import useListItems from './hooks/useListItems';
+import useScrollItems from './useScrollItems';
 
-function ListItemsContainer() {
+function useListItems() {
   const history = useHistory();
   const [search, setSearch] = useState('');
   const [name, setName] = useState('');
-  const { data, loading, error } = useListItems(name);
+  const { data, loading, error } = useScrollItems(name);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -35,19 +34,16 @@ function ListItemsContainer() {
     history.push(`/item/${id}`);
   };
 
-  if (loading) return null;
-  if (error) return null;
-
-  return (
-    <ListItems
-      items={data?.ListItems.items || []}
-      search={search}
-      onChange={onChange}
-      onSearch={onSearch}
-      onKeyPress={onKeyPress}
-      onDetail={onDetail}
-    />
-  );
+  return {
+    items: data?.ListItems.items || [],
+    search,
+    onChange,
+    onSearch,
+    onKeyPress,
+    onDetail,
+    loading,
+    error,
+  };
 }
 
-export default ListItemsContainer;
+export default useListItems;

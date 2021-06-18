@@ -1,10 +1,10 @@
 import PageTemplate from '../../components/common/PageTemplate';
-import UpdateItemCotnainer from '../../containers/items/UpdateItemContainer';
+import UpdateItem from '../../components/items/UpdateItem';
 
 function UpdateItemPage() {
   return (
     <PageTemplate>
-      <UpdateItemCotnainer />
+      <UpdateItem />
     </PageTemplate>
   );
 }

@@ -15,9 +15,12 @@ interface CartState {
   etc: string;
 }
 
-interface CartAction {
+interface ItemState {
   name: string;
-  value: string;
+  divide: string;
+  native: string;
+  unit: string;
+  price: string;
 }
 
 interface QueryType {

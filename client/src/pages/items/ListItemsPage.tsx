@@ -1,10 +1,10 @@
 import PageTemplate from '../../components/common/PageTemplate';
-import ListItemsContainer from '../../containers/items/ListItemsContainer';
+import ListItems from '../../components/items/ListItems';
 
 function ListItemsPage() {
   return (
     <PageTemplate>
-      <ListItemsContainer />
+      <ListItems />
     </PageTemplate>
   );
 }

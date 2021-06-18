@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import oc from 'open-color';
 import { media, shadow } from '../../libs/styles';
-import ReadButton from './ReadButton';
+import ReadButton from './common/ReadButton';
+import useReadItem from './hooks/useReadItem';
 
 // Styles
 const Container = styled.div`
@@ -72,14 +73,9 @@ const DownBorder = styled.div`
   }
 `;
 
-interface Props {
-  item: ItemType | null;
-  onList: () => void;
-  onEdit: () => void;
-  onRemoveItem: () => void;
-}
-
-const ReadItem: React.FC<Props> = ({ item, onList, onEdit, onRemoveItem }) => {
+function ReadItem() {
+  const { item, onList, onEdit, loading, error } = useReadItem();
+  
   return (
     <Container>
       <WhiteBoard>
@@ -89,7 +85,7 @@ const ReadItem: React.FC<Props> = ({ item, onList, onEdit, onRemoveItem }) => {
 
         <DownBorder />
 
-        <ReadButton onList={onList} onEdit={onEdit} onRemove={onRemoveItem} />
+        <ReadButton onList={onList} onEdit={onEdit} />
 
         <div className="content">
           <table className="table">
@@ -129,6 +125,6 @@ const ReadItem: React.FC<Props> = ({ item, onList, onEdit, onRemoveItem }) => {
       </WhiteBoard>
     </Container>
   );
-};
+}
 
 export default ReadItem;

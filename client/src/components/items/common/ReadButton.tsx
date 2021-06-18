@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import oc from 'open-color';
-import { media, shadow } from '../../libs/styles';
-import RemoveModal from '../common/RemoveModal';
+import { media, shadow } from '../../../libs/styles';
+import RemoveModal from '../../common/RemoveModal';
+import useModalItem from '../hooks/useModalItem';
 
 // Styles
 const Container = styled.div`
@@ -77,24 +78,10 @@ interface ButtonProps {
 interface Props {
   onList: () => void;
   onEdit: () => void;
-  onRemove: () => void;
 }
 
-const ReadButton: React.FC<Props> = ({ onList, onEdit, onRemove }) => {
-  const [modal, setModal] = useState(false);
-
-  const onRemoveClick = () => {
-    setModal(true);
-  };
-
-  const onCancel = () => {
-    setModal(false);
-  };
-
-  const onConfirm = () => {
-    setModal(false);
-    onRemove();
-  };
+const ReadButton: React.FC<Props> = ({ onList, onEdit }) => {
+  const { modal, onRemoveClick, onCancel, onConfirm } = useModalItem();
 
   return (
     <>

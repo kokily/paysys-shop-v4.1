@@ -1,10 +1,10 @@
 import PageTemplate from '../../components/common/PageTemplate';
-import AddItemContainer from '../../containers/items/AddItemContainer';
+import AddItem from '../../components/items/AddItem';
 
 function AddItemPage() {
   return (
     <PageTemplate>
-      <AddItemContainer />
+      <AddItem />
     </PageTemplate>
   );
 }

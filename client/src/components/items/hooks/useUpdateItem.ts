@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
-import { READ_ITEM, UPDATE_ITEM } from '../../libs/graphql/items';
-import UpdateItem from '../../components/items/UpdateItem';
+import { READ_ITEM, UPDATE_ITEM } from '../../../libs/graphql/items';
 
-function UpdateItemCotnainer() {
+function useUpdateItem() {
   const history = useHistory();
   const { itemId }: { itemId: string } = useParams();
   const { data, loading, error } = useQuery<{ ReadItem: { item: ItemType } }>(
@@ -85,22 +84,19 @@ function UpdateItemCotnainer() {
     }
   }, [data]);
 
-  if (loading) return null;
-  if (error) return null;
-
-  return (
-    <UpdateItem
-      name={name}
-      divide={divide}
-      native={native}
-      unit={unit}
-      price={price}
-      onChange={onChange}
-      onSubmit={onSubmit}
-      onBack={onBack}
-      onKeyPress={onKeyPress}
-    />
-  );
+  return {
+    name,
+    divide,
+    native,
+    unit,
+    price,
+    onChange,
+    onSubmit,
+    onBack,
+    onKeyPress,
+    loading,
+    error,
+  };
 }
 
-export default UpdateItemCotnainer;
+export default useUpdateItem;

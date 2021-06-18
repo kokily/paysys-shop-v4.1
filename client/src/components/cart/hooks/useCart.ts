@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { ADD_BILL } from '../../../libs/graphql/bills';
 import { REMOVE_CART, REMOVE_ONE, VIEW_CART } from '../../../libs/graphql/cart';
 
-const reducer = (state: CartState, action: CartAction) => {
+const reducer = (state: CartState, action: ActionProps) => {
   return {
     ...state,
     [action.name]: action.value,

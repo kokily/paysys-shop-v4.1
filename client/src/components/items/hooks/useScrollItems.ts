@@ -1,9 +1,9 @@
-import { useQuery } from '@apollo/react-hooks';
 import { useCallback, useState } from 'react';
+import { useQuery } from '@apollo/client';
 import { LIST_ITEMS } from '../../../libs/graphql/items';
 import useScroll from '../../../libs/hooks/useScroll';
 
-function useListItems(name?: string) {
+function useScrollItems(name?: string) {
   const { data, loading, error, fetchMore } = useQuery<{
     ListItems: { items: ItemType[] };
   }>(LIST_ITEMS, {
@@ -20,7 +20,7 @@ function useListItems(name?: string) {
         },
         updateQuery: (prev, { fetchMoreResult }) => {
           if (!fetchMoreResult) return prev;
-          if (fetchMoreResult.ListItems.items.length) {
+          if (fetchMoreResult.ListItems.items.length === 0) {
             setIsFinished(true);
           }
 
@@ -36,7 +36,7 @@ function useListItems(name?: string) {
         },
       });
     },
-    [fetchMore, name]
+    [name, fetchMore]
   );
 
   const cursor = data?.ListItems.items[data.ListItems.items.length - 1]?.id;
@@ -54,4 +54,4 @@ function useListItems(name?: string) {
   };
 }
 
-export default useListItems;
+export default useScrollItems;

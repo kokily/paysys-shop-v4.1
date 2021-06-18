@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import oc from 'open-color';
 import { shadow } from '../../libs/styles';
+import useUpdateItem from './hooks/useUpdateItem';
 
 // Styles
 const Container = styled.div`
@@ -145,35 +146,24 @@ const Button = styled.button<{ cyan?: boolean }>`
     `}
 `;
 
-interface Props {
-  name: string;
-  divide: string;
-  native: string;
-  unit: string;
-  price: string;
-  onChange: (
-    e:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLSelectElement>
-  ) => void;
-  onSubmit: (e: React.MouseEvent) => void;
-  onBack: () => void;
-  onKeyPress: (
-    e: React.KeyboardEvent<HTMLInputElement> & React.MouseEvent
-  ) => void;
-}
+function UpdateItem() {
+  const {
+    name,
+    divide,
+    native,
+    unit,
+    price,
+    onChange,
+    onSubmit,
+    onBack,
+    onKeyPress,
+    loading,
+    error,
+  } = useUpdateItem();
 
-const UpdateItem: React.FC<Props> = ({
-  name,
-  divide,
-  native,
-  unit,
-  price,
-  onChange,
-  onSubmit,
-  onBack,
-  onKeyPress,
-}) => {
+  if (loading) return null;
+  if (error) return null;
+
   return (
     <Container>
       <div className="logo">품목 수정</div>
@@ -249,6 +239,6 @@ const UpdateItem: React.FC<Props> = ({
       </form>
     </Container>
   );
-};
+}
 
 export default UpdateItem;

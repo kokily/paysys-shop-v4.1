@@ -1,31 +1,17 @@
-import React, { useReducer } from 'react';
+import { useReducer } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
+import { ADD_ITEM } from '../../../libs/graphql/items';
 import { toast } from 'react-toastify';
-import { ADD_ITEM } from '../../libs/graphql/items';
-import AddItem from '../../components/items/AddItem';
 
-interface StateProps {
-  name: string;
-  divide: string;
-  native: string;
-  unit: string;
-  price: string;
-}
-
-interface ActionProps {
-  name: string;
-  value: string;
-}
-
-const reducer = (state: StateProps, action: ActionProps) => {
+const reducer = (state: ItemState, action: ActionProps) => {
   return {
     ...state,
     [action.name]: action.value,
   };
 };
 
-function AddItemContainer() {
+function useAddItem() {
   const history = useHistory();
   const [state, dispatch] = useReducer(reducer, {
     name: '',
@@ -35,7 +21,7 @@ function AddItemContainer() {
     price: '',
   });
   const { name, divide, native, unit, price } = state;
-  const [AddItemResolver, { client }] = useMutation(ADD_ITEM);
+  const [AddItem, { client }] = useMutation(ADD_ITEM);
 
   const onChange = (
     e:
@@ -49,7 +35,7 @@ function AddItemContainer() {
     e.preventDefault();
 
     try {
-      const response = await AddItemResolver({
+      const response = await AddItem({
         variables: { name, divide, native, unit, price: parseInt(price) },
       });
 
@@ -76,19 +62,17 @@ function AddItemContainer() {
     }
   };
 
-  return (
-    <AddItem
-      name={name}
-      divide={divide}
-      native={native}
-      unit={unit}
-      price={price}
-      onChange={onChange}
-      onSubmit={onSubmit}
-      onBack={onBack}
-      onKeyPress={onKeyPress}
-    />
-  );
+  return {
+    name,
+    divide,
+    native,
+    unit,
+    price,
+    onChange,
+    onSubmit,
+    onBack,
+    onKeyPress,
+  };
 }
 
-export default AddItemContainer;
+export default useAddItem;
