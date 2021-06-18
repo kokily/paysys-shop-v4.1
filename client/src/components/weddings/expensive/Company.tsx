@@ -1,39 +1,33 @@
-import React from 'react';
 import { stringAccounting } from '../../../libs/utils';
+import useExpensive from './hooks/useExpensive';
 
-interface Props extends ExpensiveCompanyType {
-  onChange: (
-    e:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLSelectElement>
-  ) => void;
-}
+function Company() {
+  const {
+    company_husband,
+    company_bride,
+    rooftop_husband,
+    rooftop_bride,
+    owner_woman_husband,
+    owner_woman_bride,
+    owner_man_husband,
+    owner_man_bride,
+    select_husband,
+    select_bride,
+    frame_husband,
+    frame_bride,
+    dress_husband,
+    dress_bride,
+    hairpin_husband,
+    hairpin_bride,
+    wig_husband,
+    wig_bride,
+    video_husband,
+    video_bride,
+    etc_husband,
+    etc_bride,
+    onChange,
+  } = useExpensive();
 
-const Company: React.FC<Props> = ({
-  company_husband,
-  company_bride,
-  rooftop_husband,
-  rooftop_bride,
-  owner_woman_husband,
-  owner_woman_bride,
-  owner_man_husband,
-  owner_man_bride,
-  select_husband,
-  select_bride,
-  frame_husband,
-  frame_bride,
-  dress_husband,
-  dress_bride,
-  hairpin_husband,
-  hairpin_bride,
-  wig_husband,
-  wig_bride,
-  video_husband,
-  video_bride,
-  etc_husband,
-  etc_bride,
-  onChange,
-}) => {
   return (
     <>
       <h3>웨딩업체</h3>
@@ -334,6 +328,6 @@ const Company: React.FC<Props> = ({
       </table>
     </>
   );
-};
+}
 
 export default Company;

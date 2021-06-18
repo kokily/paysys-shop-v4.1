@@ -1,14 +1,8 @@
-import React from 'react';
+import useExpensive from './hooks/useExpensive';
 
-interface Props extends ExpensiveReserveType {
-  onChange: (
-    e:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLSelectElement>
-  ) => void;
-}
+function Reserve() {
+  const { reserve, reserve_pay, onChange } = useExpensive();
 
-const Reserve: React.FC<Props> = ({ reserve, reserve_pay, onChange }) => {
   return (
     <>
       <h3>예약금</h3>
@@ -53,6 +47,6 @@ const Reserve: React.FC<Props> = ({ reserve, reserve_pay, onChange }) => {
       </table>
     </>
   );
-};
+}
 
 export default Reserve;

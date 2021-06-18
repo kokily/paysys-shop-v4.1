@@ -1,21 +1,10 @@
-import React from 'react';
 import { stringAccounting } from '../../../libs/utils';
+import useExpensive from './hooks/useExpensive';
 
-interface Props extends ExpensiveMealType {
-  onChange: (
-    e:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLSelectElement>
-  ) => void;
-}
+function Meal() {
+  const { meals, meals_price, meals_num_husband, meals_num_bride, onChange } =
+    useExpensive();
 
-const Meal: React.FC<Props> = ({
-  meals,
-  meals_price,
-  meals_num_husband,
-  meals_num_bride,
-  onChange,
-}) => {
   return (
     <>
       <h3>식사비용</h3>
@@ -87,6 +76,6 @@ const Meal: React.FC<Props> = ({
       </table>
     </>
   );
-};
+}
 
 export default Meal;

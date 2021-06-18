@@ -1,24 +1,17 @@
-import React from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import useExpensive from './hooks/useExpensive';
 
-interface Props extends ExpensiveWeddingType {
-  setStartDate: any;
-  onChange: (
-    e:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLSelectElement>
-  ) => void;
-}
+function ExpensiveWedding() {
+  const {
+    husband_name,
+    bride_name,
+    wedding_at,
+    event_at,
+    onChange,
+    onChangeDate,
+  } = useExpensive();
 
-const ExpensiveWedding: React.FC<Props> = ({
-  husband_name,
-  bride_name,
-  wedding_at,
-  event_at,
-  setStartDate,
-  onChange,
-}) => {
   return (
     <>
       <div className="name-pane">
@@ -51,7 +44,7 @@ const ExpensiveWedding: React.FC<Props> = ({
           locale="ko"
           startDate={wedding_at}
           selected={wedding_at}
-          onChange={setStartDate}
+          onChange={onChangeDate}
           dateFormat="yyyy, MM dd"
         />
         <span>웨딩시간: </span>
@@ -69,6 +62,6 @@ const ExpensiveWedding: React.FC<Props> = ({
       <hr style={{ width: '90%' }} />
     </>
   );
-};
+}
 
 export default ExpensiveWedding;

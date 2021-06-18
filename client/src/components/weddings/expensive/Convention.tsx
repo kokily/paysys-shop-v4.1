@@ -1,27 +1,21 @@
-import React from 'react';
 import { stringAccounting } from '../../../libs/utils';
+import useExpensive from './hooks/useExpensive';
 
-interface Props extends ExpensiveConventionType {
-  onChange: (
-    e:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLSelectElement>
-  ) => void;
-}
+function Convention() {
+  const {
+    rental_husband,
+    rental_bride,
+    sword_husband,
+    sword_bride,
+    glove_husband,
+    glove_bride,
+    bouquet_husband,
+    bouquet_bride,
+    ceremony_husband,
+    ceremony_bride,
+    onChange,
+  } = useExpensive();
 
-const Convention: React.FC<Props> = ({
-  rental_husband,
-  rental_bride,
-  sword_husband,
-  sword_bride,
-  glove_husband,
-  glove_bride,
-  bouquet_husband,
-  bouquet_bride,
-  ceremony_husband,
-  ceremony_bride,
-  onChange,
-}) => {
   return (
     <>
       <h3>컨벤션 비용</h3>
@@ -172,6 +166,6 @@ const Convention: React.FC<Props> = ({
       </table>
     </>
   );
-};
+}
 
 export default Convention;

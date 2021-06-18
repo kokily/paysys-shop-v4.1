@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import oc from 'open-color';
 import { shadow } from '../../../libs/styles';
+import useExpensive from './hooks/useExpensive';
 
 const ButtonBox = styled.div`
   display: flex;
@@ -67,12 +68,9 @@ const Button = styled.button<{
   }
 `;
 
-interface Props {
-  onBack: () => void;
-  onSubmit: (e: React.MouseEvent) => void;
-}
+function ExpenseButton() {
+  const { onBack, onSubmit } = useExpensive();
 
-const ExpenseButton: React.FC<Props> = ({ onBack, onSubmit }) => {
   return (
     <ButtonBox>
       <Button remove={true} onClick={onBack}>
@@ -83,6 +81,6 @@ const ExpenseButton: React.FC<Props> = ({ onBack, onSubmit }) => {
       </Button>
     </ButtonBox>
   );
-};
+}
 
 export default ExpenseButton;
