@@ -1,11 +1,10 @@
 import PageTemplate from '../../components/common/PageTemplate';
-import ListWeddingsContainer from '../../containers/weddings/ListWeddingsContainer';
-
+import ListWeddings from '../../components/weddings/ListWeddings';
 
 function ListWeddingsPage() {
   return (
     <PageTemplate>
-      <ListWeddingsContainer />
+      <ListWeddings />
     </PageTemplate>
   );
 }

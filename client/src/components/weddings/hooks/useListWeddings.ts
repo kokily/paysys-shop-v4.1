@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import ListWeddings from '../../components/weddings/ListWeddings';
-import useListWeddings from './hooks/useListWeddings';
+import useScrollWedding from './useScrollWeddings';
 
-function ListWeddingsContainer() {
+function useListWeddings() {
   const history = useHistory();
   const [search, setSearch] = useState('');
   const [date, setDate] = useState('');
-  const { data, loading, error } = useListWeddings(date);
+  const { data, loading, error } = useScrollWedding(date);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -35,19 +34,16 @@ function ListWeddingsContainer() {
     history.push(`/wedding/${id}`);
   };
 
-  if (loading) return null;
-  if (error) return null;
-
-  return (
-    <ListWeddings
-      weddings={data?.ListWeddings.weddings || []}
-      search={search}
-      onChange={onChange}
-      onSearch={onSearch}
-      onKeyPress={onKeyPress}
-      onDetail={onDetail}
-    />
-  );
+  return {
+    weddings: data?.ListWeddings.weddings || [],
+    search,
+    onChange,
+    onSearch,
+    onKeyPress,
+    onDetail,
+    loading,
+    error,
+  };
 }
 
-export default ListWeddingsContainer;
+export default useListWeddings;
