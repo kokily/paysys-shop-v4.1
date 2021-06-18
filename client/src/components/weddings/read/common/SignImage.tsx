@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import RemoveModal from '../../common/RemoveModal';
+import RemoveModal from '../../../common/RemoveModal';
 
 // Styles
 const Container = styled.div`

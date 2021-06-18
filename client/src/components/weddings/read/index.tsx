@@ -1,5 +1,5 @@
 import useReadWedding from './hooks/useReadWedding';
-import SignImage from './SignImage';
+import SignImage from './common/SignImage';
 
 function ReadWedding() {
   const { wedding, onRemoveSign, loading, error } = useReadWedding();

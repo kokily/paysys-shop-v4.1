@@ -1,15 +1,25 @@
+import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import moment from 'moment';
 import { husbandSign, brideSign } from '../../../../libs/store/sign';
-import HusbandSignContainer from '../../../../containers/weddings/sign/HusbandSignContainer';
-import BrideSignContainer from '../../../../containers/weddings/sign/BrideSignContainer';
-import SignImage from '../SignImage';
+import SignImage from '../common/SignImage';
 import useReadWedding from '../hooks/useReadWedding';
+import SignModal from '../common/SignModal';
+import useSignHusband from '../hooks/useSignHusband';
+import useSignBride from '../hooks/useSignBride';
 
 function ReadMobileWedding() {
-  const { wedding, refetch, onRemoveSign } = useReadWedding();
-  const [, setHusband] = useRecoilState(husbandSign);
-  const [, setBride] = useRecoilState(brideSign);
+  const { wedding, onRemoveSign, refetch } = useReadWedding();
+  const { visibleHusband, titleHusband, onCancelHusband, onConfirmHusband } =
+    useSignHusband();
+  const { visibleBride, titleBride, onCancelBride, onConfirmBride } =
+    useSignBride();
+  const [husband, setHusband] = useRecoilState(husbandSign);
+  const [bride, setBride] = useRecoilState(brideSign);
+
+  useEffect(() => {
+    refetch();
+  }, [husband, bride, refetch]);
 
   return (
     <>
@@ -37,8 +47,18 @@ function ReadMobileWedding() {
             {wedding.event_at}
           </h4>
 
-          <HusbandSignContainer refetch={refetch} />
-          <BrideSignContainer refetch={refetch} />
+          <SignModal
+            visible={visibleHusband}
+            title={titleHusband}
+            onCancel={onCancelHusband}
+            onConfirm={onConfirmHusband}
+          />
+          <SignModal
+            visible={visibleBride}
+            title={titleBride}
+            onCancel={onCancelBride}
+            onConfirm={onConfirmBride}
+          />
 
           <hr style={{ width: '90%' }} />
 

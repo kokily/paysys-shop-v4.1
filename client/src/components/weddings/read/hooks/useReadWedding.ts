@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useApolloClient, useMutation, useQuery } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
@@ -53,10 +52,6 @@ function useReadWedding() {
       toast.error(err);
     }
   };
-
-  useEffect(() => {
-    refetch();
-  }, [refetch]);
 
   return {
     wedding: data?.ReadWedding.wedding || null,

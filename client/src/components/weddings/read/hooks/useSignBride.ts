@@ -1,18 +1,17 @@
 import { useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import { ADD_SIGN } from '../../../../libs/graphql/sign';
 import {
   currentImage,
-  husbandImage,
-  husbandSign,
-} from '../../../libs/store/sign';
-import SignModal from '../../../components/weddings/read/SignModal';
-import { useMutation } from '@apollo/react-hooks';
-import { ADD_SIGN } from '../../../libs/graphql/sign';
+  brideImage,
+  brideSign,
+} from '../../../../libs/store/sign';
 
-function HusbandSignContainer({ refetch }: { refetch: any }) {
+function useSignBride() {
   const { weddingId }: { weddingId: string } = useParams();
-  const [husband, setHusband] = useRecoilState(husbandSign);
-  const [, setHusbandImg] = useRecoilState(husbandImage);
+  const [bride, setBride] = useRecoilState(brideSign);
+  const [, setBrideImg] = useRecoilState(brideImage);
   const [currentImg, setCurrentImg] = useRecoilState(currentImage);
   const [AddSign, { client }] = useMutation(ADD_SIGN);
 
@@ -57,13 +56,13 @@ function HusbandSignContainer({ refetch }: { refetch: any }) {
 
       const data = await response.json();
 
-      setHusbandImg(`https://image.paysys.shop/${data.key}`);
+      setBrideImg(`https://image.paysys.shop/${data.key}`);
       setCurrentImg('');
 
       const response2 = await AddSign({
         variables: {
           weddingId,
-          sex: 'husband',
+          sex: 'bride',
           image: `https://image.paysys.shop/${data.key}`,
         },
       });
@@ -71,22 +70,19 @@ function HusbandSignContainer({ refetch }: { refetch: any }) {
       if (!response2 || !response2.data) return;
 
       await client.clearStore();
-      await refetch();
 
-      setHusband(false);
+      setBride(false);
     } catch (err) {
       alert(err);
     }
   };
 
-  return (
-    <SignModal
-      visible={husband}
-      title="신랑 서명"
-      onCancel={() => setHusband(false)}
-      onConfirm={onUpload}
-    />
-  );
+  return {
+    visibleBride: bride,
+    titleBride: '신부 서명',
+    onCancelBride: () => setBride(false),
+    onConfirmBride: onUpload,
+  };
 }
 
-export default HusbandSignContainer;
+export default useSignBride;
